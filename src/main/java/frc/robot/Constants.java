@@ -13,7 +13,14 @@ package frc.robot;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
-  public static class OperatorConstants {
+    
+  //TalonSRX/Falcon motor ID's
+    public static final int LEFT_FRONT_DRIVE = 6;
+    public static final int RIGHT_FRONT_DRIVE = 2;
+    public static final int LEFT_BACK_DRIVE = 4;
+    public static final int RIGHT_BACK_DRIVE = 3;
+  
+    public static class OperatorConstants {
     public static final int kDriverControllerPort = 0;
   }
 }
