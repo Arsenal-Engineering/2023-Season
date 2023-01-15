@@ -71,4 +71,8 @@ public class RobotContainer {
   public DriveJoystick getdriveJoystick() {
     return driveJoystick;
   }
+
+  public DriveTrain getDriveTrain() {
+    return driveTrain;
+  }
 }
