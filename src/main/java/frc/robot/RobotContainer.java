@@ -24,11 +24,13 @@ public class RobotContainer {
     new XboxController(OperatorConstants.kDriverControllerPort);
 
   // The robot's subsystems and commands are defined here...
-  private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
+  private final ServoClaw servoClaw = new ServoClaw();
 
   private final DriveTrain driveTrain = new DriveTrain();
 
   private final DriveJoystick driveJoystick = new DriveJoystick(driveTrain, m_driverController);
+
+  private final SpinServo spinServo = new SpinServo(servoClaw);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -74,5 +76,9 @@ public class RobotContainer {
 
   public DriveTrain getDriveTrain() {
     return driveTrain;
+  }
+
+  public SpinServo getSpinServo(){
+    return spinServo;
   }
 }

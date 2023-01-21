@@ -20,7 +20,14 @@ public final class Constants {
     public static final int LEFT_BACK_DRIVE = 4;
     public static final int RIGHT_BACK_DRIVE = 3;
   
-    public static class OperatorConstants {
+
+
+  //Servo IDs for claw
+  public static final int SERVO_LEFT = 7;
+  public static final int SERVO_RIGHT = 8;
+
+
+  public static class OperatorConstants {
     public static final int kDriverControllerPort = 0;
   }
 }

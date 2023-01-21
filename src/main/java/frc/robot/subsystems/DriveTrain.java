@@ -24,6 +24,7 @@ public class DriveTrain extends SubsystemBase {
   private AHRS navX;
   private String driveDirectionalMode;
   private boolean driveSlow;
+  public boolean funkyMode;
 
   /** Creates a new DriveTrain. */
   public DriveTrain() {
@@ -34,8 +35,11 @@ public class DriveTrain extends SubsystemBase {
     navX = new AHRS(edu.wpi.first.wpilibj.SPI.Port.kMXP);
     driveDirectionalMode = "navX";
     driveSlow = true;
-    navX.reset();    
-    
+    navX.reset();  
+    funkyMode = false;  
+    /*if (funkyMode){
+      robot.spin();
+    }*/
     R1.setInverted(true);
     R2.setInverted(true);
 
