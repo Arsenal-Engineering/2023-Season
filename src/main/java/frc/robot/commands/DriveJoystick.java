@@ -11,15 +11,15 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.XboxController;
 
 public class DriveJoystick extends CommandBase {
-  private DriveTrain doggoDriveTrain;
-  private XboxController humanController;
+  private DriveTrain driveTrain;
+  private XboxController controller;
 
   /** Creates a new DriveJoystick. */
-  public DriveJoystick(DriveTrain dog,XboxController human) {
+  public DriveJoystick(DriveTrain driveTrain,XboxController controller) {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(dog);
-    doggoDriveTrain = dog;
-    humanController = human;
+    addRequirements(driveTrain);
+    this.driveTrain = driveTrain;
+    this.controller = controller;
   }
 
   // Called when the command is initially scheduled.
@@ -31,7 +31,7 @@ public class DriveJoystick extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    doggoDriveTrain.driveMecanum(humanController);
+    driveTrain.driveMecanum(controller);
   }
 
   // Called once the command ends or is interrupted.

@@ -24,7 +24,6 @@ public class DriveTrain extends SubsystemBase {
   private AHRS navX;
   private String driveDirectionalMode;
   private boolean driveSlow;
-  private boolean funkyMode;
 
   /** Creates a new DriveTrain. */
   public DriveTrain() {
@@ -35,12 +34,10 @@ public class DriveTrain extends SubsystemBase {
     navX = new AHRS(edu.wpi.first.wpilibj.SPI.Port.kMXP);
     driveDirectionalMode = "navX";
     driveSlow = true;
-    funkyMode = false;
     navX.reset();
     
     L2.setInverted(true);
     R2.setInverted(true);
-
     L1.setNeutralMode(NeutralMode.Brake);
     L2.setNeutralMode(NeutralMode.Brake);
     R1.setNeutralMode(NeutralMode.Brake);
@@ -54,14 +51,10 @@ public class DriveTrain extends SubsystemBase {
       if (driveSlow) driveFactor = 0.8;
   
       // With XBox controller, need negative X, Z, and NavXangle
-      if (funkyMode){
-        mecanumDrive.driveCartesian(0, 0, 0.25);
-      } else {
-        mecanumDrive.driveCartesian(-controller.getLeftY() * driveFactor, 
-          controller.getLeftX() * driveFactor,controller.getRightX()/2.0, new Rotation2d(Math.toRadians(navX.getAngle())));
-      }
+      mecanumDrive.driveCartesian(-controller.getLeftY() * driveFactor, 
+        controller.getLeftX() * driveFactor,controller.getRightX()/2.0, new Rotation2d(Math.toRadians(navX.getAngle())));
+      
     }
-
     public void driveTest(double x, double y, double z) {
       mecanumDrive.driveCartesian(x, y, z);
     }

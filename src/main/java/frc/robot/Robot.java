@@ -86,7 +86,13 @@ public class Robot extends TimedRobot {
 
   /** This function is called periodically during operator control. */
   @Override
-  public void teleopPeriodic() {}
+  public void teleopPeriodic() {
+    if (m_robotContainer.getXboxController().getStartButton()){
+      m_robotContainer.getAutoBalance().schedule();
+    } else {
+      m_robotContainer.getdriveJoystick().schedule();
+    }
+  }
 
   @Override
   public void testInit() {

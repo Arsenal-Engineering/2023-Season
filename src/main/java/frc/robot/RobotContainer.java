@@ -30,6 +30,8 @@ public class RobotContainer {
 
   private final DriveJoystick driveJoystick = new DriveJoystick(driveTrain, m_driverController);
 
+  private final AutoBalance autoBalance = new AutoBalance(driveTrain);
+
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the trigger bindings
@@ -68,11 +70,19 @@ public class RobotContainer {
     // An example command will be run in autonomous
     // return Autos.exampleAuto(m_exampleSubsystem);
   // 
+  public XboxController getXboxController() {
+    return m_driverController;
+  }
+
   public DriveJoystick getdriveJoystick() {
     return driveJoystick;
   }
 
   public DriveTrain getDriveTrain() {
     return driveTrain;
+  }
+
+  public AutoBalance getAutoBalance() {
+    return autoBalance;
   }
 }
