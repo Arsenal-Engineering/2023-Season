@@ -22,7 +22,7 @@ public class RobotContainer {
   // Replace with CommandPS4Controller or CommandJoystick if needed
   private final XboxController m_driverController =
     new XboxController(OperatorConstants.kDriverControllerPort);
-
+  public final LifeCam lifeCam;
   // The robot's subsystems and commands are defined here...
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
 
@@ -32,6 +32,7 @@ public class RobotContainer {
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
+    lifeCam = new LifeCam();
     // Configure the trigger bindings
     configureBindings();
   }
