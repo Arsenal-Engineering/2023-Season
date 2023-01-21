@@ -13,6 +13,12 @@ package frc.robot;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
+
+  //Servo IDs for claw
+  public static final int SERVO_LEFT = 7;
+  public static final int SERVO_RIGHT = 8;
+
+
   public static class OperatorConstants {
     public static final int kDriverControllerPort = 0;
   }
