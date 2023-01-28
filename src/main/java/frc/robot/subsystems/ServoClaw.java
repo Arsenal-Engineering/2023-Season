@@ -11,10 +11,14 @@ import edu.wpi.first.wpilibj.Servo;
 public class ServoClaw extends SubsystemBase {
   Servo leftServo;
   Servo rightServo;
+  private double leftServoPosition;
+  private double rightServoPosition;
   /** Creates a new ServoClaw. */
   public ServoClaw() {
     leftServo = new Servo(Constants.SERVO_LEFT);
-    // rightServo = new Servo(Constants.SERVO_RIGHT);
+    rightServo = new Servo(Constants.SERVO_RIGHT);
+    leftServoPosition = 10;
+    rightServoPosition = 160;
   }
 
   @Override
@@ -24,5 +28,16 @@ public class ServoClaw extends SubsystemBase {
 
   public void testServoRotation(int angle){
     leftServo.setAngle(angle);
+  }
+
+  public void moveServo(double increment){
+    if(leftServoPosition + increment <= 80 && leftServoPosition + increment >= 10){
+      leftServoPosition += increment;
+    }
+    if(rightServoPosition - increment <= 160 && rightServoPosition - increment >= 90){
+      rightServoPosition -= increment;
+    }
+    leftServo.setAngle(leftServoPosition);
+    rightServo.setAngle(rightServoPosition);
   }
 }
