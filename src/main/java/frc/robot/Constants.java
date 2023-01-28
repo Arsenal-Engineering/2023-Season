@@ -26,8 +26,12 @@ public final class Constants {
   public static final int SERVO_LEFT = 7;
   public static final int SERVO_RIGHT = 8;
 
+  //TalonSRX ARM BASE
+  public static final int ARM_BASE = 1; //when running on 2022 robot
+
 
   public static class OperatorConstants {
-    public static final int kDriverControllerPort = 0;
+    public static final int kDriverControllerPort = 1;
+    public static final int kArmControllerPort = 0;
   }
 }

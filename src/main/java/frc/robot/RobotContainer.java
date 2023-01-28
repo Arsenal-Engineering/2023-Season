@@ -23,14 +23,33 @@ public class RobotContainer {
   private final XboxController m_driverController =
     new XboxController(OperatorConstants.kDriverControllerPort);
 
+    private final XboxController m_armController =
+    new XboxController(OperatorConstants.kArmControllerPort);
+
   // The robot's subsystems and commands are defined here...
   private final ServoClaw servoClaw = new ServoClaw();
+
+  private final ArmBase armBase = new ArmBase();
 
   private final DriveTrain driveTrain = new DriveTrain();
 
   private final DriveJoystick driveJoystick = new DriveJoystick(driveTrain, m_driverController);
 
-  private final SpinServo spinServo = new SpinServo(servoClaw);
+  private final OpenClaw oServo = new OpenClaw(servoClaw);
+
+  private final CloseClaw cServo = new CloseClaw(servoClaw);
+
+  private final StopClaw sServo = new StopClaw(servoClaw);
+
+  private final ArmMove aMove = new ArmMove(armBase, m_armController);
+
+
+
+
+
+
+
+
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -70,15 +89,35 @@ public class RobotContainer {
     // An example command will be run in autonomous
     // return Autos.exampleAuto(m_exampleSubsystem);
   // 
-  public DriveJoystick getdriveJoystick() {
-    return driveJoystick;
+  // public DriveJoystick getdriveJoystick() {
+  //   return driveJoystick;
+  // }
+
+  public XboxController getXboxController(){
+    return m_driverController;
+  }
+
+  public XboxController getArmController(){
+    return m_armController;
   }
 
   public DriveTrain getDriveTrain() {
     return driveTrain;
   }
 
-  public SpinServo getSpinServo(){
-    return spinServo;
+  public OpenClaw getOpenClaw(){
+    return oServo;
+  }
+
+  public CloseClaw getCloseClaw(){
+    return cServo;
+  }
+
+  public StopClaw getStopClaw(){
+    return sServo;
+  }
+
+  public ArmMove getArmMove(){
+    return aMove;
   }
 }
