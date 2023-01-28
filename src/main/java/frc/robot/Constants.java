@@ -19,8 +19,11 @@ public final class Constants {
     public static final int RIGHT_FRONT_DRIVE = 2;
     public static final int LEFT_BACK_DRIVE = 4;
     public static final int RIGHT_BACK_DRIVE = 3;
+
+    public static final double DEPOSIT_TAG_HEIGHT = 0.36;
+    public static final double LIMELIGHT_HEIGHT = 0.16;
   
     public static class OperatorConstants {
-    public static final int kDriverControllerPort = 0;
+    public static final int kDriverControllerPort = 1;
   }
 }

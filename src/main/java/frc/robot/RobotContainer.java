@@ -9,8 +9,10 @@ import frc.robot.commands.Autos;
 import frc.robot.commands.*;
 import frc.robot.subsystems.*;
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
+import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -20,15 +22,19 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
  */
 public class RobotContainer {
   // Replace with CommandPS4Controller or CommandJoystick if needed
-  private final XboxController m_driverController =
-    new XboxController(OperatorConstants.kDriverControllerPort);
+  private final CommandXboxController m_driverController =
+    new CommandXboxController(OperatorConstants.kDriverControllerPort);
+  private JoystickButton buttonA;
 
   // The robot's subsystems and commands are defined here...
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
 
   private final DriveTrain driveTrain = new DriveTrain();
 
-  private final DriveJoystick driveJoystick = new DriveJoystick(driveTrain, m_driverController);
+  private final DriveJoystick driveJoystick = new DriveJoystick(driveTrain, m_driverController.getHID());
+
+  private final LimelightCam limeLight = new LimelightCam();
+  private final AutoAlign cubeAlign = new AutoAlign(driveTrain, limeLight, m_driverController, 0);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -57,7 +63,8 @@ public class RobotContainer {
     //pravnav
     //the limit as iq aproaches infinity
     //I am here
-  }
+    m_driverController.a().onTrue(cubeAlign).onFalse(driveJoystick);
+   }
 
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
@@ -74,5 +81,8 @@ public class RobotContainer {
 
   public DriveTrain getDriveTrain() {
     return driveTrain;
+  }
+  public LimelightCam getLimelightCam(){
+    return limeLight;
   }
 }
