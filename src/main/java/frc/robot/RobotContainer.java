@@ -35,6 +35,10 @@ public class RobotContainer {
 
   private final LimelightCam limeLight = new LimelightCam();
   private final AutoAlign cubeAlign = new AutoAlign(driveTrain, limeLight, m_driverController, 0);
+  private final AutoAlign leftConeAlign = new AutoAlign(driveTrain, limeLight, m_driverController, Constants.CONE_DEPOSIT_OFFSET);
+  private final AutoAlign rightConeAlign = new AutoAlign(driveTrain, limeLight, m_driverController, -Constants.CONE_DEPOSIT_OFFSET);
+
+
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -64,6 +68,9 @@ public class RobotContainer {
     //the limit as iq aproaches infinity
     //I am here
     m_driverController.a().onTrue(cubeAlign).onFalse(driveJoystick);
+    m_driverController.x().onTrue(leftConeAlign).onFalse(driveJoystick);
+    m_driverController.b().onTrue(rightConeAlign).onFalse(driveJoystick);
+
    }
 
   /**
