@@ -26,7 +26,7 @@ public class DriveTrain extends SubsystemBase {
   private String driveDirectionalMode;
   private boolean driveSlow;
   private boolean brakeMode;
-
+  private boolean isFieldOriented;
 
   /** Creates a new DriveTrain. */
   public DriveTrain() {
@@ -38,6 +38,7 @@ public class DriveTrain extends SubsystemBase {
     driveDirectionalMode = "navX";
     driveSlow = true;
     brakeMode=false;
+    isFieldOriented=true;
     navX.reset();
     
     L2.setInverted(true);
@@ -50,10 +51,15 @@ public class DriveTrain extends SubsystemBase {
     public void driveMecanum(XboxController controller) {
       double driveFactor = 1;
       if (brakeMode) driveFactor = 0.3;
-  
-      // With XBox controller, need negative X, Z, and NavXangle
-      mecanumDrive.driveCartesian(-controller.getLeftY() * driveFactor, 
-        controller.getLeftX() * driveFactor,controller.getRightX()/2.0, new Rotation2d(Math.toRadians(navX.getAngle())));
+      
+      if (isFieldOriented){
+        // With XBox controller, need negative X, Z, and NavXangle
+        mecanumDrive.driveCartesian(-controller.getLeftY() * driveFactor, 
+          controller.getLeftX() * driveFactor,controller.getRightX()/2.0, new Rotation2d(Math.toRadians(navX.getAngle())));
+      } else {
+        mecanumDrive.driveCartesian(-controller.getLeftY() * driveFactor, 
+          controller.getLeftX() * driveFactor,controller.getRightX()/2.0);
+      }
       
     }
     public void driveTest(double x, double y, double z) {
@@ -78,6 +84,9 @@ public class DriveTrain extends SubsystemBase {
     }
     public void setBrakeMode(boolean brakeMode){
       this.brakeMode=brakeMode;
+    }
+    public void setDriveMode(boolean theFunny){
+      isFieldOriented=theFunny;
     }
 
     public AHRS getNavX() {

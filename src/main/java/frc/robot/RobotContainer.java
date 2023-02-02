@@ -37,11 +37,14 @@ public class RobotContainer {
 
   private final AutoAlign autoAlign = new AutoAlign(driveTrain, 0);
 
+  private final LifeCam lc = new LifeCam();
+
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     dPadUp=new POVButton(m_driverController, 0);
     // Configure the trigger bindings
     configureBindings();
+    lc.startVision();
   }
 
   /**

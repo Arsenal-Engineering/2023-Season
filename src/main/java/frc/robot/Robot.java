@@ -94,6 +94,12 @@ public class Robot extends TimedRobot {
     } else {
       m_robotContainer.getdriveJoystick().schedule();
     }
+
+    if (m_robotContainer.getXboxController().getStartButton()) {
+      m_robotContainer.getDriveTrain().setDriveMode(true);
+    } else if (m_robotContainer.getXboxController().getBackButton()) {
+      m_robotContainer.getDriveTrain().setDriveMode(false);
+    }
   }
 
   @Override
