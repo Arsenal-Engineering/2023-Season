@@ -1,9 +1,9 @@
-/*
+
 package frc.robot.subsystems;
 
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import edu.wpi.cscore.UsbCamera;
+import edu.wpi.first.cscore.UsbCamera;
 
 public class LifeCam extends SubsystemBase {
   UsbCamera lifeCamArm;
@@ -14,4 +14,3 @@ public class LifeCam extends SubsystemBase {
     lifeCamArm.setFPS(10);
   }
 }
-*/
