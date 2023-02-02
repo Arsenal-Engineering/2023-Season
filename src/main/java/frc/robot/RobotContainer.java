@@ -10,6 +10,7 @@ import frc.robot.commands.*;
 import frc.robot.subsystems.*;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj2.command.button.POVButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 
 /**
@@ -23,6 +24,8 @@ public class RobotContainer {
   private final XboxController m_driverController =
     new XboxController(OperatorConstants.kDriverControllerPort);
 
+  private final POVButton dPadUp;
+
   // The robot's subsystems and commands are defined here...
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
 
@@ -32,8 +35,11 @@ public class RobotContainer {
 
   private final AutoBalance autoBalance = new AutoBalance(driveTrain);
 
+  private final AutoAlign autoAlign = new AutoAlign(driveTrain, 0);
+
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
+    dPadUp=new POVButton(m_driverController, 0);
     // Configure the trigger bindings
     configureBindings();
   }
@@ -56,9 +62,6 @@ public class RobotContainer {
     // cancelling on release.
     //m_driverController.b().whileTrue(m_exampleSubsystem.exampleMethodCommand());
 
-    //pravnav
-    //the limit as iq aproaches infinity
-    //I am here
   }
 
   /**
@@ -84,5 +87,9 @@ public class RobotContainer {
 
   public AutoBalance getAutoBalance() {
     return autoBalance;
+  }
+
+  public AutoAlign getAutoAlign() {
+    return autoAlign;
   }
 }

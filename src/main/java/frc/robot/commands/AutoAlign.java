@@ -6,38 +6,41 @@ package frc.robot.commands;
 
 import com.kauailabs.navx.frc.AHRS;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.DriveTrain;
 
-public class AutoBalance extends CommandBase {
+public class AutoAlign extends CommandBase {
   private DriveTrain driveTrain;
   private AHRS navX;
-  private double offset;
-  /** Creates a new AutoBalance. */
-  public AutoBalance(DriveTrain driveTrain) {
+  private double alignGoal;
+  /** Creates a new AutoAlign. */
+  public AutoAlign(DriveTrain driveTrain, double alignGoal) {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(driveTrain);
     this.driveTrain = driveTrain;
     navX = driveTrain.getNavX();
-    offset = navX.getPitch();
+    this.alignGoal = alignGoal;
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    //Determine offset
+    //Turn on E-breake
+    driveTrain.setBrakeMode(!(driveTrain.getBrakeMode()));
+    driveTrain.updateBrakeMode();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (navX.getPitch()-offset>4){
-      driveTrain.driveTest(Math.sin((navX.getPitch()-offset)* 0.9 * (Math.PI / 180.0)+0.1)*-0.5, 0, 0);
-    } else if (navX.getPitch()-offset<-4) { 
-      driveTrain.driveTest(Math.sin((navX.getPitch()-offset)* 0.9 * (Math.PI / 180.0)-0.1)*-0.5, 0, 0);
-    }//Stop when Balanced
-    else {
-      driveTrain.driveTest(0,0,0);
+    //Align Yaw to 180
+    if (driveTrain.getBrakeMode()) {
+      if (navX.getYaw() < 0) {
+        driveTrain.driveTest(0, 0, Math.sin((navX.getYaw()+180) * (Math.PI / 180.0))*-1);
+      } else {
+        driveTrain.driveTest(0, 0, Math.sin((navX.getYaw()-180) * (Math.PI / 180.0))*-1);
+      }
     }
   }
 
