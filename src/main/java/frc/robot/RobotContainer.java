@@ -9,7 +9,7 @@ import frc.robot.commands.Autos;
 import frc.robot.commands.*;
 import frc.robot.subsystems.*;
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 
 /**
@@ -20,15 +20,21 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
  */
 public class RobotContainer {
   // Replace with CommandPS4Controller or CommandJoystick if needed
-  private final XboxController m_driverController =
-    new XboxController(OperatorConstants.kDriverControllerPort);
+  private final CommandXboxController m_driverController =
+    new CommandXboxController(OperatorConstants.kDriverControllerPort);
 
   // The robot's subsystems and commands are defined here...
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
 
   private final DriveTrain driveTrain = new DriveTrain();
 
-  private final DriveJoystick driveJoystick = new DriveJoystick(driveTrain, m_driverController);
+  private final DriveJoystick driveJoystick = new DriveJoystick(driveTrain, m_driverController.getHID());
+
+  private final ArmExtension armExtender = new ArmExtension();
+
+  private final ExtendArm extendArm = new ExtendArm(armExtender, m_driverController);
+
+  private final RetractArm retractArm = new RetractArm(armExtender, m_driverController);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -70,5 +76,17 @@ public class RobotContainer {
   // 
   public DriveJoystick getdriveJoystick() {
     return driveJoystick;
+  }
+
+  public ExtendArm getExtendArm() {
+    return extendArm;
+  }
+
+  public RetractArm getRetractArm() {
+    return retractArm;
+  }
+
+  public CommandXboxController getController() {
+    return m_driverController;
   }
 }
