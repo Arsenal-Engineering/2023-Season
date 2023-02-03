@@ -7,14 +7,15 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.ArmBase;
-
+import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 public class ArmMove extends CommandBase {
 
   private ArmBase armMove;
-  private XboxController armcontrol;
+  private Joystick armcontrol;
   /** Creates a new ArmUp. */
-  public ArmMove(ArmBase armMove, XboxController armcontroller) {
+  public ArmMove(ArmBase armMove, Joystick armcontroller) {
     this.armMove = armMove;
     armcontrol = armcontroller;
     // Use addRequirements() here to declare subsystem dependencies.
@@ -28,7 +29,7 @@ public class ArmMove extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    armMove.armMove(armcontrol.getLeftY()/2);
+    armMove.armMove(armcontrol.getX()/2);
   }
 
   // Called once the command ends or is interrupted.

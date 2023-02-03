@@ -35,6 +35,8 @@ public final class Constants {
   //SPARKMAX ARM BASE
   public static final int ARM_BASE = 1; //when running on 2022 robot
 
+  public static final int ARM_CONTROLLER_PORT = 1;
+
 
   public static class OperatorConstants {
     public static final int kDriverControllerPort = 1;

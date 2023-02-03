@@ -11,6 +11,7 @@ import com.revrobotics.CANSparkMax;
 //import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
+
 public class ArmBase extends SubsystemBase {
   private CANSparkMax arm_base;
   /** Creates a new Arm. */

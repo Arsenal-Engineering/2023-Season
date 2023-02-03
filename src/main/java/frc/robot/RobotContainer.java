@@ -5,7 +5,6 @@
 package frc.robot;
 
 import frc.robot.Constants.OperatorConstants;
-import frc.robot.commands.Autos;
 import frc.robot.commands.*;
 import frc.robot.subsystems.*;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -15,6 +14,11 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
+import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+
+import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -24,11 +28,15 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
  */
 public class RobotContainer {
   // Replace with CommandPS4Controller or CommandJoystick if needed
-  private final XboxController m_driverController =
-    new XboxController(OperatorConstants.kDriverControllerPort);
+  private final CommandXboxController m_driverController =
+    new CommandXboxController(OperatorConstants.kDriverControllerPort);
 
-  private final XboxController m_armController =
-    new XboxController(OperatorConstants.kArmControllerPort);
+  //private final XboxController m_armController =
+  //new XboxController(OperatorConstants.kArmControllerPort);
+
+  private final Joystick m_armController = new Joystick(Constants.ARM_CONTROLLER_PORT);
+
+  private final JoystickButton armButton1 = new JoystickButton(m_armController,1);
 
 
 
@@ -92,6 +100,9 @@ public class RobotContainer {
     //pravnav
     //the limit as iq aproaches infinity
     //I am here
+
+    //m_driverController.a().onTrue(new )
+    armButton1.onTrue(new ClawUnOpen(claw));
   }
 
   /**
@@ -107,11 +118,11 @@ public class RobotContainer {
   //   return driveJoystick;
   // }
 
-  public XboxController getXboxController(){
+  public CommandXboxController getXboxController(){
     return m_driverController;
   }
 
-  public XboxController getArmController(){
+  public Joystick getArmController(){
     return m_armController;
   }
 
