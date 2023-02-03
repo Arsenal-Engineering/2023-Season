@@ -5,13 +5,13 @@
 package frc.robot;
 
 import frc.robot.Constants.OperatorConstants;
-import frc.robot.commands.Autos;
 import frc.robot.commands.*;
 import frc.robot.subsystems.*;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
+import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -21,17 +21,15 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
  */
 public class RobotContainer {
   // Replace with CommandPS4Controller or CommandJoystick if needed
-  private final XboxController m_driverController =
-    new XboxController(OperatorConstants.kDriverControllerPort);
-
-  private final POVButton dPadUp;
+  private final CommandXboxController m_driverController =
+    new CommandXboxController(OperatorConstants.kDriverControllerPort);
 
   // The robot's subsystems and commands are defined here...
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
 
   private final DriveTrain driveTrain = new DriveTrain();
 
-  private final DriveJoystick driveJoystick = new DriveJoystick(driveTrain, m_driverController);
+  private final DriveJoystick driveJoystick = new DriveJoystick(driveTrain, m_driverController.getHID());
 
   private final AutoBalance autoBalance = new AutoBalance(driveTrain);
 
@@ -41,7 +39,6 @@ public class RobotContainer {
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
-    dPadUp=new POVButton(m_driverController, 0);
     // Configure the trigger bindings
     configureBindings();
     lc.startVision();
@@ -65,6 +62,13 @@ public class RobotContainer {
     // cancelling on release.
     //m_driverController.b().whileTrue(m_exampleSubsystem.exampleMethodCommand());
 
+    m_driverController.start().onTrue(new AutoAlign(driveTrain, 0));
+    m_driverController.a().onTrue(new AutoBalance(driveTrain));
+    m_driverController.x().onTrue(new DriveJoystick(driveTrain, m_driverController.getHID()));
+    /*RIGHT NOW TO TAKE BACK DRIVE ^^^, FIND BETTER WAY TO DO THIS; STILL WANT TO USE TRIGGERS THO*/
+
+    m_driverController.start().onTrue(new SetDriveMode(driveTrain, true));
+    m_driverController.back().onTrue(new SetDriveMode(driveTrain, false));
   }
 
   /**
@@ -76,7 +80,7 @@ public class RobotContainer {
     // An example command will be run in autonomous
     // return Autos.exampleAuto(m_exampleSubsystem);
   // 
-  public XboxController getXboxController() {
+  public CommandXboxController getXboxController() {
     return m_driverController;
   }
 
