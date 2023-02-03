@@ -4,31 +4,27 @@
 
 package frc.robot.commands;
 
+import frc.robot.subsystems.Claw;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.ServoClaw;
-import edu.wpi.first.wpilibj.Timer;
 
-public class OpenClaw extends CommandBase {
-  private ServoClaw servoClaw;
-  /** Creates a new SpinServo. */
-  public OpenClaw(ServoClaw servoClaw) {
-    this.servoClaw = servoClaw;
+public class ClawUnOpen extends CommandBase {
+  private Claw clawUnOpen;
+  /** Creates a new ClawUnOpen. */
+  public ClawUnOpen(Claw clawUnOpen) {
+    this.clawUnOpen = clawUnOpen;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(servoClaw);
 
+    addRequirements(clawUnOpen);
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {
-    
-  }
+  public void initialize() {}
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    servoClaw.moveServo(-1);
-    
+    clawUnOpen.clawGrip(-0.2);
   }
 
   // Called once the command ends or is interrupted.

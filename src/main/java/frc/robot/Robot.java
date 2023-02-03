@@ -90,16 +90,26 @@ public class Robot extends TimedRobot {
   /** This function is called periodically during operator control. */
   @Override
   public void teleopPeriodic() {
-    if(robotContainer.getArmController().getRightBumper()){
-      robotContainer.getCloseClaw().schedule();
+    if((!robotContainer.getArmController().getBButton() && !robotContainer.getArmController().getYButton())){
+      robotContainer.getClawNoOpen().schedule();
     }
-    else if(robotContainer.getArmController().getLeftBumper()){
-      robotContainer.getOpenClaw().schedule();
+    else if(robotContainer.getArmController().getBButton()){
+      robotContainer.getClawOpen().schedule();
     }
-    else {
-      robotContainer.getStopClaw().schedule();
+    else if(robotContainer.getArmController().getYButton()){
+      robotContainer.getClawUnOpen().schedule();
+    }
+    if ((!robotContainer.getArmController().getAButton() && !robotContainer.getArmController().getXButton())){
+      robotContainer.getClawNoUp().schedule();
+    }
+    else if(robotContainer.getArmController().getAButton()){
+      robotContainer.getClawUp().schedule();
+    }
+    else if(robotContainer.getArmController().getXButton()){
+      robotContainer.getClawUnUp().schedule();
     }
   }
+  
 
   @Override
   public void testInit() {
@@ -112,19 +122,7 @@ public class Robot extends TimedRobot {
 
   /** This function is called periodically during test mode. */
   @Override
-  public void testPeriodic() {
-    if (timer.get() < 3) {
-      robotContainer.getDriveTrain().driveTest(0.25, 0, 0);
-    } else if (timer.get() < 6) {
-      robotContainer.getDriveTrain().driveTest(0, 0.25, 0);
-    } else if (timer.get() < 9) {
-      robotContainer.getDriveTrain().driveTest(0, 0, 0.4);
-    } else if (timer.get() < 12) {
-      robotContainer.getDriveTrain().driveTest(-0.25, -0.25, 0);
-    } else {
-      robotContainer.getDriveTrain().driveTest(0, 0, 0);
-    }
-  }
+  public void testPeriodic() {}
 
   /** This function is called once when the robot is first started up. */
   @Override

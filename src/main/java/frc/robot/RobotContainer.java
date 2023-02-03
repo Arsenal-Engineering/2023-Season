@@ -9,6 +9,10 @@ import frc.robot.commands.Autos;
 import frc.robot.commands.*;
 import frc.robot.subsystems.*;
 import edu.wpi.first.wpilibj2.command.Command;
+
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 
@@ -23,25 +27,35 @@ public class RobotContainer {
   private final XboxController m_driverController =
     new XboxController(OperatorConstants.kDriverControllerPort);
 
-    private final XboxController m_armController =
+  private final XboxController m_armController =
     new XboxController(OperatorConstants.kArmControllerPort);
 
+
+
   // The robot's subsystems and commands are defined here...
-  private final ServoClaw servoClaw = new ServoClaw();
 
   private final ArmBase armBase = new ArmBase();
 
-  private final DriveTrain driveTrain = new DriveTrain();
-
-  private final DriveJoystick driveJoystick = new DriveJoystick(driveTrain, m_driverController);
-
-  private final OpenClaw oServo = new OpenClaw(servoClaw);
-
-  private final CloseClaw cServo = new CloseClaw(servoClaw);
-
-  private final StopClaw sServo = new StopClaw(servoClaw);
-
   private final ArmMove aMove = new ArmMove(armBase, m_armController);
+
+  private final Claw claw = new Claw(Constants.CLAW,MotorType.kBrushed);
+
+  private final ClawOpen cOpen = new ClawOpen(claw);
+
+  private final ClawUnOpen cUnOpen = new ClawUnOpen(claw);
+
+  private final ClawNoOpen cNoOpen = new ClawNoOpen(claw);
+
+  private final ClawWrist clawWrist = new ClawWrist(Constants.CLAW_WRIST,MotorType.kBrushed);
+
+  private final ClawNoUp cNoUp = new ClawNoUp(clawWrist);
+
+  private final ClawUp cUp = new ClawUp(clawWrist);
+
+  private final ClawUnUp cUnUp = new ClawUnUp(clawWrist);
+
+
+
 
 
 
@@ -101,23 +115,26 @@ public class RobotContainer {
     return m_armController;
   }
 
-  public DriveTrain getDriveTrain() {
-    return driveTrain;
-  }
-
-  public OpenClaw getOpenClaw(){
-    return oServo;
-  }
-
-  public CloseClaw getCloseClaw(){
-    return cServo;
-  }
-
-  public StopClaw getStopClaw(){
-    return sServo;
-  }
-
   public ArmMove getArmMove(){
     return aMove;
+  }
+  
+  public ClawOpen getClawOpen(){
+    return cOpen;
+  }
+  public ClawUnOpen getClawUnOpen(){
+    return cUnOpen;
+  }
+  public ClawUp getClawUp(){
+    return cUp;
+  }
+  public ClawNoUp getClawNoUp(){
+    return cNoUp;
+  }
+  public ClawUnUp getClawUnUp(){
+    return cUnUp;
+  }
+  public ClawNoOpen getClawNoOpen(){
+    return cNoOpen;
   }
 }

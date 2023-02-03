@@ -22,11 +22,17 @@ public final class Constants {
   
 
 
-  //Servo IDs for claw
-  public static final int SERVO_LEFT = 7;
-  public static final int SERVO_RIGHT = 8;
 
-  //TalonSRX ARM BASE
+  //SPARKMAX ID for claw (placeholder)
+  public static final int CLAW = 10;
+
+  //SPARKMAX ID for claw wrist
+  public static final int CLAW_WRIST = 11;
+
+
+
+
+  //SPARKMAX ARM BASE
   public static final int ARM_BASE = 1; //when running on 2022 robot
 
 

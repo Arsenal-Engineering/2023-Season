@@ -4,41 +4,33 @@
 
 package frc.robot.commands;
 
+import frc.robot.subsystems.Claw;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Robot;
-import frc.robot.subsystems.DriveTrain;
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import edu.wpi.first.wpilibj.XboxController;
 
-public class DriveJoystick extends CommandBase {
-  private DriveTrain doggoDriveTrain;
-  private XboxController humanController;
-
-  /** Creates a new DriveJoystick. */
-  public DriveJoystick(DriveTrain dog,XboxController human) {
+public class ClawNoOpen extends CommandBase {
+  /** Creates a new ClawNoOpen. */
+  private Claw clawNoOpen;
+  public ClawNoOpen(Claw clawNoOpen) {
+    this.clawNoOpen = clawNoOpen;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(dog);
-    doggoDriveTrain = dog;
-    humanController = human;
+
+    addRequirements(clawNoOpen);
+    // Use addRequirements() here to declare subsystem dependencies.
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {
-    System.out.println("test1");
-  }
+  public void initialize() {}
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    doggoDriveTrain.driveMecanum(humanController);
+    clawNoOpen.clawGrip(0);
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {
-    System.out.println("test2");
-  }
+  public void end(boolean interrupted) {}
 
   // Returns true when the command should end.
   @Override
