@@ -62,10 +62,8 @@ public class RobotContainer {
     // cancelling on release.
     //m_driverController.b().whileTrue(m_exampleSubsystem.exampleMethodCommand());
 
-    m_driverController.start().onTrue(new AutoAlign(driveTrain, 0));
-    m_driverController.a().onTrue(new AutoBalance(driveTrain));
-    m_driverController.x().onTrue(new DriveJoystick(driveTrain, m_driverController.getHID()));
-    /*RIGHT NOW TO TAKE BACK DRIVE ^^^, FIND BETTER WAY TO DO THIS; STILL WANT TO USE TRIGGERS THO*/
+    m_driverController.start().onTrue(new AutoAlign(driveTrain, 0)).onFalse(driveJoystick);
+    m_driverController.a().onTrue(new AutoBalance(driveTrain)).onFalse(driveJoystick);
 
     m_driverController.start().onTrue(new SetDriveMode(driveTrain, true));
     m_driverController.back().onTrue(new SetDriveMode(driveTrain, false));
