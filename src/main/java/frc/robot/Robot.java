@@ -101,17 +101,6 @@ public class Robot extends TimedRobot {
   /** This function is called periodically during test mode. */
   @Override
   public void testPeriodic() {
-    if (timer.get() < 3) {
-      m_robotContainer.getDriveTrain().driveTest(0.25, 0, 0);
-    } else if (timer.get() < 6) {
-      m_robotContainer.getDriveTrain().driveTest(0, 0.25, 0);
-    } else if (timer.get() < 9) {
-      m_robotContainer.getDriveTrain().driveTest(0, 0, 0.4);
-    } else if (timer.get() < 12) {
-      m_robotContainer.getDriveTrain().driveTest(-0.25, -0.25, 0);
-    } else {
-      m_robotContainer.getDriveTrain().driveTest(0, 0, 0);
-    }
   }
 
   /** This function is called once when the robot is first started up. */

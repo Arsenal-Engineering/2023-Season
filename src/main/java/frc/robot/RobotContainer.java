@@ -24,17 +24,8 @@ public class RobotContainer {
   private final CommandXboxController m_driverController =
     new CommandXboxController(OperatorConstants.kDriverControllerPort);
 
-  // The robot's subsystems and commands are defined here...
-  private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
-
   private final DriveTrain driveTrain = new DriveTrain();
-
   private final DriveJoystick driveJoystick = new DriveJoystick(driveTrain, m_driverController.getHID());
-
-  private final AutoBalance autoBalance = new AutoBalance(driveTrain);
-
-  private final AutoAlign autoAlign = new AutoAlign(driveTrain, 0);
-
   private final LifeCam lc = new LifeCam();
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
@@ -69,32 +60,11 @@ public class RobotContainer {
     m_driverController.back().onTrue(new SetDriveMode(driveTrain, false));
   }
 
-  /**
-   * Use this to pass the autonomous command to the main {@link Robot} class.
-   *
-   * @return the command to run in autonomous
-   */
-  // public Command getAutonomousCommand() {
-    // An example command will be run in autonomous
-    // return Autos.exampleAuto(m_exampleSubsystem);
-  // 
   public CommandXboxController getXboxController() {
     return m_driverController;
   }
 
   public DriveJoystick getdriveJoystick() {
     return driveJoystick;
-  }
-
-  public DriveTrain getDriveTrain() {
-    return driveTrain;
-  }
-
-  public AutoBalance getAutoBalance() {
-    return autoBalance;
-  }
-
-  public AutoAlign getAutoAlign() {
-    return autoAlign;
   }
 }
