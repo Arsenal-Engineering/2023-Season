@@ -22,7 +22,6 @@ public class DriveTrain extends SubsystemBase {
   //private AHRS navX;
   private String driveDirectionalMode;
   private boolean driveSlow;
-  private boolean funkyMode;
 
   /** Creates a new DriveTrain. */
   public DriveTrain() {

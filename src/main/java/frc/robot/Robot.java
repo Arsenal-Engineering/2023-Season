@@ -89,7 +89,10 @@ public class Robot extends TimedRobot {
     }
     if (m_robotContainer.getController().getLeftTriggerAxis() > .2) {
       m_robotContainer.getRetractArm().schedule();
-    } 
+    }
+    if (m_robotContainer.getController().getHID().getLeftBumper() || m_robotContainer.getController().getHID().getRightBumper()){
+      m_robotContainer.getTwistWrist().schedule();
+    }
   }
 
   @Override

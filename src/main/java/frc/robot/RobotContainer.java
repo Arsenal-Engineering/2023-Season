@@ -10,6 +10,7 @@ import frc.robot.commands.*;
 import frc.robot.subsystems.*;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 
 /**
@@ -24,7 +25,6 @@ public class RobotContainer {
     new CommandXboxController(OperatorConstants.kDriverControllerPort);
 
   // The robot's subsystems and commands are defined here...
-  private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
 
   private final DriveTrain driveTrain = new DriveTrain();
 
@@ -35,6 +35,10 @@ public class RobotContainer {
   private final ExtendArm extendArm = new ExtendArm(armExtender, m_driverController);
 
   private final RetractArm retractArm = new RetractArm(armExtender, m_driverController);
+
+  private final TwistyWrist twistyWrist = new TwistyWrist();
+
+  private final TwistWrist twistWrist = new TwistWrist(twistyWrist, m_driverController.getHID());
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -88,5 +92,9 @@ public class RobotContainer {
 
   public CommandXboxController getController() {
     return m_driverController;
+  }
+
+  public TwistWrist getTwistWrist() {
+    return twistWrist;
   }
 }
