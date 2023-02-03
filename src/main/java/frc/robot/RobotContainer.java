@@ -12,6 +12,8 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
+import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -23,6 +25,10 @@ public class RobotContainer {
   // Replace with CommandPS4Controller or CommandJoystick if needed
   private final CommandXboxController m_driverController =
     new CommandXboxController(OperatorConstants.kDriverControllerPort);
+
+  private final Joystick joystick = new Joystick(Constants.JOYSTICK_PORT);
+
+  private final JoystickButton joystickButton1 = new JoystickButton(joystick, 1);
 
   // The robot's subsystems and commands are defined here...
 
@@ -38,7 +44,7 @@ public class RobotContainer {
 
   private final TwistyWrist twistyWrist = new TwistyWrist();
 
-  private final TwistWrist twistWrist = new TwistWrist(twistyWrist, m_driverController.getHID());
+  //private final TwistWrist twistWrist = new TwistWrist(twistyWrist, m_driverController.getHID());
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -67,6 +73,9 @@ public class RobotContainer {
     //pravnav
     //the limit as iq aproaches infinity
     //I am here
+    m_driverController.leftBumper().onTrue(new TwistWrist(twistyWrist, joystick));
+
+    joystickButton1.onTrue(new TwistWrist(twistyWrist, joystick));
   }
 
   /**

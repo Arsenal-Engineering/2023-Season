@@ -21,6 +21,7 @@ public final class Constants {
     public static final int RIGHT_BACK_DRIVE = 3;
     public static final int ARM_EXTENDER_MOTOR = 7;
     public static final int WRIST_TWIST = 8;
+    public static final int JOYSTICK_PORT = 1;
 
     public static class OperatorConstants {
     public static final int kDriverControllerPort = 0;
