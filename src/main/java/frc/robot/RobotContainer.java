@@ -26,9 +26,6 @@ public class RobotContainer {
     new CommandXboxController(OperatorConstants.kDriverControllerPort);
   private JoystickButton buttonA;
 
-  // The robot's subsystems and commands are defined here...
-  private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
-
   private final DriveTrain driveTrain = new DriveTrain();
 
   private final DriveJoystick driveJoystick = new DriveJoystick(driveTrain, m_driverController.getHID());
@@ -73,15 +70,6 @@ public class RobotContainer {
 
    }
 
-  /**
-   * Use this to pass the autonomous command to the main {@link Robot} class.
-   *
-   * @return the command to run in autonomous
-   */
-  // public Command getAutonomousCommand() {
-    // An example command will be run in autonomous
-    // return Autos.exampleAuto(m_exampleSubsystem);
-  // 
   public DriveJoystick getdriveJoystick() {
     return driveJoystick;
   }

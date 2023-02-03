@@ -18,8 +18,6 @@ public class AutoAlign extends CommandBase {
   //controller
   private CommandXboxController xboxController;
 
-  
-
   //PID values for X and Y motion
   private final double X_KP = 0.2;
   private final double X_KD = 0.0;
