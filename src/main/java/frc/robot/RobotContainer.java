@@ -53,7 +53,7 @@ public class RobotContainer {
     // cancelling on release.
     //m_driverController.b().whileTrue(m_exampleSubsystem.exampleMethodCommand());
 
-    m_driverController.start().onTrue(new AutoAlign(driveTrain, 0)).onFalse(driveJoystick);
+    m_driverController.start().onTrue(new DriveTurnTowardsDirection(driveTrain, 0)).onFalse(driveJoystick);
     m_driverController.a().onTrue(new AutoBalance(driveTrain)).onFalse(driveJoystick);
 
     m_driverController.start().onTrue(new SetDriveMode(driveTrain, true));

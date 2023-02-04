@@ -10,12 +10,12 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.DriveTrain;
 
-public class AutoAlign extends CommandBase {
+public class DriveTurnTowardsDirection extends CommandBase {
   private DriveTrain driveTrain;
   private AHRS navX;
   private double alignGoal;
   /** Creates a new AutoAlign. */
-  public AutoAlign(DriveTrain driveTrain, double alignGoal) {
+  public DriveTurnTowardsDirection(DriveTrain driveTrain, double alignGoal) {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(driveTrain);
     this.driveTrain = driveTrain;
