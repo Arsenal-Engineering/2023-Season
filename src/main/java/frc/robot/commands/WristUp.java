@@ -4,13 +4,13 @@
 
 package frc.robot.commands;
 
-import frc.robot.subsystems.ClawWrist;
+import frc.robot.subsystems.ClawUpDown;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class WristUp extends CommandBase {
-  private ClawWrist wristUp;
+  private ClawUpDown wristUp;
   /** Creates a new ClawDie. */
-  public WristUp(ClawWrist wristUp) {
+  public WristUp(ClawUpDown wristUp) {
     this.wristUp = wristUp;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(wristUp);

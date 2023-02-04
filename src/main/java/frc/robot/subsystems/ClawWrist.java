@@ -5,23 +5,24 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import frc.robot.Constants;
-//import com.ctre.phoenix.motorcontrol.can.*;
-import com.revrobotics.CANSparkMax;
-//import com.revrobotics.CANSparkMax.IdleMode;
-import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 public class ClawWrist extends SubsystemBase {
-  private CANSparkMax clawWrist;
-  /** Creates a new ClawWrist. */
-  public ClawWrist(int clawWristID, MotorType motor) {
-    clawWrist = new CANSparkMax(clawWristID, motor);
+  private TalonSRX wristMotor;
+  /** Creates a new TwistyWrist. */
+  public ClawWrist() {
+    wristMotor = new TalonSRX(Constants.WRIST_TWIST);
   }
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
   }
-  public void setWristSpeed(double clawSpeed){
-    clawWrist.set(clawSpeed);
+
+  public void twist(double speed) {
+    wristMotor.set(ControlMode.Velocity,speed);
   }
 }

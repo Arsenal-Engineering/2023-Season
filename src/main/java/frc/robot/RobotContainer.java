@@ -39,22 +39,6 @@ public class RobotContainer {
 
   private final Joystick joystick = new Joystick(Constants.ARM_CONTROLLER_PORT);
 
-  private final JoystickButton joystickButton1 = new JoystickButton(joystick,1);
-
-  private final JoystickButton joystickButton2 = new JoystickButton(joystick,2);
-
-  private final JoystickButton joystickButton3 = new JoystickButton(joystick,3);
-
-  private final JoystickButton joystickButton4 = new JoystickButton(joystick,4);
-  
-  private final JoystickButton joystickButton5 = new JoystickButton(joystick,5);
-
-  private final JoystickButton joystickButton6 = new JoystickButton(joystick,6);
-
-  private final JoystickButton joystickButton7 = new JoystickButton(joystick,7);
-
-  private final JoystickButton joystickButton8 = new JoystickButton(joystick,8);
-
 
 
   // The robot's subsystems and commands are defined here...
@@ -71,7 +55,7 @@ public class RobotContainer {
 
   private final ClawStop cStop = new ClawStop(claw);
 
-  private final ClawWrist clawWrist = new ClawWrist(Constants.CLAW_WRIST,MotorType.kBrushed);
+  private final ClawUpDown clawWrist = new ClawUpDown(Constants.CLAW_WRIST,MotorType.kBrushed);
 
   private final WristStop wStop = new WristStop(clawWrist);
 
@@ -82,9 +66,7 @@ public class RobotContainer {
   private final DriveTrain driveTrain = new DriveTrain();
   private final DriveJoystick driveJoystick = new DriveJoystick(driveTrain, m_driverController.getHID());
   private final LifeCam lc = new LifeCam();
-  
-  private JoystickButton buttonA;
-  
+    
   private final LimelightCam limeLight = new LimelightCam();
   private final AutoAlign cubeAlign = new AutoAlign(driveTrain, limeLight, m_driverController, 0);
   private final AutoAlign leftConeAlign = new AutoAlign(driveTrain, limeLight, m_driverController, Constants.CONE_DEPOSIT_OFFSET);
@@ -92,11 +74,11 @@ public class RobotContainer {
 
   private final ArmExtension armExtender = new ArmExtension();
 
-  private final ExtendArm extendArm = new ExtendArm(armExtender, m_driverController);
+  private final ExtendArm extendArm = new ExtendArm(armExtender, joystick);
 
-  private final RetractArm retractArm = new RetractArm(armExtender, m_driverController);
+  private final RetractArm retractArm = new RetractArm(armExtender, joystick);
 
-  private final TwistyWrist twistyWrist = new TwistyWrist();
+  private final ClawWrist twistyWrist = new ClawWrist();
 
   private final TwistWrist twistWrist = new TwistWrist(twistyWrist, joystick);
 
@@ -135,9 +117,6 @@ public class RobotContainer {
     m_driverController.povUp().onTrue(cubeAlign).onFalse(driveJoystick);
     m_driverController.povLeft().onTrue(leftConeAlign).onFalse(driveJoystick);
     m_driverController.povRight().onTrue(rightConeAlign).onFalse(driveJoystick);
-
-    joystickButton1.onTrue(twistWrist);
-    joystickButton2.onTrue(cOpen);
 
   }
 
@@ -187,5 +166,29 @@ public class RobotContainer {
 
   public ArmMove getArmMove(){
     return aMove;
+  }
+
+  public ClawClose getClawClose(){
+    return cClose;
+  }
+
+  public ClawOpen getClawOpen(){
+    return cOpen;
+  }
+
+  public ClawStop getClawStop(){
+    return cStop;
+  }
+
+  public WristDown getWristDown(){
+    return wDown;
+  }
+
+  public WristStop getWristStop(){
+    return wStop;
+  }
+
+  public WristUp getWristUp(){
+    return wUp;
   }
 }

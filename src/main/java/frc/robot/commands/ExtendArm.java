@@ -6,13 +6,13 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.*;
-import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+import edu.wpi.first.wpilibj.Joystick;
 
 public class ExtendArm extends CommandBase {
   private ArmExtension armExtender;
-  private CommandXboxController controller;
+  private Joystick controller;
   /** Creates a new ExtendArm. */
-  public ExtendArm(ArmExtension armExtender, CommandXboxController controller) {
+  public ExtendArm(ArmExtension armExtender, Joystick controller) {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(armExtender);
     this.armExtender = armExtender;
@@ -26,8 +26,8 @@ public class ExtendArm extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (controller.getRightTriggerAxis() > .2)
-      armExtender.setSpeed(controller.getRightTriggerAxis() * 0.25);
+    if (controller.getRawAxis(3) < -.9)
+      armExtender.setSpeed(.5);
   }
 
   // Called once the command ends or is interrupted.

@@ -6,13 +6,13 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.*;
-import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+import edu.wpi.first.wpilibj.Joystick;
 
 public class RetractArm extends CommandBase {
   private ArmExtension armRetractor;
-  private CommandXboxController controller;
+  private Joystick controller;
   /** Creates a new RetractArm. */
-  public RetractArm(ArmExtension armRetractor, CommandXboxController controller) {
+  public RetractArm(ArmExtension armRetractor, Joystick controller) {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(armRetractor);
     this.armRetractor = armRetractor;
@@ -26,8 +26,8 @@ public class RetractArm extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (controller.getLeftTriggerAxis() > .2)
-      armRetractor.setSpeed(-controller.getLeftTriggerAxis() * 0.25);
+    if (controller.getRawAxis(3) > .9)
+      armRetractor.setSpeed(-.5);
   }
 
   // Called once the command ends or is interrupted.

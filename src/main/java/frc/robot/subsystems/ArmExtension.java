@@ -6,14 +6,15 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import frc.robot.Constants;
 
 public class ArmExtension extends SubsystemBase {
-  private WPI_TalonSRX extendMotor;
+  private TalonSRX extendMotor;
   /** Creates a new ArmExtension. */
   public ArmExtension() {
-    extendMotor = new WPI_TalonSRX(Constants.ARM_EXTENDER_MOTOR);
+    extendMotor = new TalonSRX(Constants.ARM_EXTENDER_MOTOR);
   }
 
   @Override
@@ -22,6 +23,6 @@ public class ArmExtension extends SubsystemBase {
   }
 
   public void setSpeed(double speed) {
-    extendMotor.set(speed);
+    extendMotor.set(ControlMode.Velocity,speed);
   }
 }
