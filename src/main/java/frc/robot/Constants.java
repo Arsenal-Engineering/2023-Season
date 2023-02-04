@@ -25,6 +25,7 @@ public final class Constants {
     public static final double LIMELIGHT_HEIGHT = 0.16;
     public static final double CONE_DEPOSIT_OFFSET = 0.5;
   
+    public static final int ARM_CONTROLLER_PORT = 1;
     public static class OperatorConstants {
     public static final int kDriverControllerPort = 1;
   }

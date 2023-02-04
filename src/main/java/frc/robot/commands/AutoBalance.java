@@ -4,41 +4,46 @@
 
 package frc.robot.commands;
 
+import com.kauailabs.navx.frc.AHRS;
+
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Robot;
 import frc.robot.subsystems.DriveTrain;
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import edu.wpi.first.wpilibj.XboxController;
 
-public class DriveJoystick extends CommandBase {
+public class AutoBalance extends CommandBase {
   private DriveTrain driveTrain;
-  private XboxController controller;
-
-  /** Creates a new DriveJoystick. */
-  public DriveJoystick(DriveTrain driveTrain,XboxController controller) {
+  private AHRS navX;
+  private double offset;
+  /** Creates a new AutoBalance. */
+  public AutoBalance(DriveTrain driveTrain) {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(driveTrain);
     this.driveTrain = driveTrain;
-    this.controller = controller;
+    navX = driveTrain.getNavX();
+    offset = navX.getPitch();
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    System.out.println("test1");
+    //Determine offset
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    driveTrain.driveMecanum(controller);
+    if (navX.getPitch()-offset>4){
+      driveTrain.driveTest(Math.sin((navX.getPitch()-offset)* 0.9 * (Math.PI / 180.0)+0.1)*-0.5, 0, 0);
+    } else if (navX.getPitch()-offset<-4) { 
+      driveTrain.driveTest(Math.sin((navX.getPitch()-offset)* 0.9 * (Math.PI / 180.0)-0.1)*-0.5, 0, 0);
+    }//Stop when Balanced
+    else {
+      driveTrain.driveTest(0,0,0);
+    }
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {
-    System.out.println("test2");
-  }
+  public void end(boolean interrupted) {}
 
   // Returns true when the command should end.
   @Override

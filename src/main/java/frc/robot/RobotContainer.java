@@ -5,10 +5,11 @@
 package frc.robot;
 
 import frc.robot.Constants.OperatorConstants;
-import frc.robot.commands.Autos;
 import frc.robot.commands.*;
 import frc.robot.subsystems.*;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj2.command.button.POVButton;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
@@ -24,23 +25,24 @@ public class RobotContainer {
   // Replace with CommandPS4Controller or CommandJoystick if needed
   private final CommandXboxController m_driverController =
     new CommandXboxController(OperatorConstants.kDriverControllerPort);
-  private JoystickButton buttonA;
 
   private final DriveTrain driveTrain = new DriveTrain();
-
   private final DriveJoystick driveJoystick = new DriveJoystick(driveTrain, m_driverController.getHID());
-
+  private final LifeCam lc = new LifeCam();
+  
+  private JoystickButton buttonA;
+  
   private final LimelightCam limeLight = new LimelightCam();
   private final AutoAlign cubeAlign = new AutoAlign(driveTrain, limeLight, m_driverController, 0);
   private final AutoAlign leftConeAlign = new AutoAlign(driveTrain, limeLight, m_driverController, Constants.CONE_DEPOSIT_OFFSET);
   private final AutoAlign rightConeAlign = new AutoAlign(driveTrain, limeLight, m_driverController, -Constants.CONE_DEPOSIT_OFFSET);
 
 
-
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the trigger bindings
     configureBindings();
+    lc.startVision();
   }
 
   /**
@@ -61,22 +63,29 @@ public class RobotContainer {
     // cancelling on release.
     //m_driverController.b().whileTrue(m_exampleSubsystem.exampleMethodCommand());
 
+    m_driverController.b().onTrue(new DriveTurnTowardsDirection(driveTrain, 0)).onFalse(driveJoystick);
+    m_driverController.a().onTrue(new AutoBalance(driveTrain)).onFalse(driveJoystick);
+
+    m_driverController.start().onTrue(new SetDriveMode(driveTrain, true));
+    m_driverController.back().onTrue(new SetDriveMode(driveTrain, false
+    
+    m_driverController.povUp().onTrue(cubeAlign).onFalse(driveJoystick);
+    m_driverController.povLeft().onTrue(leftConeAlign).onFalse(driveJoystick);
+    m_driverController.povRight().onTrue(rightConeAlign).onFalse(driveJoystick);
+  }
+
+  public CommandXboxController getXboxController() {
+    return m_driverController;
+
     //pravnav
     //the limit as iq aproaches infinity
     //I am here
-    m_driverController.a().onTrue(cubeAlign).onFalse(driveJoystick);
-    m_driverController.x().onTrue(leftConeAlign).onFalse(driveJoystick);
-    m_driverController.b().onTrue(rightConeAlign).onFalse(driveJoystick);
-
    }
 
   public DriveJoystick getdriveJoystick() {
     return driveJoystick;
   }
-
-  public DriveTrain getDriveTrain() {
-    return driveTrain;
-  }
+  
   public LimelightCam getLimelightCam(){
     return limeLight;
   }
