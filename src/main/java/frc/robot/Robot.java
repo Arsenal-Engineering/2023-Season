@@ -90,24 +90,7 @@ public class Robot extends TimedRobot {
   /** This function is called periodically during operator control. */
   @Override
   public void teleopPeriodic() {
-    if((!robotContainer.getArmController().getBButton() && !robotContainer.getArmController().getYButton())){
-      robotContainer.getClawNoOpen().schedule();
-    }
-    else if(robotContainer.getArmController().getBButton()){
-      robotContainer.getClawOpen().schedule();
-    }
-    else if(robotContainer.getArmController().getYButton()){
-      robotContainer.getClawUnOpen().schedule();
-    }
-    if ((!robotContainer.getArmController().getAButton() && !robotContainer.getArmController().getXButton())){
-      robotContainer.getClawNoUp().schedule();
-    }
-    else if(robotContainer.getArmController().getAButton()){
-      robotContainer.getClawUp().schedule();
-    }
-    else if(robotContainer.getArmController().getXButton()){
-      robotContainer.getClawUnUp().schedule();
-    }
+
   }
   
 
