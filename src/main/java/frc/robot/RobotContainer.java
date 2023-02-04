@@ -61,7 +61,7 @@ public class RobotContainer {
 
   private final ArmBase armBase = new ArmBase();
 
-  private final ArmMove aMove = new ArmMove(armBase, joystick);
+  private final ArmMove aMove = new ArmMove(armBase, joystick, Constants.FORWARD_LIMIT_SWITCH, Constants.BACKWARD_LIMIT_SWITCH);
 
   private final Claw claw = new Claw(Constants.CLAW,MotorType.kBrushed);
 
@@ -92,9 +92,9 @@ public class RobotContainer {
 
   private final ArmExtension armExtender = new ArmExtension();
 
-  private final ExtendArm extendArm = new ExtendArm(armExtender, m_driverController);
+  private final ExtendArm extendArm = new ExtendArm(armExtender, m_driverController, Constants.EXTEND_LIMIT_SWITCH);
 
-  private final RetractArm retractArm = new RetractArm(armExtender, m_driverController);
+  private final RetractArm retractArm = new RetractArm(armExtender, m_driverController, Constants.RETRACT_LIMIT_SWITCH);
 
   private final TwistyWrist twistyWrist = new TwistyWrist();
 

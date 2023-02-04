@@ -19,16 +19,19 @@ public final class Constants {
     public static final int RIGHT_FRONT_DRIVE = 2;
     public static final int LEFT_BACK_DRIVE = 4;
     public static final int RIGHT_BACK_DRIVE = 3;
+  //change ports
+    public static final int EXTEND_LIMIT_SWITCH = 98;
+    public static final int RETRACT_LIMIT_SWITCH = 99;
+    public static final int FORWARD_LIMIT_SWITCH = 69;
+    public static final int BACKWARD_LIMIT_SWITCH = 1;
 
-    //constants for auto-aligning
-    public static final double DEPOSIT_TAG_HEIGHT = 0.36;
-    public static final double LIMELIGHT_HEIGHT = 0.16;
-    public static final double CONE_DEPOSIT_OFFSET = 0.5;
-    public static final int ARM_EXTENDER_MOTOR = 7;
-    public static final int WRIST_TWIST = 8;
-    public static final int JOYSTICK_PORT = 1;
-
-    public static final int ARM_CONTROLLER_PORT = 1;
+  //constants for auto-aligning
+  public static final double DEPOSIT_TAG_HEIGHT = 0.36;
+  public static final double LIMELIGHT_HEIGHT = 0.16;
+  public static final double CONE_DEPOSIT_OFFSET = 0.5;
+  public static final int ARM_EXTENDER_MOTOR = 7;
+  public static final int WRIST_TWIST = 8;
+  public static final int JOYSTICK_PORT = 1;
 
 
 
@@ -44,9 +47,11 @@ public final class Constants {
   //SPARKMAX ARM BASE
   public static final int ARM_BASE = 1; //when running on 2022 robot
 
+  public static final int ARM_CONTROLLER_PORT = 1;
+
 
   public static class OperatorConstants {
     public static final int kDriverControllerPort = 1;
-    public static final int kArmControllerPort = 1;
+    public static final int kArmControllerPort = 0;
   }
 }

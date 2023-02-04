@@ -4,6 +4,7 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.*;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
@@ -11,12 +12,14 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 public class RetractArm extends CommandBase {
   private ArmExtension armRetractor;
   private CommandXboxController controller;
+  private DigitalInput limitSwitch;
   /** Creates a new RetractArm. */
-  public RetractArm(ArmExtension armRetractor, CommandXboxController controller) {
+  public RetractArm(ArmExtension armRetractor, CommandXboxController controller, int limitSwitchID) {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(armRetractor);
     this.armRetractor = armRetractor;
     this.controller = controller;
+    limitSwitch = new DigitalInput(limitSwitchID);
   }
 
   // Called when the command is initially scheduled.
@@ -26,7 +29,9 @@ public class RetractArm extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (controller.getLeftTriggerAxis() > .2)
+    if (limitSwitch.get()){
+      armRetractor.setSpeed(0);
+    }else if (controller.getLeftTriggerAxis() > .2)
       armRetractor.setSpeed(-controller.getLeftTriggerAxis() * 0.25);
   }
 
