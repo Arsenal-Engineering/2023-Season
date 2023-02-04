@@ -54,7 +54,7 @@ public class RobotContainer {
 
   private final TwistyWrist twistyWrist = new TwistyWrist();
 
-  //private final TwistWrist twistWrist = new TwistWrist(twistyWrist, m_driverController.getHID());
+  private final TwistWrist twistWrist = new TwistWrist(twistyWrist, joystick);
 
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
@@ -91,17 +91,12 @@ public class RobotContainer {
     m_driverController.povUp().onTrue(cubeAlign).onFalse(driveJoystick);
     m_driverController.povLeft().onTrue(leftConeAlign).onFalse(driveJoystick);
     m_driverController.povRight().onTrue(rightConeAlign).onFalse(driveJoystick);
+
+    joystickButton1.onTrue(twistWrist);
   }
 
   public CommandXboxController getXboxController() {
     return m_driverController;
-
-    //pravnav
-    //the limit as iq aproaches infinity
-    //I am here
-    m_driverController.leftBumper().onTrue(new TwistWrist(twistyWrist, joystick));
-
-    joystickButton1.onTrue(new TwistWrist(twistyWrist, joystick));
   }
 
   public DriveJoystick getdriveJoystick() {

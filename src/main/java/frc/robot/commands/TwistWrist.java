@@ -29,11 +29,8 @@ public class TwistWrist extends CommandBase {
   @Override
   //change the button triggers
   public void execute() {
-    if (controller.getLeftBumper()){
-      twist.twist(-0.25);
-    }
-    if (controller.getRightBumper()){
-      twist.twist(0.25);
+    if(controller.getTwist() > 0.2 || controller.getTwist() < -0.2){
+      twist.twist(controller.getTwist());
     }
   }
 
