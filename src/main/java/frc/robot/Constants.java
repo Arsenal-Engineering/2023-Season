@@ -29,7 +29,24 @@ public final class Constants {
     public static final int JOYSTICK_PORT = 1;
 
     public static final int ARM_CONTROLLER_PORT = 1;
-    public static class OperatorConstants {
+
+
+
+  //SPARKMAX ID for claw (placeholder)
+  public static final int CLAW = 10;
+
+  //SPARKMAX ID for claw wrist
+  public static final int CLAW_WRIST = 11;
+
+
+
+
+  //SPARKMAX ARM BASE
+  public static final int ARM_BASE = 1; //when running on 2022 robot
+
+
+  public static class OperatorConstants {
     public static final int kDriverControllerPort = 1;
+    public static final int kArmControllerPort = 1;
   }
 }
