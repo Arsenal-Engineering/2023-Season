@@ -28,7 +28,7 @@ public class TwistWrist extends CommandBase {
   //change the button triggers
   public void execute() {
     if(Math.abs(controller.getRawAxis(2)) > .2){
-      clawtwist.twist(controller.getRawAxis(2));
+      clawtwist.twist(controller.getRawAxis(2)/2);
     }
   }
 
