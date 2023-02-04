@@ -38,6 +38,20 @@ public class RobotContainer {
 
   private final JoystickButton armButton1 = new JoystickButton(m_armController,1);
 
+  private final JoystickButton armButton2 = new JoystickButton(m_armController,2);
+
+  private final JoystickButton armButton3 = new JoystickButton(m_armController,3);
+
+  private final JoystickButton armButton4 = new JoystickButton(m_armController,4);
+  
+  private final JoystickButton armButton5 = new JoystickButton(m_armController,5);
+
+  private final JoystickButton armButton6 = new JoystickButton(m_armController,6);
+
+  private final JoystickButton armButton7 = new JoystickButton(m_armController,7);
+
+  private final JoystickButton armButton8 = new JoystickButton(m_armController,8);
+
 
 
   // The robot's subsystems and commands are defined here...
@@ -50,17 +64,17 @@ public class RobotContainer {
 
   private final ClawOpen cOpen = new ClawOpen(claw);
 
-  private final ClawUnOpen cUnOpen = new ClawUnOpen(claw);
+  private final ClawClose cClose = new ClawClose(claw);
 
-  private final ClawNoOpen cNoOpen = new ClawNoOpen(claw);
+  private final ClawStop cStop = new ClawStop(claw);
 
   private final ClawWrist clawWrist = new ClawWrist(Constants.CLAW_WRIST,MotorType.kBrushed);
 
-  private final ClawNoUp cNoUp = new ClawNoUp(clawWrist);
+  private final WristStop wStop = new WristStop(clawWrist);
 
-  private final ClawUp cUp = new ClawUp(clawWrist);
+  private final WristUp wUp = new WristUp(clawWrist);
 
-  private final ClawUnUp cUnUp = new ClawUnUp(clawWrist);
+  private final WristDown wDown = new WristDown(clawWrist);
 
 
 
@@ -102,7 +116,9 @@ public class RobotContainer {
     //I am here
 
     //m_driverController.a().onTrue(new )
-    armButton1.onTrue(new ClawUnOpen(claw));
+    
+    armButton2.onTrue(new ClawOpen(claw));
+
   }
 
   /**
@@ -128,24 +144,5 @@ public class RobotContainer {
 
   public ArmMove getArmMove(){
     return aMove;
-  }
-  
-  public ClawOpen getClawOpen(){
-    return cOpen;
-  }
-  public ClawUnOpen getClawUnOpen(){
-    return cUnOpen;
-  }
-  public ClawUp getClawUp(){
-    return cUp;
-  }
-  public ClawNoUp getClawNoUp(){
-    return cNoUp;
-  }
-  public ClawUnUp getClawUnUp(){
-    return cUnUp;
-  }
-  public ClawNoOpen getClawNoOpen(){
-    return cNoOpen;
   }
 }
