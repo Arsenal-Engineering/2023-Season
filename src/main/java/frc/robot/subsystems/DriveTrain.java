@@ -61,10 +61,26 @@ public class DriveTrain extends SubsystemBase {
           controller.getLeftX() * driveFactor,controller.getRightX()/2.0);
       }
       
+      L1.feed();
+      L2.feed();
+      R1.feed();
+      R2.feed();
     }
+    
+    //allows for driving through set values rather than a controller
+    public void driveMecanum(double xSpeed, double ySpeed, double zRotation){
+      mecanumDrive.driveCartesian(xSpeed, ySpeed, zRotation);
+      
+      L1.feed();
+      L2.feed();
+      R1.feed();
+      R2.feed();
+    }
+    
     public void driveTest(double x, double y, double z) {
       mecanumDrive.driveCartesian(x, y, z);
     }
+    
     public void updateBrakeMode(){
       System.out.println("brakeMode is "+brakeMode);
       if (brakeMode){
