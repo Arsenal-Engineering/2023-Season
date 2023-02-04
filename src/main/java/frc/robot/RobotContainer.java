@@ -67,7 +67,7 @@ public class RobotContainer {
     m_driverController.a().onTrue(new AutoBalance(driveTrain)).onFalse(driveJoystick);
 
     m_driverController.start().onTrue(new SetDriveMode(driveTrain, true));
-    m_driverController.back().onTrue(new SetDriveMode(driveTrain, false
+    m_driverController.back().onTrue(new SetDriveMode(driveTrain, false));
     
     m_driverController.povUp().onTrue(cubeAlign).onFalse(driveJoystick);
     m_driverController.povLeft().onTrue(leftConeAlign).onFalse(driveJoystick);
