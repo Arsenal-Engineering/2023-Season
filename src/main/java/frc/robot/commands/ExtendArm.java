@@ -4,6 +4,7 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.*;
 import edu.wpi.first.wpilibj.Joystick;
@@ -11,12 +12,14 @@ import edu.wpi.first.wpilibj.Joystick;
 public class ExtendArm extends CommandBase {
   private ArmExtension armExtender;
   private Joystick controller;
+  private DigitalInput limitSwitch;
   /** Creates a new ExtendArm. */
-  public ExtendArm(ArmExtension armExtender, Joystick controller) {
+  public ExtendArm(ArmExtension armExtender, Joystick controller, int limitSwitchID) {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(armExtender);
     this.armExtender = armExtender;
     this.controller = controller;
+    limitSwitch = new DigitalInput(limitSwitchID);
   }
 
   // Called when the command is initially scheduled.
@@ -26,7 +29,9 @@ public class ExtendArm extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (controller.getRawAxis(3) < -.9)
+    if (limitSwitch.get()){
+      armExtender.setSpeed(0);
+    }else if (controller.getRawAxis(3) > .2)
       armExtender.setSpeed(.5);
   }
 
