@@ -9,7 +9,6 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj.Timer;
 
-
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
  * each mode, as described in the TimedRobot documentation. If you change the name of this class or
@@ -21,7 +20,8 @@ public class Robot extends TimedRobot {
   private Timer timer;
 //jkjkhkhk
 //kkjkj
-  private RobotContainer robotContainer;
+  private RobotContainer m_robotContainer;
+
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -31,7 +31,7 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
-    robotContainer = new RobotContainer();
+    m_robotContainer = new RobotContainer();
     timer = new Timer();
   }
 
@@ -61,17 +61,22 @@ public class Robot extends TimedRobot {
   /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
   @Override
   public void autonomousInit() {
+    timer.reset();
+    timer.start();
     //m_autonomousCommand = m_robotContainer.getAutonomousCommand();
 
     // schedule the autonomous command (example)
-    // if (m_autonomousCommand != null) {
-    //   m_autonomousCommand.schedule();
-    // }
+    if (m_autonomousCommand != null) {
+      m_autonomousCommand.schedule();
+    }
   }
 
   /** This function is called periodically during autonomous. */
   @Override
-  public void autonomousPeriodic() {}
+  public void autonomousPeriodic() {
+    //if(timer.get()<)
+
+  }
 
   @Override
   public void teleopInit() {
@@ -82,22 +87,19 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
-    //robotContainer.getdriveJoystick().schedule();
-    robotContainer.getArmMove().schedule();
+    m_robotContainer.getdriveJoystick().schedule();
 
   }
 
   /** This function is called periodically during operator control. */
   @Override
   public void teleopPeriodic() {
-    if (robotContainer.getController().getRightTriggerAxis() > .2) {
-      robotContainer.getExtendArm().schedule();
-    }
-    if (robotContainer.getController().getLeftTriggerAxis() > .2) {
-      robotContainer.getRetractArm().schedule();
-    }
-    if (robotContainer.getController().getHID().getLeftBumper() || robotContainer.getController().getHID().getRightBumper()){
-      robotContainer.getTwistWrist().schedule();
+    if(m_robotContainer.getXboxController().getBButton()) {
+      m_robotContainer.getDriveTurnTowardsDirection().schedule();
+    } else if (m_robotContainer.getXboxController().getAButton()) {
+      m_robotContainer.getaAutoBalance().schedule();
+    } else {
+      m_robotContainer.getdriveJoystick().schedule();
     }
   }
 
@@ -112,7 +114,19 @@ public class Robot extends TimedRobot {
 
   /** This function is called periodically during test mode. */
   @Override
-  public void testPeriodic() {}
+  public void testPeriodic() {
+    if (timer.get() < 3) {
+      m_robotContainer.getDriveTrain().driveTest(0.25, 0, 0);
+    } else if (timer.get() < 6) {
+      m_robotContainer.getDriveTrain().driveTest(0, 0.25, 0);
+    } else if (timer.get() < 9) {
+      m_robotContainer.getDriveTrain().driveTest(0, 0, 0.4);
+    } else if (timer.get() < 12) {
+      m_robotContainer.getDriveTrain().driveTest(-0.25, -0.25, 0);
+    } else {
+      m_robotContainer.getDriveTrain().driveTest(0, 0, 0);
+    }
+  }
 
   /** This function is called once when the robot is first started up. */
   @Override
