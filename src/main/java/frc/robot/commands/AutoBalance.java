@@ -15,29 +15,34 @@ public class AutoBalance extends CommandBase {
   private double offset;
   /** Creates a new AutoBalance. */
   public AutoBalance(DriveTrain driveTrain) {
+    //System.out.println("testprint");
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(driveTrain);
     this.driveTrain = driveTrain;
     navX = driveTrain.getNavX();
-    offset = navX.getPitch();
+
+    //Determine offset
+    offset = 5.9;
+    System.out.println("offset " + offset);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    //Determine offset
+    System.out.println("navX.getPitch()" + navX.getPitch());
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    //System.out.println(navX.getPitch()-offset);
     if (navX.getPitch()-offset>4){
-      driveTrain.driveTest(Math.sin((navX.getPitch()-offset)* 0.9 * (Math.PI / 180.0)+0.1)*-0.5, 0, 0);
+      driveTrain.driveMecanum(Math.sin((navX.getPitch()-offset)* 0.9 * (Math.PI / 180.0)+0.1)*-0.5, 0, 0);
     } else if (navX.getPitch()-offset<-4) { 
-      driveTrain.driveTest(Math.sin((navX.getPitch()-offset)* 0.9 * (Math.PI / 180.0)-0.1)*-0.5, 0, 0);
+      driveTrain.driveMecanum(Math.sin((navX.getPitch()-offset)* 0.9 * (Math.PI / 180.0)-0.1)*-0.5, 0, 0);
     }//Stop when Balanced
     else {
-      driveTrain.driveTest(0,0,0);
+      driveTrain.driveMecanum(0,0,0);
     }
   }
 
