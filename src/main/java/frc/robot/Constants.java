@@ -33,6 +33,9 @@ public final class Constants {
   public static final int WRIST_TWIST = 8;
   public static final int JOYSTICK_PORT = 1;
 
+  //angle offset
+  public static final double NAVX_PITCH_OFFSET = 5.9;
+
 
 
   //SPARKMAX ID for claw (placeholder)

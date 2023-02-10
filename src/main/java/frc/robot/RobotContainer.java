@@ -5,6 +5,7 @@
 package frc.robot;
 
 import frc.robot.Constants.OperatorConstants;
+import frc.robot.autonomous_commands.Autos;
 import frc.robot.commands.*;
 import frc.robot.subsystems.*;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -190,5 +191,10 @@ public class RobotContainer {
 
   public WristUp getWristUp(){
     return wUp;
+  }
+
+  //Autonomous Commands
+  public Command getInitialMoveAutonomous(){
+    return Autos.initialMove(armBase, claw, driveTrain);
   }
 }
