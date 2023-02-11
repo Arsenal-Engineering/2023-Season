@@ -37,6 +37,7 @@ public class MoveOverChargeStation extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
+    //finishes when robot is flat
     return (navX.getPitch() + Constants.NAVX_PITCH_OFFSET > -5 && navX.getPitch() + Constants.NAVX_PITCH_OFFSET < 5);
   }
 }

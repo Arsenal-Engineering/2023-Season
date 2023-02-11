@@ -12,9 +12,9 @@ import frc.robot.subsystems.*;
 public final class Autos {
   /** Example static factory for an autonomous command. */
 
-  public static CommandBase initialMove(ArmBase armBase, Claw claw, DriveTrain driveTrain) {
+  public static CommandBase initialMove(ArmBase armBase, Claw claw, DriveTrain driveTrain){
     //creates initial move command so robot can sense for hill
-    Move initialMoveBack = new Move(driveTrain, 3.0, -10);
+    Move initialMoveBack = new Move(driveTrain, 3.0, -1.0);
     //command sequence
     return Commands.sequence(new LowerArm(armBase),
                              new Drop(claw),
@@ -24,14 +24,17 @@ public final class Autos {
                                                     new Move(driveTrain, 1.5, -1.0),
                                                     ()->initialMoveBack.isHill()));
   }
+
+  //code for command path if robot runs over charge station during autonomous
   private static CommandBase chargeStationRoute(DriveTrain driveTrain){
     return Commands.sequence(new MoveOverChargeStation(driveTrain),
-                             new Move(driveTrain, 1, -1.0),
-                             new Move(driveTrain, 2, 1.0), 
-                             new AutoBalance(driveTrain));
+                             new MoveOverChargeStation(driveTrain), //moves until robot is flat
+                             new Move(driveTrain, 1, -1.0), //leaves community
+                             new Move(driveTrain, 2, 1.0), //drives back to charge station
+                             new AutoBalance(driveTrain)); //balances on charge station
   }
   
-  private Autos() {
+  private Autos(){
     throw new UnsupportedOperationException("This is a utility class!");
   }
 }

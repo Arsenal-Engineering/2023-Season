@@ -38,10 +38,11 @@ public class Move extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return timer.get() > timeLimit; //TODO: fix time
+    return timer.get() > timeLimit;
   }
 
   public boolean isHill(){
+    //if the robot isn't flat return true
     return (driveTrain.getNavX().getPitch() > 10 || driveTrain.getNavX().getPitch() < -10);
   }
 }
