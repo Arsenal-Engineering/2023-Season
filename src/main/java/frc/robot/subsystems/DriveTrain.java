@@ -6,9 +6,7 @@ package frc.robot.subsystems;
 
 import frc.robot.Constants;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
-import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.XboxController;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.kauailabs.navx.frc.AHRS;
@@ -17,14 +15,11 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 
 public class DriveTrain extends SubsystemBase {
   private MecanumDrive mecanumDrive;
-  private DifferentialDrive differentialDrive;
   private WPI_TalonFX L1;
   private WPI_TalonFX L2;
   private WPI_TalonFX R1;
   private WPI_TalonFX R2;
   private AHRS navX;
-  private String driveDirectionalMode;
-  private boolean driveSlow;
   private boolean brakeMode;
   private boolean isFieldOriented;
 
@@ -35,8 +30,6 @@ public class DriveTrain extends SubsystemBase {
     R1 = new WPI_TalonFX(Constants.RIGHT_FRONT_DRIVE);
     R2 = new WPI_TalonFX(Constants.RIGHT_BACK_DRIVE);
     navX = new AHRS(edu.wpi.first.wpilibj.SPI.Port.kMXP);
-    driveDirectionalMode = "navX";
-    driveSlow = true;
     brakeMode=false;
     isFieldOriented=true;
     navX.reset();

@@ -6,21 +6,18 @@ package frc.robot.commands;
 
 import com.kauailabs.navx.frc.AHRS;
 
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.DriveTrain;
 
 public class DriveTurnTowardsDirection extends CommandBase {
   private DriveTrain driveTrain;
   private AHRS navX;
-  private double alignGoal;
   /** Creates a new AutoAlign. */
-  public DriveTurnTowardsDirection(DriveTrain driveTrain, double alignGoal) {
+  public DriveTurnTowardsDirection(DriveTrain driveTrain) {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(driveTrain);
     this.driveTrain = driveTrain;
     navX = driveTrain.getNavX();
-    this.alignGoal = alignGoal;
   }
 
   // Called when the command is initially scheduled.

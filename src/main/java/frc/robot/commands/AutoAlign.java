@@ -7,7 +7,6 @@ package frc.robot.commands;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.LimelightCam;
 
@@ -15,8 +14,6 @@ public class AutoAlign extends CommandBase {
   //subsystems
   private DriveTrain driveTrain;
   private LimelightCam limelight;
-  //controller
-  private CommandXboxController xboxController;
 
   //PID values for X and Y motion
   private final double X_KP = 0.2;
@@ -33,7 +30,7 @@ public class AutoAlign extends CommandBase {
   private double sideOffset;
   
   /** Creates a new AutoAlign. */
-  public AutoAlign(DriveTrain driveTrain, LimelightCam limelight, CommandXboxController xboxController, double sideOffset) {
+  public AutoAlign(DriveTrain driveTrain, LimelightCam limelight, double sideOffset) {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(driveTrain);
     addRequirements(limelight);
@@ -41,8 +38,6 @@ public class AutoAlign extends CommandBase {
     //subsystems
     this.driveTrain = driveTrain;
     this.limelight = limelight;
-    //controller
-    this.xboxController = xboxController;
 
     //PID controllers, used to find speed to get to target
     ControllerX = new PIDController(X_KP, 0, X_KD);
