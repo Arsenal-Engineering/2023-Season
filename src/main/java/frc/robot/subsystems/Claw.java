@@ -2,6 +2,7 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
+/*
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -12,7 +13,7 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 public class Claw extends SubsystemBase {
   private CANSparkMax claw;
-  /** Creates a new OpenCloseClaw. */
+  // Creates a new OpenCloseClaw. 
   public Claw(int clawID, MotorType motor) {
     claw = new CANSparkMax(clawID, motor);
   }
@@ -25,4 +26,4 @@ public class Claw extends SubsystemBase {
   public void clawGrip(double clawSpeed){
     claw.set(clawSpeed);
   }
-}
+} */

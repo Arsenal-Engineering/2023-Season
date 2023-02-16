@@ -15,10 +15,10 @@ package frc.robot;
 public final class Constants {
     
   //TalonSRX/Falcon motor ID's
-    public static final int LEFT_FRONT_DRIVE = 6;
-    public static final int RIGHT_FRONT_DRIVE = 2;
-    public static final int LEFT_BACK_DRIVE = 4;
-    public static final int RIGHT_BACK_DRIVE = 3;
+    public static final int LEFT_FRONT_DRIVE = 2;
+    public static final int RIGHT_FRONT_DRIVE = 1;
+    public static final int LEFT_BACK_DRIVE = 3;
+    public static final int RIGHT_BACK_DRIVE = 4;
   //change ports
     public static final int EXTEND_LIMIT_SWITCH = 98;
     public static final int RETRACT_LIMIT_SWITCH = 99;
@@ -54,7 +54,7 @@ public final class Constants {
 
 
   public static class OperatorConstants {
-    public static final int kDriverControllerPort = 1;
+    public static final int kDriverControllerPort = 0;
     public static final int kArmControllerPort = 0;
   }
 }

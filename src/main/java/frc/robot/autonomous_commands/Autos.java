@@ -12,16 +12,16 @@ import frc.robot.subsystems.*;
 public final class Autos {
   /** Example static factory for an autonomous command. */
 
-  public static CommandBase initialMove(ArmBase armBase, Claw claw, DriveTrain driveTrain){
+  public static CommandBase initialMove(/*ArmBase armBase, Claw claw,*/ DriveTrain driveTrain){
     //creates initial move command so robot can sense for hill
-    Move initialMoveBack = new Move(driveTrain, 3.0, -1.0);
+    Move initialMoveBack = new Move(driveTrain, 2.3, -0.5);
     //command sequence
-    return Commands.sequence(new LowerArm(armBase),
-                             new Drop(claw),
+    return Commands.sequence(/*new LowerArm(armBase),
+                             new Drop(claw),*/
                              initialMoveBack,
                              //runs chargeStationRoute if the robot encounters a hill, otherwise leaves community
                              new ConditionalCommand(chargeStationRoute(driveTrain), 
-                                                    new Move(driveTrain, 1.5, -1.0),
+                                                    new Move(driveTrain, 0.5, 0.5),
                                                     ()->initialMoveBack.isHill()));
   }
 
@@ -29,8 +29,8 @@ public final class Autos {
   private static CommandBase chargeStationRoute(DriveTrain driveTrain){
     return Commands.sequence(new MoveOverChargeStation(driveTrain),
                              new MoveOverChargeStation(driveTrain), //moves until robot is flat
-                             new Move(driveTrain, 1, -1.0), //leaves community
-                             new Move(driveTrain, 2, 1.0), //drives back to charge station
+                             new Move(driveTrain, 1, -0.5), //leaves community
+                             new Move(driveTrain, 1.5, 0.5), //drives back to charge station
                              new AutoBalance(driveTrain)); //balances on charge station
   }
   
