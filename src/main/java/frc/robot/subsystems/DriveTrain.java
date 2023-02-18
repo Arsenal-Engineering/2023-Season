@@ -48,7 +48,9 @@ public class DriveTrain extends SubsystemBase {
       if (isFieldOriented){
         // With XBox controller, need negative X, Z, and NavXangle
         mecanumDrive.driveCartesian(-controller.getLeftY() * driveFactor, 
-          controller.getLeftX() * driveFactor,controller.getRightX()/2.0, new Rotation2d(Math.toRadians(navX.getAngle())));
+          controller.getLeftX() * driveFactor,
+          controller.getRightX()/2.0, 
+          new Rotation2d(Math.toRadians(navX.getAngle())));
       } else {
         mecanumDrive.driveCartesian(controller.getLeftY() * driveFactor, 
           -controller.getLeftX() * driveFactor, controller.getRightX()/2.0);
@@ -75,17 +77,17 @@ public class DriveTrain extends SubsystemBase {
     }
     
     public void updateBrakeMode(){
-      System.out.println("brakeMode is "+brakeMode);
+      System.out.println("brakeMode is "+ brakeMode);
       if (brakeMode){
         L1.setNeutralMode(NeutralMode.Brake);
         L2.setNeutralMode(NeutralMode.Brake);
         R1.setNeutralMode(NeutralMode.Brake);
-        R1.setNeutralMode(NeutralMode.Brake);
+        R2.setNeutralMode(NeutralMode.Brake);
       } else {
         L1.setNeutralMode(NeutralMode.Coast);
         L2.setNeutralMode(NeutralMode.Coast);
         R1.setNeutralMode(NeutralMode.Coast);
-        R1.setNeutralMode(NeutralMode.Coast);
+        R2.setNeutralMode(NeutralMode.Coast);
       }
     }
     public boolean getBrakeMode(){
