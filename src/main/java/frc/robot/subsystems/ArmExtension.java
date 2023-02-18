@@ -4,16 +4,18 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-
-import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import frc.robot.Constants;
+//import com.ctre.phoenix.motorcontrol.can.*;
+import com.revrobotics.CANSparkMax;
+//import com.revrobotics.CANSparkMax.IdleMode;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+
 
 public class ArmExtension extends SubsystemBase {
-  private TalonSRX extendMotor;
+  private CANSparkMax extendMotor;
   // Creates a new ArmExtension.
   public ArmExtension() {
-    extendMotor = new TalonSRX(Constants.ARM_EXTENDER_MOTOR);
+    extendMotor = new CANSparkMax(Constants.ARM_EXTENDER_MOTOR,MotorType.kBrushed);
   }
 
   @Override
@@ -22,6 +24,6 @@ public class ArmExtension extends SubsystemBase {
   }
 
   public void setSpeed(double speed) {
-    extendMotor.set(ControlMode.Velocity,speed);
+    extendMotor.set(speed);
   }
 } 

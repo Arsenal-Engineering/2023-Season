@@ -29,15 +29,15 @@ public final class Constants {
   public static final double DEPOSIT_TAG_HEIGHT = 0.36;
   public static final double LIMELIGHT_HEIGHT = 0.16;
   public static final double CONE_DEPOSIT_OFFSET = 0.5;
-  public static final int ARM_EXTENDER_MOTOR = 7;
-  public static final int WRIST_TWIST = 8;
-  public static final int JOYSTICK_PORT = 1;
+  
+
 
   //angle offset
   public static final double NAVX_PITCH_OFFSET = 0;
 
 
-
+  public static final int ARM_EXTENDER_MOTOR = 7;
+  public static final int WRIST_TWIST = 8;
   //SPARKMAX ID for claw (placeholder)
   public static final int CLAW = 10;
 
@@ -52,9 +52,8 @@ public final class Constants {
 
   public static final int ARM_CONTROLLER_PORT = 1;
 
-  public static final boolean DOES_ARM_EXIST = true;
+  public static final boolean DOES_ARM_EXIST = false;
   public static class OperatorConstants {
     public static final int kDriverControllerPort = 0;
-    public static final int kArmControllerPort = 0;
   }
 }

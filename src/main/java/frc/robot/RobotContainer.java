@@ -31,31 +31,31 @@ public class RobotContainer {
     new CommandXboxController(OperatorConstants.kDriverControllerPort);
 
 
- private final Joystick joystick;
+ private  Joystick joystick;
 
 
 
   // The robot's subsystems and commands are defined here...
 
-  private final ArmBase armBase;
+  private  ArmBase armBase;
 
-  private final ArmMove aMove;
+  private  ArmMove aMove;
 
-  private final Claw claw;
+  private  Claw claw;
 
-  private final ClawOpen cOpen;
+  private  ClawOpen cOpen;
 
-  private final ClawClose cClose;
+  private  ClawClose cClose;
 
-  private final ClawStop cStop;
+  private  ClawStop cStop;
 
-  private final ClawUpDown clawWrist;
+  private  ClawUpDown clawWrist;
 
-  private final WristStop wStop;
+  private  WristStop wStop;
 
-  private final WristUp wUp;
+  private  WristUp wUp;
 
-  private final WristDown wDown;
+  private  WristDown wDown;
 
   private final DriveTrain driveTrain = new DriveTrain();
   private final DriveJoystick driveJoystick = new DriveJoystick(driveTrain, m_driverController.getHID());
@@ -66,15 +66,15 @@ public class RobotContainer {
   private final AutoAlign leftConeAlign = new AutoAlign(driveTrain, limeLight, Constants.CONE_DEPOSIT_OFFSET);
   private final AutoAlign rightConeAlign = new AutoAlign(driveTrain, limeLight, -Constants.CONE_DEPOSIT_OFFSET);
 
-  private final ArmExtension armExtender;
+  private  ArmExtension armExtender;
 
-  private final ExtendArm extendArm;
+  private  ExtendArm extendArm;
 
-  private final RetractArm retractArm;
+  private  RetractArm retractArm;
 
-  private final ClawWrist twistyWrist;
+  private  ClawWrist twistyWrist;
 
-  private final TwistWrist twistWrist;
+  private  TwistWrist twistWrist;
 
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
