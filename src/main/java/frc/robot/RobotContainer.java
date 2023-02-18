@@ -11,7 +11,7 @@ import frc.robot.subsystems.*;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 
-//import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
@@ -30,34 +30,32 @@ public class RobotContainer {
   private final CommandXboxController m_driverController =
     new CommandXboxController(OperatorConstants.kDriverControllerPort);
 
-  //private final XboxController joystick =
-  //new XboxController(OperatorConstants.kArmControllerPort);
 
- // private final Joystick joystick = new Joystick(Constants.ARM_CONTROLLER_PORT);
+ private final Joystick joystick;
 
 
 
   // The robot's subsystems and commands are defined here...
 
-  // private final ArmBase armBase = new ArmBase();
+  private final ArmBase armBase;
 
-  // private final ArmMove aMove = new ArmMove(armBase, joystick, Constants.FORWARD_LIMIT_SWITCH, Constants.BACKWARD_LIMIT_SWITCH);
+  private final ArmMove aMove;
 
-  // private final Claw claw = new Claw(Constants.CLAW,MotorType.kBrushed);
+  private final Claw claw;
 
-  // private final ClawOpen cOpen = new ClawOpen(claw);
+  private final ClawOpen cOpen;
 
-  // private final ClawClose cClose = new ClawClose(claw);
+  private final ClawClose cClose;
 
-  // private final ClawStop cStop = new ClawStop(claw);
+  private final ClawStop cStop;
 
-  // private final ClawUpDown clawWrist = new ClawUpDown(Constants.CLAW_WRIST,MotorType.kBrushed);
+  private final ClawUpDown clawWrist;
 
-  // private final WristStop wStop = new WristStop(clawWrist);
+  private final WristStop wStop;
 
-  // private final WristUp wUp = new WristUp(clawWrist);
+  private final WristUp wUp;
 
-  // private final WristDown wDown = new WristDown(clawWrist);
+  private final WristDown wDown;
 
   private final DriveTrain driveTrain = new DriveTrain();
   private final DriveJoystick driveJoystick = new DriveJoystick(driveTrain, m_driverController.getHID());
@@ -68,15 +66,15 @@ public class RobotContainer {
   private final AutoAlign leftConeAlign = new AutoAlign(driveTrain, limeLight, Constants.CONE_DEPOSIT_OFFSET);
   private final AutoAlign rightConeAlign = new AutoAlign(driveTrain, limeLight, -Constants.CONE_DEPOSIT_OFFSET);
 
-  // private final ArmExtension armExtender = new ArmExtension();
+  private final ArmExtension armExtender;
 
-  // private final ExtendArm extendArm = new ExtendArm(armExtender, joystick, Constants.EXTEND_LIMIT_SWITCH);
+  private final ExtendArm extendArm;
 
-  // private final RetractArm retractArm = new RetractArm(armExtender, joystick, Constants.RETRACT_LIMIT_SWITCH);
+  private final RetractArm retractArm;
 
-  // private final ClawWrist twistyWrist = new ClawWrist();
+  private final ClawWrist twistyWrist;
 
-  // private final TwistWrist twistWrist = new TwistWrist(twistyWrist, joystick);
+  private final TwistWrist twistWrist;
 
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
@@ -84,6 +82,24 @@ public class RobotContainer {
     // Configure the trigger bindings
     configureBindings();
     lc.startVision();
+    if(Constants.DOES_ARM_EXIST){
+      armExtender = new ArmExtension();
+      armBase = new ArmBase();
+      joystick = new Joystick(Constants.ARM_CONTROLLER_PORT);
+      aMove = new ArmMove(armBase, joystick, Constants.FORWARD_LIMIT_SWITCH, Constants.BACKWARD_LIMIT_SWITCH);
+      claw = new Claw(Constants.CLAW,MotorType.kBrushed);
+      clawWrist = new ClawUpDown(Constants.CLAW_WRIST,MotorType.kBrushed);
+      cOpen = new ClawOpen(claw);
+      cClose = new ClawClose(claw);
+      cStop = new ClawStop(claw);
+      wDown = new WristDown(clawWrist);
+      wStop = new WristStop(clawWrist);
+      wUp = new WristUp(clawWrist);
+      extendArm = new ExtendArm(armExtender, joystick, Constants.EXTEND_LIMIT_SWITCH);
+      retractArm = new RetractArm(armExtender, joystick, Constants.RETRACT_LIMIT_SWITCH);
+      twistyWrist = new ClawWrist();
+      twistWrist = new TwistWrist(twistyWrist, joystick);
+    }
   }
 
   /**
@@ -143,9 +159,9 @@ public class RobotContainer {
   }
 
 
-  // public Joystick getArmController(){
-  //   return joystick;
-  // }
+  public Joystick getArmController(){
+    return joystick;
+  }
 
   public CommandXboxController getController() {
     return m_driverController;
@@ -155,48 +171,51 @@ public class RobotContainer {
     return limeLight;
   }
 
-  // public TwistWrist getTwistWrist() {
-  //   return twistWrist;
-  // }
+  public TwistWrist getTwistWrist() {
+    return twistWrist;
+  }
 
-  // public ArmMove getArmMove(){
-  //   return aMove;
-  // }
+  public ArmMove getArmMove(){
+    return aMove;
+  }
 
-  // public ClawClose getClawClose(){
-  //   return cClose;
-  // }
+  public ClawClose getClawClose(){
+    return cClose;
+  }
 
-  // public ClawOpen getClawOpen(){
-  //   return cOpen;
-  // }
+  public ClawOpen getClawOpen(){
+    return cOpen;
+  }
 
-  // public ClawStop getClawStop(){
-  //   return cStop;
-  // }
+  public ClawStop getClawStop(){
+    return cStop;
+  }
 
-  // public WristDown getWristDown(){
-  //   return wDown;
-  // }
+  public WristDown getWristDown(){
+    return wDown;
+  }
 
-  // public WristStop getWristStop(){
-  //   return wStop;
-  // }
+  public WristStop getWristStop(){
+    return wStop;
+  }
 
-  // public WristUp getWristUp(){
-  //   return wUp;
-  // }
+  public WristUp getWristUp(){
+    return wUp;
+  }
 
-  // public ExtendArm getExtendArm() {
-  //   return extendArm;
-  // }
+  public ExtendArm getExtendArm() {
+    return extendArm;
+  }
 
-  // public RetractArm getRetractArm() {
-  //   return retractArm;
-  // }
+  public RetractArm getRetractArm() {
+    return retractArm;
+  }
 
   //Autonomous Commands
   public Command getInitialMoveAutonomous(){
-    return Autos.initialMove(/*armBase, claw,*/ driveTrain);
+    if(Constants.DOES_ARM_EXIST){
+      return Autos.initialMove(armBase, claw, driveTrain);
+    }
+    return Autos.initialMove(driveTrain);
   }
 }
