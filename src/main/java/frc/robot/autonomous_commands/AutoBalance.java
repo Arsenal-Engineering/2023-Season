@@ -24,14 +24,16 @@ public class AutoBalance extends CommandBase {
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    driveTrain.setBrakeMode(true);
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (navX.getPitch() - Constants.NAVX_PITCH_OFFSET > 4){
+    if (navX.getPitch() - Constants.NAVX_PITCH_OFFSET > 5){
       driveTrain.driveTest(Math.sin((navX.getPitch() - Constants.NAVX_PITCH_OFFSET) * 0.9 * (Math.PI / 180.0) + 0.1) * -0.5, 0, 0);
-    } else if (navX.getPitch() - Constants.NAVX_PITCH_OFFSET < -4) { 
+    } else if (navX.getPitch() - Constants.NAVX_PITCH_OFFSET < -5) { 
       driveTrain.driveTest(Math.sin((navX.getPitch() - Constants.NAVX_PITCH_OFFSET) * 0.9 * (Math.PI / 180.0) -0.1)* -0.5, 0, 0);
     }//Stop when Balanced
     else {

@@ -34,7 +34,7 @@ public final class Constants {
   public static final int JOYSTICK_PORT = 1;
 
   //angle offset
-  public static final double NAVX_PITCH_OFFSET = 5.9;
+  public static final double NAVX_PITCH_OFFSET = 0;
 
 
 

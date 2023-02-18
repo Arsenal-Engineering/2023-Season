@@ -51,7 +51,7 @@ public class DriveTrain extends SubsystemBase {
           controller.getLeftX() * driveFactor,controller.getRightX()/2.0, new Rotation2d(Math.toRadians(navX.getAngle())));
       } else {
         mecanumDrive.driveCartesian(controller.getLeftY() * driveFactor, 
-          -controller.getLeftX() * driveFactor,controller.getRightX()/2.0);
+          -controller.getLeftX() * driveFactor, controller.getRightX()/2.0);
       }
       
       L1.feed();

@@ -22,12 +22,14 @@ public class MoveOverChargeStation extends CommandBase {
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    driveTrain.setBrakeMode(true);
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    driveTrain.driveMecanum(-1.0, 0, 0);
+    driveTrain.driveMecanum(-0.4, 0, 0);
   }
 
   // Called once the command ends or is interrupted.

@@ -14,27 +14,34 @@ public final class Autos {
 
   public static CommandBase initialMove(/*ArmBase armBase, Claw claw,*/ DriveTrain driveTrain){
     //creates initial move command so robot can sense for hill
-    Move initialMoveBack = new Move(driveTrain, 2.3, -0.5);
+
     //command sequence
     return Commands.sequence(/*new LowerArm(armBase),
                              new Drop(claw),*/
-                             initialMoveBack,
+                             new Move(driveTrain, 3.2, -0.5),
+                             new Delay(driveTrain,.5),
                              //runs chargeStationRoute if the robot encounters a hill, otherwise leaves community
                              new ConditionalCommand(chargeStationRoute(driveTrain), 
-                                                    new Move(driveTrain, 0.5, 0.5),
-                                                    ()->initialMoveBack.isHill()));
+                                                    new Move(driveTrain, 1.0 ,0.5),
+                                                    () -> isHill(driveTrain)));
   }
 
   //code for command path if robot runs over charge station during autonomous
   private static CommandBase chargeStationRoute(DriveTrain driveTrain){
     return Commands.sequence(new MoveOverChargeStation(driveTrain),
+                             new Delay(driveTrain, 0.25),
                              new MoveOverChargeStation(driveTrain), //moves until robot is flat
-                             new Move(driveTrain, 1, -0.5), //leaves community
-                             new Move(driveTrain, 1.5, 0.5), //drives back to charge station
+                             new Delay(driveTrain, 0.5),
+                             new Move(driveTrain, 0.7, 0.5), //drives back to charge station
                              new AutoBalance(driveTrain)); //balances on charge station
   }
   
   private Autos(){
     throw new UnsupportedOperationException("This is a utility class!");
+  }
+
+  public static boolean isHill(DriveTrain driveTrain){
+    //if the robot isn't flat return true
+    return (driveTrain.getNavX().getPitch() > 5 || driveTrain.getNavX().getPitch() < -5);
   }
 }
