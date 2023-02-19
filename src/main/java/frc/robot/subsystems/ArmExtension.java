@@ -25,5 +25,6 @@ public class ArmExtension extends SubsystemBase {
 
   public void setSpeed(double speed) {
     extendMotor.set(speed);
+    System.out.print(speed);
   }
 } 

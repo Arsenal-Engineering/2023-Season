@@ -104,12 +104,13 @@ public class Robot extends TimedRobot {
       //Axis 3 refers to the slider on the joystick 
       //All the way up is -1
       //All the way down is +1
-      if (robotContainer.getArmController().getRawAxis(3) < -.9) {
-        robotContainer.getExtendArm().schedule();
-      }
-      if (robotContainer.getArmController().getRawAxis(3) > .9) {
-        robotContainer.getRetractArm().schedule();
-      }
+      
+      // if (robotContainer.getArmController().getRawAxis(3) < -.9) {
+      //   robotContainer.getExtendArm().schedule();
+      // }
+      // if (robotContainer.getArmController().getRawAxis(3) > .9) {
+      //   robotContainer.getRetractArm().schedule();
+      // }
 
       //Axis 2 refers to Z Rotate (Rotating the joystick)
       //-1 is rotate left
@@ -127,15 +128,15 @@ public class Robot extends TimedRobot {
 
       //Buttons 5 & 6 are the buttons labeled 5 & 6
       //Returns True or False
-      if (robotContainer.getArmController().getRawButton(1)){
-        robotContainer.getClawClose().schedule();
-      }
-      else if(robotContainer.getArmController().getRawButton(2)) {
-        robotContainer.getClawOpen().schedule();
-      }
-      else{
-        robotContainer.getClawStop().schedule();
-      }
+      // if (robotContainer.getArmController().getRawButton(1)){
+      //   robotContainer.getClawClose().schedule();
+      // }
+      // else if(robotContainer.getArmController().getRawButton(2)) {
+      //   robotContainer.getClawOpen().schedule();
+      // }
+      // else{
+      //   robotContainer.getClawStop().schedule();
+      // }
 
       //getPOV refers to the D-Pad on the joystick
       //returns the angle(degree) of the dpad with 0 = top

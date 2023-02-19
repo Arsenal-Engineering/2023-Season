@@ -24,20 +24,25 @@ public class RetractArm extends CommandBase {
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    System.out.println("Retract initialized");
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
     if (limitSwitch.get()){
       armRetractor.setSpeed(0);
-    }else if (controller.getRawAxis(3) > .2)
+      System.out.println("limit switch bottom");
+    }else
       armRetractor.setSpeed(-.5);
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    armRetractor.setSpeed(0);
+  }
 
   // Returns true when the command should end.
   @Override

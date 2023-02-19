@@ -29,6 +29,8 @@ public class TwistWrist extends CommandBase {
   public void execute() {
     if(Math.abs(controller.getRawAxis(2)) > .2){
       clawtwist.twist(controller.getRawAxis(2)/2);
+    } else{
+      clawtwist.twist(0);
     }
   }
 

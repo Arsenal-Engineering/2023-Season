@@ -30,8 +30,8 @@ public final class Autos {
     //command sequence
     return Commands.sequence(new LowerArm(armBase),
                              new Drop(claw),
-                             new Move(driveTrain, 2.4, -0.75),
-                             new Delay(driveTrain,.5),
+                             new Move(driveTrain, 3.2, -0.5),
+                             new Delay(driveTrain, 1),
                              //runs chargeStationRoute if the robot encounters a hill, otherwise leaves community
                              new ConditionalCommand(chargeStationRoute(driveTrain), 
                                                     new Move(driveTrain, 1.0 ,0.5),
@@ -41,10 +41,10 @@ public final class Autos {
   //code for command path if robot runs over charge station during autonomous
   private static CommandBase chargeStationRoute(DriveTrain driveTrain){
     return Commands.sequence(new MoveOverChargeStation(driveTrain),
-                             new Delay(driveTrain, 0.25),
+                             new Delay(driveTrain, 0.5),
                              new MoveOverChargeStation(driveTrain), //moves until robot is flat
                              new Delay(driveTrain, 0.5),
-                             new Move(driveTrain, 0.5, 0.75), //drives back to charge station
+                             new Move(driveTrain, 0.7, 0.5), //drives back to charge station
                              new AutoBalance(driveTrain)); //balances on charge station
   }
   
