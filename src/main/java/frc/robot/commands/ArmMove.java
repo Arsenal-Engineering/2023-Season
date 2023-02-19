@@ -34,11 +34,13 @@ public class ArmMove extends CommandBase {
   public void execute() {
     // moves arm based on joystick front/back (Look at Robot.java for more info)
     double armmovement = armcontrol.getRawAxis(1);
-    if ((armmovement<0 && limitSwitchBottom.get()) || armmovement>0 && limitSwitchTop.get()){
-      armMove.armMove(0);
-    } else {
+
+    //TODO: put limit switches on robot, fix ids, and uncomment this code
+    // if ((armmovement<0 && limitSwitchBottom.get()) || armmovement>0 && limitSwitchTop.get()){
+    //   armMove.armMove(0);
+    // } else {
       armMove.armMove(armmovement < 0 ? armmovement/7 : armmovement/5);
-    }
+    // }
   }
 
   // Called once the command ends or is interrupted.

@@ -24,10 +24,10 @@ public final class Constants {
     public static final int RIGHT_BACK_DRIVE = 4;
 
   //Limit switch ids
-    public static final int EXTEND_LIMIT_SWITCH = 98;
-    public static final int RETRACT_LIMIT_SWITCH = 99;
-    public static final int FORWARD_LIMIT_SWITCH = 69;
-    public static final int BACKWARD_LIMIT_SWITCH = 1;
+    public static final int RETRACT_LIMIT_SWITCH = 0; //bottom
+    public static final int EXTEND_LIMIT_SWITCH = 1; //top
+    public static final int FORWARD_LIMIT_SWITCH = 2; //not using currently
+    public static final int BACKWARD_LIMIT_SWITCH = 3; //not using currently
 
   //Ports for arm
   public static final int CLAW = 10;
