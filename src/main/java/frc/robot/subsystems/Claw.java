@@ -9,12 +9,14 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.revrobotics.CANSparkMax;
 //import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+import frc.robot.TestSparkMax;
+
 
 public class Claw extends SubsystemBase {
-  private CANSparkMax claw;
+  private TestSparkMax claw;
   // Creates a new OpenCloseClaw. 
   public Claw(int clawID, MotorType motor) {
-    claw = new CANSparkMax(clawID, motor);
+    claw = new TestSparkMax(clawID, motor,"Claw");
   }
 
   @Override

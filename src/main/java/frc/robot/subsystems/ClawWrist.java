@@ -11,12 +11,13 @@ import frc.robot.Constants;
 import com.revrobotics.CANSparkMax;
 //import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+import frc.robot.TestSparkMax;
 
 public class ClawWrist extends SubsystemBase {
-  private CANSparkMax wristMotor;
+  private TestSparkMax wristMotor;
   // Creates a new TwistyWrist. 
   public ClawWrist() {
-    wristMotor = new CANSparkMax(Constants.WRIST_TWIST,MotorType.kBrushed);
+    wristMotor = new TestSparkMax(Constants.WRIST_TWIST,MotorType.kBrushed,"Wrist motor");
   }
 
   @Override
