@@ -48,10 +48,12 @@ public class DriveTrain extends SubsystemBase {
       if (isFieldOriented){
         // With XBox controller, need negative X, Z, and NavXangle
         mecanumDrive.driveCartesian(-controller.getLeftY() * driveFactor, 
-          controller.getLeftX() * driveFactor,controller.getRightX()/2.0, new Rotation2d(Math.toRadians(navX.getAngle())));
+          controller.getLeftX() * driveFactor,
+          controller.getRightX()/2.0, 
+          new Rotation2d(Math.toRadians(navX.getAngle())));
       } else {
         mecanumDrive.driveCartesian(controller.getLeftY() * driveFactor, 
-          -controller.getLeftX() * driveFactor,controller.getRightX()/2.0);
+          -controller.getLeftX() * driveFactor, controller.getRightX()/2.0);
       }
       
       L1.feed();

@@ -1,7 +1,7 @@
 // Copyright (c) FIRST and other WPILib contributors.
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
-/*
+
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
@@ -13,16 +13,16 @@ public class ArmMove extends CommandBase {
 
   private ArmBase armMove;
   private Joystick armcontrol;
-  private DigitalInput limitSwitchForward;
-  private DigitalInput limitSwitchBackward;
+  private DigitalInput limitSwitchBottom;
+  private DigitalInput limitSwitchTop;
   // Creates a new ArmUp.
   public ArmMove(ArmBase armMove, Joystick armcontroller, int limSwitchForID, int limSwitchBackID) {
     this.armMove = armMove;
     armcontrol = armcontroller;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(armMove);
-    limitSwitchForward = new DigitalInput(limSwitchForID);
-    limitSwitchBackward = new DigitalInput(limSwitchBackID);
+    limitSwitchBottom = new DigitalInput(limSwitchForID);
+    limitSwitchTop = new DigitalInput(limSwitchBackID);
   }
 
   // Called when the command is initially scheduled.
@@ -32,11 +32,15 @@ public class ArmMove extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if ((armcontrol.getX()<0 && limitSwitchForward.get()) || (armcontrol.getX()>0 && limitSwitchBackward.get())){
-      armMove.armMove(0);
-    } else {
-      armMove.armMove(armcontrol.getX()/2);
-    }
+    // moves arm based on joystick front/back (Look at Robot.java for more info)
+    double armmovement = armcontrol.getRawAxis(1);
+
+    //TODO: put limit switches on robot, fix ids, and uncomment this code
+    // if ((armmovement<0 && limitSwitchBottom.get()) || armmovement>0 && limitSwitchTop.get()){
+    //   armMove.armMove(0);
+    // } else {
+      armMove.armMove(armmovement < 0 ? armmovement/7 : armmovement/5);
+    // }
   }
 
   // Called once the command ends or is interrupted.
@@ -48,4 +52,4 @@ public class ArmMove extends CommandBase {
   public boolean isFinished() {
     return false;
   }
-}*/
+}

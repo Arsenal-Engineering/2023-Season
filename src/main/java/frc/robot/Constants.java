@@ -13,48 +13,41 @@ package frc.robot;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
-    
+  
+  //Depends on whether the physical robot has the arm attached to it
+  public static final boolean DOES_ARM_EXIST = false;
+
   //TalonSRX/Falcon motor ID's
-    public static final int LEFT_FRONT_DRIVE = 2;
     public static final int RIGHT_FRONT_DRIVE = 1;
+    public static final int LEFT_FRONT_DRIVE = 2;
     public static final int LEFT_BACK_DRIVE = 3;
     public static final int RIGHT_BACK_DRIVE = 4;
-  //change ports
-    public static final int EXTEND_LIMIT_SWITCH = 98;
-    public static final int RETRACT_LIMIT_SWITCH = 99;
-    public static final int FORWARD_LIMIT_SWITCH = 69;
-    public static final int BACKWARD_LIMIT_SWITCH = 1;
 
-  //constants for auto-aligning
+  //Limit switch ids
+    public static final int RETRACT_LIMIT_SWITCH = 0; //bottom
+    public static final int EXTEND_LIMIT_SWITCH = 1; //top
+    public static final int FORWARD_LIMIT_SWITCH = 2; //not using currently
+    public static final int BACKWARD_LIMIT_SWITCH = 3; //not using currently
+
+  //Ports for arm
+  public static final int CLAW = -10;
+  public static final int CLAW_WRIST = -11;
+  public static final int WRIST_TWIST = -12;
+  public static final int ARM_EXTENDER_MOTOR = -13;
+  public static final int ARM_BASE = -14;
+
+  //Controller ports
+  public static final int ARM_CONTROLLER_PORT = 1;
+  public static class OperatorConstants {
+    public static final int kDriverControllerPort = 0;
+  }
+
+  //Constants for auto-aligning
   public static final double DEPOSIT_TAG_HEIGHT = 0.36;
   public static final double LIMELIGHT_HEIGHT = 0.16;
   public static final double CONE_DEPOSIT_OFFSET = 0.5;
-  public static final int ARM_EXTENDER_MOTOR = 7;
-  public static final int WRIST_TWIST = 8;
-  public static final int JOYSTICK_PORT = 1;
 
   //angle offset
-  public static final double NAVX_PITCH_OFFSET = 5.9;
+  public static final double NAVX_PITCH_OFFSET = 0;
 
-
-
-  //SPARKMAX ID for claw (placeholder)
-  public static final int CLAW = 10;
-
-  //SPARKMAX ID for claw wrist
-  public static final int CLAW_WRIST = 11;
-
-
-
-
-  //SPARKMAX ARM BASE
-  public static final int ARM_BASE = 1; //when running on 2022 robot
-
-  public static final int ARM_CONTROLLER_PORT = 1;
-
-
-  public static class OperatorConstants {
-    public static final int kDriverControllerPort = 0;
-    public static final int kArmControllerPort = 0;
-  }
 }

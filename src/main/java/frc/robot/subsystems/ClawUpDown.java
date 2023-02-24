@@ -2,7 +2,7 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-/* 
+
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -10,12 +10,14 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.revrobotics.CANSparkMax;
 //import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+import frc.robot.TestSparkMax;
+
 
 public class ClawUpDown extends SubsystemBase {
-  private CANSparkMax clawWrist;
+  private TestSparkMax clawWrist;
   // Creates a new ClawWrist. 
   public ClawUpDown(int clawWristID, MotorType motor) {
-    clawWrist = new CANSparkMax(clawWristID, motor);
+    clawWrist = new TestSparkMax(clawWristID, motor,"Claw wrist");
   }
   @Override
   public void periodic() {
@@ -24,4 +26,4 @@ public class ClawUpDown extends SubsystemBase {
   public void setWristSpeed(double clawSpeed){
     clawWrist.set(clawSpeed);
   }
-} */
+} 
