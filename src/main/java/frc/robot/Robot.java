@@ -128,15 +128,15 @@ public class Robot extends TimedRobot {
 
       //Buttons 5 & 6 are the buttons labeled 5 & 6
       //Returns True or False
-      // if (robotContainer.getArmController().getRawButton(1)){
-      //   robotContainer.getClawClose().schedule();
-      // }
-      // else if(robotContainer.getArmController().getRawButton(2)) {
-      //   robotContainer.getClawOpen().schedule();
-      // }
-      // else{
-      //   robotContainer.getClawStop().schedule();
-      // }
+      if (robotContainer.getArmController().getRawButton(1)){
+        robotContainer.getClawClose().schedule();
+      }
+      else if(robotContainer.getArmController().getRawButton(2)) {
+        robotContainer.getClawOpen().schedule();
+      }
+      else{
+        robotContainer.getClawStop().schedule();
+      }
 
       //getPOV refers to the D-Pad on the joystick
       //returns the angle(degree) of the dpad with 0 = top

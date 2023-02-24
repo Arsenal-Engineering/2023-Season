@@ -24,7 +24,7 @@ public class ClawClose extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    clawClose.clawGrip(-0.2);
+    clawClose.clawGrip(-.8);
   }
 
   // Called once the command ends or is interrupted.

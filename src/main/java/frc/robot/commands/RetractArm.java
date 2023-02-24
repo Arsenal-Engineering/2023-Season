@@ -8,11 +8,14 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.*;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.Timer;
 
 public class RetractArm extends CommandBase {
   private ArmExtension armRetractor;
   private Joystick controller;
   private DigitalInput limitSwitch;
+  private Timer timer;
+
   /** Creates a new RetractArm. */
   public RetractArm(ArmExtension armRetractor, Joystick controller, int limitSwitchID) {
     // Use addRequirements() here to declare subsystem dependencies.
@@ -20,12 +23,17 @@ public class RetractArm extends CommandBase {
     this.armRetractor = armRetractor;
     this.controller = controller;
     limitSwitch = new DigitalInput(limitSwitchID);
+
+    timer = new Timer();
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    System.out.println("Retract initialized");
+    // System.out.println("Retract initialized");
+
+    timer.reset();
+    timer.start();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -33,15 +41,23 @@ public class RetractArm extends CommandBase {
   public void execute() {
     if (limitSwitch.get()){
       armRetractor.setSpeed(0);
-      System.out.println("limit switch bottom");
+      ArmExtension.setCurrentTimeExtended(0);
+      timer.reset();
+      timer.stop();
+      // System.out.println("limit switch bottom");
     }else
       armRetractor.setSpeed(-.5);
+
+    // System.out.println("Arm is extended this amount of time: " + (ArmExtension.getCurrentTimeExtended() - timer.get()));
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
     armRetractor.setSpeed(0);
+
+    
+    ArmExtension.setCurrentTimeExtended(ArmExtension.getCurrentTimeExtended() - timer.get());
   }
 
   // Returns true when the command should end.

@@ -13,6 +13,8 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 public class ArmExtension extends SubsystemBase {
   private CANSparkMax extendMotor;
+  private static double currentTimeExtended = 0.0;
+
   // Creates a new ArmExtension.
   public ArmExtension() {
     extendMotor = new CANSparkMax(Constants.ARM_EXTENDER_MOTOR,MotorType.kBrushed);
@@ -25,6 +27,14 @@ public class ArmExtension extends SubsystemBase {
 
   public void setSpeed(double speed) {
     extendMotor.set(speed);
-    System.out.print(speed);
+    // System.out.print(speed);
+  }
+
+  public static void setCurrentTimeExtended(double input) {
+    currentTimeExtended = input;
+  }
+
+  public static double getCurrentTimeExtended() {
+    return currentTimeExtended;
   }
 } 

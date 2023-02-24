@@ -84,27 +84,27 @@ public class RobotContainer {
     // Configure the trigger bindings
     lc.startVision();
     if(Constants.DOES_ARM_EXIST){
-      //armExtender = new ArmExtension();
+      armExtender = new ArmExtension();
       armBase = new ArmBase();
       joystick = new Joystick(Constants.ARM_CONTROLLER_PORT);
       aMove = new ArmMove(armBase, joystick, Constants.FORWARD_LIMIT_SWITCH, Constants.BACKWARD_LIMIT_SWITCH);
-      // claw = new Claw(Constants.CLAW,MotorType.kBrushed);
+      claw = new Claw(Constants.CLAW,MotorType.kBrushed);
       clawWrist = new ClawUpDown(Constants.CLAW_WRIST,MotorType.kBrushed);
-      // cOpen = new ClawOpen(claw);
-      // cClose = new ClawClose(claw);
-      // cStop = new ClawStop(claw);
+      cOpen = new ClawOpen(claw);
+      cClose = new ClawClose(claw);
+      cStop = new ClawStop(claw);
       wDown = new WristDown(clawWrist);
       wStop = new WristStop(clawWrist);
       wUp = new WristUp(clawWrist);
-      //extendArm = new ExtendArm(armExtender, joystick, Constants.EXTEND_LIMIT_SWITCH);
-      //retractArm = new RetractArm(armExtender, joystick, Constants.RETRACT_LIMIT_SWITCH);
+      extendArm = new ExtendArm(armExtender, joystick, Constants.EXTEND_LIMIT_SWITCH);
+      retractArm = new RetractArm(armExtender, joystick, Constants.RETRACT_LIMIT_SWITCH);
       twistyWrist = new ClawWrist();
       twistWrist = new TwistWrist(twistyWrist, joystick);
-      //button9 = new Trigger(() -> joystick.getRawButton(9));
-      //button11 = new Trigger(() -> joystick.getRawButton(11));
+      button9 = new Trigger(() -> joystick.getRawButton(9));
+      button11 = new Trigger(() -> joystick.getRawButton(11));
+
     }
     configureBindings();
-
   }
 
   /**
@@ -125,22 +125,24 @@ public class RobotContainer {
     // cancelling on release.
     //m_driverController.b().whileTrue(m_exampleSubsystem.exampleMethodCommand());
 
-    m_driverController.b().onTrue(new DriveTurnTowardsDirection(driveTrain)).onFalse(driveJoystick);
-    m_driverController.a().onTrue(new AutoBalance(driveTrain)).onFalse(driveJoystick);
+    // warning saying can't find button 1 on joystick....idk why....not working for any of the buttons
+    // m_driverController.b().onTrue(new DriveTurnTowardsDirection(driveTrain)).onFalse(driveJoystick);
+    // m_driverController.a().onTrue(new AutoBalance(driveTrain)).onFalse(driveJoystick);
 
-    m_driverController.start().onTrue(new SetDriveMode(driveTrain, true));
-    m_driverController.start().onFalse(new DriveJoystick(driveTrain, m_driverController.getHID()));
-    m_driverController.back().onTrue(new SetDriveMode(driveTrain, false));
-    m_driverController.back().onFalse(new DriveJoystick(driveTrain, m_driverController.getHID()));
+    // m_driverController.start().onTrue(new SetDriveMode(driveTrain, true));
+    // m_driverController.start().onFalse(new DriveJoystick(driveTrain, m_driverController.getHID()));
+    // m_driverController.back().onTrue(new SetDriveMode(driveTrain, false));
+    // m_driverController.back().onFalse(new DriveJoystick(driveTrain, m_driverController.getHID()));
 
     
-    m_driverController.povUp().onTrue(cubeAlign).onFalse(driveJoystick);
-    m_driverController.povLeft().onTrue(leftConeAlign).onFalse(driveJoystick);
-    m_driverController.povRight().onTrue(rightConeAlign).onFalse(driveJoystick);
+    // m_driverController.povUp().onTrue(cubeAlign).onFalse(driveJoystick);
+    // m_driverController.povLeft().onTrue(leftConeAlign).onFalse(driveJoystick);
+    // m_driverController.povRight().onTrue(rightConeAlign).onFalse(driveJoystick);
 
-    //button9.whileTrue(extendArm);
-    //button11.whileTrue(retractArm);
-
+    if (Constants.DOES_ARM_EXIST) {
+      button9.whileTrue(extendArm);
+      button11.whileTrue(retractArm);
+    }
 
   }
 

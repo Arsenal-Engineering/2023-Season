@@ -42,6 +42,6 @@ public class Move extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return (timer.get() > timeLimit) || (driveTrain.getNavX().getPitch() > 10 || driveTrain.getNavX().getPitch() < -10);
+    return (timer.get() > timeLimit || driveTrain.getNavX().getPitch() > 10 || driveTrain.getNavX().getPitch() < -10);
   }
 }

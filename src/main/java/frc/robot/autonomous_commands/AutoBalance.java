@@ -6,6 +6,7 @@ package frc.robot.autonomous_commands;
 
 import com.kauailabs.navx.frc.AHRS;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.Constants;
@@ -13,11 +14,13 @@ import frc.robot.Constants;
 public class AutoBalance extends CommandBase {
   private DriveTrain driveTrain;
   private AHRS navX;
+  private Timer timer;
   /** Creates a new AutoBalance. */
   public AutoBalance(DriveTrain driveTrain){
     addRequirements(driveTrain);
     this.driveTrain = driveTrain;
     navX = driveTrain.getNavX();
+    timer = new Timer();
     // Use addRequirements() here to declare subsystem dependencies.
     
   }
@@ -26,15 +29,17 @@ public class AutoBalance extends CommandBase {
   @Override
   public void initialize() {
     driveTrain.setBrakeMode(true);
+    timer.reset();
+    timer.start();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
     if (navX.getPitch() - Constants.NAVX_PITCH_OFFSET > 5){
-      driveTrain.driveTest(Math.sin((navX.getPitch() - Constants.NAVX_PITCH_OFFSET) * 0.9 * (Math.PI / 180.0) + 0.1) * -0.5, 0, 0);
+      driveTrain.driveTest(Math.sin((navX.getPitch() - Constants.NAVX_PITCH_OFFSET) * 0.9 * (Math.PI / 180.0) + 0.1) * (-2 / (2 + timer.get())) + 0.2, 0, 0);
     } else if (navX.getPitch() - Constants.NAVX_PITCH_OFFSET < -5) { 
-      driveTrain.driveTest(Math.sin((navX.getPitch() - Constants.NAVX_PITCH_OFFSET) * 0.9 * (Math.PI / 180.0) -0.1)* -0.5, 0, 0);
+      driveTrain.driveTest(Math.sin((navX.getPitch() - Constants.NAVX_PITCH_OFFSET) * 0.9 * (Math.PI / 180.0) - 0.1) * (-2 / (2 + timer.get())) - 0.2, 0, 0);
     }//Stop when Balanced
     else {
       driveTrain.driveTest(0,0,0);

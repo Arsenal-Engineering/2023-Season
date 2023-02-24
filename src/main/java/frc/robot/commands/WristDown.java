@@ -22,7 +22,7 @@ public class WristDown extends CommandBase {
 
   @Override
   public void execute() {
-    wristDown.setWristSpeed(-.2);
+    wristDown.setWristSpeed(-.7);
   }
 
   // Called once the command ends or is interrupted.

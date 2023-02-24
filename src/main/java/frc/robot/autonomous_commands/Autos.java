@@ -16,11 +16,11 @@ public final class Autos {
     //creates initial move command so robot can sense for hill
 
     //command sequence
-    return Commands.sequence(new Move(driveTrain, 2.4, -0.75),
+    return Commands.sequence(new Move(driveTrain, 2.0, -0.65),
                              new Delay(driveTrain,.5),
                              //runs chargeStationRoute if the robot encounters a hill, otherwise leaves community
                              new ConditionalCommand(chargeStationRoute(driveTrain), 
-                                                    new Move(driveTrain, 1.0 ,0.5),
+                                                    new Move(driveTrain, 0.5 ,0.5),
                                                     () -> isHill(driveTrain)));
   }
 
@@ -28,13 +28,13 @@ public final class Autos {
     //creates initial move command so robot can sense for hill
 
     //command sequence
-    return Commands.sequence(new LowerArm(armBase),
-                             new Drop(claw),
-                             new Move(driveTrain, 3.2, -0.5),
+    return Commands.sequence(/*new LowerArm(armBase),
+                             new Drop(claw),*/
+                             new Move(driveTrain, 3.0, -0.5),
                              new Delay(driveTrain, 1),
                              //runs chargeStationRoute if the robot encounters a hill, otherwise leaves community
                              new ConditionalCommand(chargeStationRoute(driveTrain), 
-                                                    new Move(driveTrain, 1.0 ,0.5),
+                                                    new Move(driveTrain, 0.5 , 0.5),
                                                     () -> isHill(driveTrain)));
   }
 
