@@ -74,18 +74,18 @@ public class DriveTrain extends SubsystemBase {
       mecanumDrive.driveCartesian(-x, y, z);
     }
     
-    public void updateBrakeMode(){
+    private void updateBrakeMode() {
       System.out.println("brakeMode is "+brakeMode);
       if (brakeMode){
         L1.setNeutralMode(NeutralMode.Brake);
         L2.setNeutralMode(NeutralMode.Brake);
         R1.setNeutralMode(NeutralMode.Brake);
-        R1.setNeutralMode(NeutralMode.Brake);
+        R2.setNeutralMode(NeutralMode.Brake);
       } else {
         L1.setNeutralMode(NeutralMode.Coast);
         L2.setNeutralMode(NeutralMode.Coast);
         R1.setNeutralMode(NeutralMode.Coast);
-        R1.setNeutralMode(NeutralMode.Coast);
+        R2.setNeutralMode(NeutralMode.Coast);
       }
     }
     public boolean getBrakeMode(){
@@ -93,6 +93,7 @@ public class DriveTrain extends SubsystemBase {
     }
     public void setBrakeMode(boolean brakeMode){
       this.brakeMode=brakeMode;
+      updateBrakeMode();
     }
     public void setDriveMode(boolean theFunny){
       isFieldOriented=theFunny;

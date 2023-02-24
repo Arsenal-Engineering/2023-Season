@@ -24,8 +24,7 @@ public class DriveTurnTowardsDirection extends CommandBase {
   @Override
   public void initialize() {
     //Turn on E-breake
-    driveTrain.setBrakeMode(!(driveTrain.getBrakeMode()));
-    driveTrain.updateBrakeMode();
+    driveTrain.setBrakeMode(true);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
