@@ -5,6 +5,7 @@
 package frc.robot.autonomous_commands;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
 import frc.robot.subsystems.DriveTrain;
 public class Move extends CommandBase {
     private Timer timer;
@@ -32,7 +33,10 @@ public class Move extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    driveTrain.driveMecanum(speed, 0, 0);
+    if(timer.get() < 0.2)
+      driveTrain.driveMecanumField(speed / 2, 0, 0);
+    else
+      driveTrain.driveMecanumField(speed, 0, 0);
   }
 
   // Called once the command ends or is interrupted.
@@ -42,6 +46,6 @@ public class Move extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return (timer.get() > timeLimit || driveTrain.getNavX().getPitch() > 10 || driveTrain.getNavX().getPitch() < -10);
+    return (timer.get() > timeLimit || driveTrain.getNavX().getPitch() > Constants.AUTO_ANGLE_TARGET || driveTrain.getNavX().getPitch() < -Constants.AUTO_ANGLE_TARGET);
   }
 }

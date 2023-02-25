@@ -65,11 +65,10 @@ public class DriveTrain extends SubsystemBase {
     //allows for driving through set values rather than a controller
     public void driveMecanum(double xSpeed, double ySpeed, double zRotation){
       mecanumDrive.driveCartesian(-xSpeed, ySpeed, zRotation);
-      
-      L1.feed();
-      L2.feed();
-      R1.feed();
-      R2.feed();
+    }
+
+    public void driveMecanumField(double xSpeed, double ySpeed, double zRotation){
+      mecanumDrive.driveCartesian(-xSpeed, ySpeed, zRotation, new Rotation2d(Math.toRadians(navX.getAngle())));
     }
     
     public void driveTest(double x, double y, double z) {

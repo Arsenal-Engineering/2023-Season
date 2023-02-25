@@ -5,6 +5,7 @@
 package frc.robot;
 
 import frc.robot.Constants.OperatorConstants;
+import frc.robot.autonomous_commands.AutoBalance;
 import frc.robot.autonomous_commands.Autos;
 import frc.robot.commands.*;
 import frc.robot.subsystems.*;
@@ -61,7 +62,7 @@ public class RobotContainer {
 
   private final DriveTrain driveTrain = new DriveTrain();
   private final DriveJoystick driveJoystick = new DriveJoystick(driveTrain, m_driverController.getHID());
-  private final LifeCam lc = new LifeCam();
+  //private final LifeCam lc = new LifeCam();
     
   private final LimelightCam limeLight = new LimelightCam();
   private final AutoAlign cubeAlign = new AutoAlign(driveTrain, limeLight, 0);
@@ -79,10 +80,11 @@ public class RobotContainer {
   private  TwistWrist twistWrist;
 
 
+
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the trigger bindings
-    lc.startVision();
+    //lc.startVision();
     if(Constants.DOES_ARM_EXIST){
       armExtender = new ArmExtension();
       armBase = new ArmBase();

@@ -24,7 +24,7 @@ public class Delay extends CommandBase {
   public void initialize() {
     timer.reset();
     timer.start();
-    driveTrain.setBrakeMode(true);
+    driveTrain.setBrakeMode(false);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
