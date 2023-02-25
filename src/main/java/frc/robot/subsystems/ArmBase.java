@@ -14,16 +14,16 @@ import com.revrobotics.CANSparkMax;
 //import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
-
 public class ArmBase extends SubsystemBase {
   private final double upReducer = 0.5;
   private final double downReducer = 0.1;
   private TestSparkMax arm_base;
   private DigitalInput limitSwitchBottom;
   private DigitalInput limitSwitchTop;
+
   // creates a new arm base
   public ArmBase() {
-    arm_base = new TestSparkMax(Constants.ARM_BASE,MotorType.kBrushed,"Arm base");
+    arm_base = new TestSparkMax(Constants.ARM_BASE, MotorType.kBrushed, "Arm base");
     limitSwitchBottom = new DigitalInput(Constants.FORWARD_LIMIT_SWITCH);
     limitSwitchTop = new DigitalInput(Constants.BACKWARD_LIMIT_SWITCH);
   }
@@ -34,24 +34,26 @@ public class ArmBase extends SubsystemBase {
   }
 
   public void armUp(double happyStickSpeed) {
-    if (!limitSwitchTop.get()){
+    if (!limitSwitchTop.get()) {
       arm_base.set(0.0);
     } else {
-      arm_base.set(happyStickSpeed*upReducer);
+      arm_base.set(happyStickSpeed * upReducer);
     }
   }
-  public void armDown(double happyStickSpeed){ 
-    if (!limitSwitchBottom.get()){
+
+  public void armDown(double happyStickSpeed) {
+    if (!limitSwitchBottom.get()) {
       arm_base.set(0.0);
-    } else {  
-    arm_base.set(happyStickSpeed*downReducer);
+    } else {
+      arm_base.set(happyStickSpeed * downReducer);
     }
   }
+
   public void armStop() {
     arm_base.set(0.0);
   }
-  public void armWhenTheAutonomousIsSusAndGoDownToVent(){
+
+  public void armWhenTheAutonomousIsSusAndGoDownToVent() {
     arm_base.set(downReducer);
   }
 }
-

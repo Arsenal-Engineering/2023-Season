@@ -6,7 +6,6 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.ArmBase;
-import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Joystick;
 
 public class ArmMove extends CommandBase {
@@ -18,9 +17,8 @@ public class ArmMove extends CommandBase {
   public ArmMove(ArmBase armMove, Joystick armcontroller) {
     this.armMove = armMove;
     armcontrol = armcontroller;
-    // Use addRequirements() here to declare subsystem dependencies.
+
     addRequirements(armMove);
-    
   }
 
   // Called when the command is initially scheduled.
@@ -31,8 +29,8 @@ public class ArmMove extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    // moves arm based on joystick front/back (Look at Robot.java for more info)
     double armmovement = armcontrol.getRawAxis(1);
+
     if (armmovement > .2) {
       armMove.armUp(armmovement);
     } else if (armmovement < -.2) {

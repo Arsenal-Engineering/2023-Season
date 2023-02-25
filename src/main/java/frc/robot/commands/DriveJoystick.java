@@ -13,17 +13,17 @@ public class DriveJoystick extends CommandBase {
   private XboxController controller;
 
   /** Creates a new DriveJoystick. */
-  public DriveJoystick(DriveTrain driveTrain,XboxController controller) {
+  public DriveJoystick(DriveTrain driveTrain, XboxController controller) {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(driveTrain);
     this.driveTrain = driveTrain;
     this.controller = controller;
+
+    addRequirements(this.driveTrain);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    System.out.println("test1");
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -35,7 +35,6 @@ public class DriveJoystick extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    System.out.println("test2");
   }
 
   // Returns true when the command should end.

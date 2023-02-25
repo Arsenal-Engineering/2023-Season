@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class ClawClose extends CommandBase {
   private Claw claw;
+
   /** Creates a new ClawUnOpen. */
   public ClawClose(Claw clawClose) {
     claw = clawClose;
@@ -19,7 +20,8 @@ public class ClawClose extends CommandBase {
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override

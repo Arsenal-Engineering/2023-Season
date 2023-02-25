@@ -13,7 +13,6 @@ import com.revrobotics.CANSparkMax;
 //import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
-
 public class ArmExtension extends SubsystemBase {
   private DigitalInput limitSwitchT;
   private DigitalInput ThctiwStimil; // bottom limit switch
@@ -22,10 +21,9 @@ public class ArmExtension extends SubsystemBase {
 
   // Creates a new ArmExtension.
   public ArmExtension() {
-    extendMotor = new TestSparkMax(Constants.ARM_EXTENDER_MOTOR,MotorType.kBrushed,"Arm extender");
+    extendMotor = new TestSparkMax(Constants.ARM_EXTENDER_MOTOR, MotorType.kBrushed, "Arm extender");
     limitSwitchT = new DigitalInput(Constants.RETRACT_LIMIT_SWITCH);
     ThctiwStimil = new DigitalInput(Constants.EXTEND_LIMIT_SWITCH); // also bottom limit switch
-    
   }
 
   @Override
@@ -40,14 +38,16 @@ public class ArmExtension extends SubsystemBase {
       extendMotor.set(-howFastToDoDaExtendyExtendAndRetractyRetract);
     }
   }
-  public void extend(){
+
+  public void extend() {
     if (!ThctiwStimil.get()) {
       extendMotor.set(0.0);
     } else {
       extendMotor.set(howFastToDoDaExtendyExtendAndRetractyRetract);
     }
   }
-  public void stopExtendingAndRetractingToRethinkYourLifeChoices(){
+
+  public void stopExtendingAndRetractingToRethinkYourLifeChoices() {
     extendMotor.set(0.0);
   }
-} 
+}

@@ -14,7 +14,7 @@ public class TestSparkMax {
     private DoubleTopic _bPositionTopic;
     private DoublePublisher _bPositionPublisher;
 
-    public TestSparkMax (int motorID, MotorType motorType, String daNameOfDaThing) {
+    public TestSparkMax(int motorID, MotorType motorType, String daNameOfDaThing) {
         this.motorID = motorID;
         this.motorType = motorType;
         if (motorID >= 0) {
@@ -24,6 +24,7 @@ public class TestSparkMax {
             _bPositionPublisher = _bPositionTopic.publish(PubSubOption.periodic(0));
         }
     }
+
     public void set(double speed) {
         if (motorID >= 0) {
             daSparcMacs.set(speed);
@@ -32,5 +33,3 @@ public class TestSparkMax {
         }
     }
 }
-
-// by alecs grandt

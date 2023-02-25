@@ -11,14 +11,14 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import frc.robot.TestSparkMax;
 
-
 public class Claw extends SubsystemBase {
   private TestSparkMax claw;
   private final double howFastToDoDaGrabbyGrabAndReleasyRelease = 0.8;
   private final double stopExistingAndNoMoreBreathing = 0.0;
-  // Creates a new OpenCloseClaw. 
+
+  // Creates a new OpenCloseClaw.
   public Claw(int clawID, MotorType motor) {
-    claw = new TestSparkMax(clawID, motor,"Claw");
+    claw = new TestSparkMax(clawID, motor, "Claw");
   }
 
   @Override
@@ -26,13 +26,15 @@ public class Claw extends SubsystemBase {
     // This method will be called once per scheduler run
   }
 
-  public void clawClose(){
+  public void clawClose() {
     claw.set(-howFastToDoDaGrabbyGrabAndReleasyRelease);
   }
-  public void clawOpen(){
+
+  public void clawOpen() {
     claw.set(howFastToDoDaGrabbyGrabAndReleasyRelease);
   }
-  public void clawStop(){
+
+  public void clawStop() {
     claw.set(stopExistingAndNoMoreBreathing);
   }
-} 
+}

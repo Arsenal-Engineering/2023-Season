@@ -12,6 +12,7 @@ import frc.robot.subsystems.DriveTrain;
 public class DriveTurnTowardsDirection extends CommandBase {
   private DriveTrain driveTrain;
   private AHRS navX;
+
   /** Creates a new AutoAlign. */
   public DriveTurnTowardsDirection(DriveTrain driveTrain) {
     // Use addRequirements() here to declare subsystem dependencies.
@@ -23,26 +24,27 @@ public class DriveTurnTowardsDirection extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    //Turn on E-breake
+    // Turn on E-breake
     driveTrain.setBrakeMode(true);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    //Align Yaw to 180
+    // Align Yaw to 180
     if (driveTrain.getBrakeMode()) {
       if (navX.getYaw() < 0) {
-        driveTrain.driveTest(0, 0, Math.sin((navX.getYaw()+180) * (Math.PI / 180.0))*-1);
+        driveTrain.driveTest(0, 0, Math.sin((navX.getYaw() + 180) * (Math.PI / 180.0)) * -1);
       } else {
-        driveTrain.driveTest(0, 0, Math.sin((navX.getYaw()-180) * (Math.PI / 180.0))*-1);
+        driveTrain.driveTest(0, 0, Math.sin((navX.getYaw() - 180) * (Math.PI / 180.0)) * -1);
       }
     }
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+  }
 
   // Returns true when the command should end.
   @Override
