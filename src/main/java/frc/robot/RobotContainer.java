@@ -78,6 +78,8 @@ public class RobotContainer {
 
   private  TwistWrist twistWrist;
 
+  private Rumble rumble;
+
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -105,6 +107,8 @@ public class RobotContainer {
 
     }
     configureBindings();
+
+    rumble = new Rumble(m_driverController, 0.5, 1);
   }
 
   /**
@@ -220,6 +224,10 @@ public class RobotContainer {
 
   public RetractArm getRetractArm() {
     return retractArm;
+  }
+
+  public Rumble getRumble() {
+    return rumble;
   }
 
   //Autonomous Commands

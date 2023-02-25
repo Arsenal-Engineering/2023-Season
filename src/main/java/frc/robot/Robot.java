@@ -95,6 +95,7 @@ public class Robot extends TimedRobot {
     robotContainer.getdriveJoystick().schedule();
    // robotContainer.getArmMove().schedule();
 
+   robotContainer.getRumble().schedule();
   }
 
   /** This function is called periodically during operator control. */
