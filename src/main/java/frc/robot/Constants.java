@@ -45,7 +45,7 @@ public final class Constants {
   public static final int ARM_CONTROLLER_PORT = 1;
 
   public static class OperatorConstants {
-    public static final int kDriverControllerPort = 0;
+    public static final int kDriverControllerPort = 1;
   }
 
   // Constants for auto-aligning
@@ -55,5 +55,9 @@ public final class Constants {
 
   // angle offset
   public static final double NAVX_PITCH_OFFSET = 0;
+
+  //autonomous constants
+  public static final double AUTO_SPEED = 0.65;
+  public static final double AUTO_ANGLE_TARGET = 10.0;
 
 }

@@ -52,16 +52,48 @@ public class DriveTrain extends SubsystemBase {
           controller.getLeftX() * driveFactor,
           controller.getRightX() / 2.0,
           new Rotation2d(Math.toRadians(navX.getAngle())));
-    } else {
-      mecanumDrive.driveCartesian(controller.getLeftY() * driveFactor,
-          -controller.getLeftX() * driveFactor, controller.getRightX() / 2.0);
+      } else {
+        mecanumDrive.driveCartesian(controller.getLeftY() * driveFactor, 
+          -controller.getLeftX() * driveFactor, controller.getRightX()/2.0);
+      }
+      
+      L1.feed();
+      L2.feed();
+      R1.feed();
+      R2.feed();
+    }
+    
+    public void driveMecanumField(double xSpeed, double ySpeed, double zRotation){
+      mecanumDrive.driveCartesian(-xSpeed, ySpeed, zRotation, new Rotation2d(Math.toRadians(navX.getAngle())));
+    }
+    
+    private void updateBrakeMode() {
+      System.out.println("brakeMode is "+brakeMode);
+      if (brakeMode){
+        L1.setNeutralMode(NeutralMode.Brake);
+        L2.setNeutralMode(NeutralMode.Brake);
+        R1.setNeutralMode(NeutralMode.Brake);
+        R2.setNeutralMode(NeutralMode.Brake);
+      } else {
+        L1.setNeutralMode(NeutralMode.Coast);
+        L2.setNeutralMode(NeutralMode.Coast);
+        R1.setNeutralMode(NeutralMode.Coast);
+        R2.setNeutralMode(NeutralMode.Coast);
+      }
     }
 
-    L1.feed();
-    L2.feed();
-    R1.feed();
-    R2.feed();
-  }
+    public boolean getBrakeMode(){
+      return brakeMode;
+    }
+    
+    public void setBrakeMode(boolean brakeMode){
+      this.brakeMode=brakeMode;
+      updateBrakeMode();
+    }
+
+    public void setDriveMode(boolean theFunny){
+      isFieldOriented=theFunny;
+    }
 
   // allows for driving through set values rather than a controller
   public void driveMecanum(double xSpeed, double ySpeed, double zRotation) {
@@ -75,34 +107,6 @@ public class DriveTrain extends SubsystemBase {
 
   public void driveTest(double x, double y, double z) {
     mecanumDrive.driveCartesian(-x, y, z);
-  }
-
-  private void updateBrakeMode() {
-    System.out.println("brakeMode is " + brakeMode);
-    if (brakeMode) {
-      L1.setNeutralMode(NeutralMode.Brake);
-      L2.setNeutralMode(NeutralMode.Brake);
-      R1.setNeutralMode(NeutralMode.Brake);
-      R2.setNeutralMode(NeutralMode.Brake);
-    } else {
-      L1.setNeutralMode(NeutralMode.Coast);
-      L2.setNeutralMode(NeutralMode.Coast);
-      R1.setNeutralMode(NeutralMode.Coast);
-      R2.setNeutralMode(NeutralMode.Coast);
-    }
-  }
-
-  public boolean getBrakeMode() {
-    return brakeMode;
-  }
-
-  public void setBrakeMode(boolean brakeMode) {
-    this.brakeMode = brakeMode;
-    updateBrakeMode();
-  }
-
-  public void setDriveMode(boolean theFunny) {
-    isFieldOriented = theFunny;
   }
 
   public AHRS getNavX() {

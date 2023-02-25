@@ -5,6 +5,7 @@
 package frc.robot;
 
 import frc.robot.Constants.OperatorConstants;
+import frc.robot.autonomous_commands.AutoBalance;
 import frc.robot.autonomous_commands.Autos;
 import frc.robot.commands.*;
 import frc.robot.subsystems.*;

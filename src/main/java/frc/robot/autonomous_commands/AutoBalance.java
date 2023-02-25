@@ -14,13 +14,12 @@ import frc.robot.Constants;
 public class AutoBalance extends CommandBase {
   private DriveTrain driveTrain;
   private AHRS navX;
-  private Timer timer;
+  private Timer timer = new Timer();
   /** Creates a new AutoBalance. */
   public AutoBalance(DriveTrain driveTrain){
     addRequirements(driveTrain);
     this.driveTrain = driveTrain;
     navX = driveTrain.getNavX();
-    timer = new Timer();
     // Use addRequirements() here to declare subsystem dependencies.
     
   }
@@ -36,13 +35,13 @@ public class AutoBalance extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (navX.getPitch() - Constants.NAVX_PITCH_OFFSET > 5){
-      driveTrain.driveTest(Math.sin((navX.getPitch() - Constants.NAVX_PITCH_OFFSET) * 0.9 * (Math.PI / 180.0) + 0.1) * (-2 / (2 + timer.get())) + 0.2, 0, 0);
-    } else if (navX.getPitch() - Constants.NAVX_PITCH_OFFSET < -5) { 
-      driveTrain.driveTest(Math.sin((navX.getPitch() - Constants.NAVX_PITCH_OFFSET) * 0.9 * (Math.PI / 180.0) - 0.1) * (-2 / (2 + timer.get())) - 0.2, 0, 0);
+    if (navX.getPitch() < -Constants.AUTO_ANGLE_TARGET/2){
+      driveTrain.driveMecanumField(Math.sin(-navX.getPitch() * 0.9 * (Math.PI / 180.0) + 0.1) * (2 / (2 + (timer.get() / 3))), 0, 0);
+    } else if (navX.getPitch() > Constants.AUTO_ANGLE_TARGET/2) { 
+      driveTrain.driveMecanumField(Math.sin(-navX.getPitch() - Constants.NAVX_PITCH_OFFSET * 0.9 * (Math.PI / 180.0) - 0.1) * (2 / (2 + (timer.get() / 3))), 0, 0);
     }//Stop when Balanced
     else {
-      driveTrain.driveTest(0,0,0);
+      driveTrain.driveMecanumField(0,0,0);
     }
   }
 

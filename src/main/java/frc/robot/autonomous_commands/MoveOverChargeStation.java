@@ -29,7 +29,7 @@ public class MoveOverChargeStation extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    driveTrain.driveMecanum(-0.4, 0, 0);
+    driveTrain.driveMecanumField(-Constants.AUTO_SPEED + 0.3, 0, 0);
   }
 
   // Called once the command ends or is interrupted.
@@ -40,6 +40,6 @@ public class MoveOverChargeStation extends CommandBase {
   @Override
   public boolean isFinished() {
     //finishes when robot is flat
-    return (navX.getPitch() + Constants.NAVX_PITCH_OFFSET > -5 && navX.getPitch() + Constants.NAVX_PITCH_OFFSET < 5);
+    return (navX.getPitch() + Constants.NAVX_PITCH_OFFSET > -Constants.AUTO_ANGLE_TARGET/2 && navX.getPitch() + Constants.NAVX_PITCH_OFFSET < Constants.AUTO_ANGLE_TARGET/2);
   }
 }
