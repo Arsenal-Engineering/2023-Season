@@ -9,14 +9,12 @@ import edu.wpi.first.networktables.PubSubOption;
 
 public class TestSparkMax {
     private int motorID;
-    private MotorType motorType;
     private CANSparkMax daSparcMacs;
     private DoubleTopic _bPositionTopic;
     private DoublePublisher _bPositionPublisher;
 
     public TestSparkMax(int motorID, MotorType motorType, String daNameOfDaThing) {
         this.motorID = motorID;
-        this.motorType = motorType;
         if (motorID >= 0) {
             daSparcMacs = new CANSparkMax(motorID, motorType);
         } else {
