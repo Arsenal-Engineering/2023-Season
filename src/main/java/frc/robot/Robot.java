@@ -91,6 +91,8 @@ public class Robot extends TimedRobot {
       normalRoute.cancel();
     }
     robotContainer.getdriveJoystick().schedule();
+
+   robotContainer.getRumble().schedule();
     robotContainer.getDriveTrain().setBrakeMode(false);
   }
 

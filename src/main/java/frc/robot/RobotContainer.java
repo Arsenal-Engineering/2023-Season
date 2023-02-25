@@ -10,7 +10,6 @@ import frc.robot.autonomous_commands.Autos;
 import frc.robot.commands.*;
 import frc.robot.subsystems.*;
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.Commands;
 
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
@@ -32,7 +31,7 @@ public class RobotContainer {
     new CommandXboxController(OperatorConstants.kDriverControllerPort);
 
 
- private  Joystick joystick;
+ private Joystick joystick;
  private Trigger button9;
  private Trigger button11;
 
@@ -40,51 +39,53 @@ public class RobotContainer {
 
   // The robot's subsystems and commands are defined here...
 
-  private  ArmBase armBase;
+  private ArmBase armBase;
 
-  private  ArmMove aMove;
+  private ArmMove aMove;
 
-  private  Claw claw;
+  private Claw claw;
 
-  private  ClawOpen cOpen;
+  private ClawOpen cOpen;
 
-  private  ClawClose cClose;
+  private ClawClose cClose;
 
-  private  ClawStop cStop;
+  private ClawStop cStop;
 
-  private  ClawUpDown clawWrist;
+  private ClawUpDown clawWrist;
 
-  private  WristStop wStop;
+  private WristStop wStop;
 
-  private  WristUp wUp;
+  private WristUp wUp;
 
-  private  WristDown wDown;
+  private WristDown wDown;
 
-  private final DriveTrain driveTrain = new DriveTrain();
-  private final DriveJoystick driveJoystick = new DriveJoystick(driveTrain, m_driverController.getHID());
-  //private final LifeCam lc = new LifeCam();
+  private DriveTrain driveTrain;
+  private DriveJoystick driveJoystick;
+  private LifeCam lc;
     
-  private final LimelightCam limeLight = new LimelightCam();
-  private final AutoAlign cubeAlign = new AutoAlign(driveTrain, limeLight, 0);
-  private final AutoAlign leftConeAlign = new AutoAlign(driveTrain, limeLight, Constants.CONE_DEPOSIT_OFFSET);
-  private final AutoAlign rightConeAlign = new AutoAlign(driveTrain, limeLight, -Constants.CONE_DEPOSIT_OFFSET);
+  private LimelightCam limeLight;
+  private AutoAlign cubeAlign;
+  private AutoAlign leftConeAlign;
+  private AutoAlign rightConeAlign;
 
-  private  ArmExtension armExtender;
+  private ArmExtension armExtender;
 
-  private  ExtendArm extendArm;
+  private ExtendArm extendArm;
 
-  private  RetractArm retractArm;
+  private RetractArm retractArm;
 
-  private  ClawWrist twistyWrist;
+  private ClawWrist twistyWrist;
 
-  private  TwistWrist twistWrist;
+  private TwistWrist twistWrist;
+
+  private Rumble rumble;
 
 
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the trigger bindings
-    //lc.startVision();
+    lc.startVision();
     if(Constants.DOES_ARM_EXIST){
       armExtender = new ArmExtension();
       armBase = new ArmBase();
@@ -106,7 +107,19 @@ public class RobotContainer {
       button11 = new Trigger(() -> joystick.getRawButton(11));
 
     }
+    if(Constants.DOES_DRIVETRAIN_EXIST){
+      driveTrain = new DriveTrain();
+      driveJoystick = new DriveJoystick(driveTrain, m_driverController.getHID());
+      lc = new LifeCam();
+      lc.startVision();
+      limeLight = new LimelightCam();
+      cubeAlign = new AutoAlign(driveTrain, limeLight, 0);
+      leftConeAlign = new AutoAlign(driveTrain, limeLight, Constants.CONE_DEPOSIT_OFFSET);
+      rightConeAlign = new AutoAlign(driveTrain, limeLight, -Constants.CONE_DEPOSIT_OFFSET);
+    }
     configureBindings();
+
+    rumble = new Rumble(m_driverController, 0.5, 1);
   }
 
   /**
@@ -224,11 +237,18 @@ public class RobotContainer {
     return retractArm;
   }
 
+  public Rumble getRumble() {
+    return rumble;
+  }
+
   //Autonomous Commands
   public Command getInitialMoveAutonomous(){
-    if(Constants.DOES_ARM_EXIST){
+    if(Constants.DOES_ARM_EXIST && Constants.DOES_DRIVETRAIN_EXIST){
       return Autos.initialMove(armBase, claw, driveTrain);
     }
-    return Autos.initialMove(driveTrain);
+    if(Constants.DOES_DRIVETRAIN_EXIST){
+      return Autos.initialMove(driveTrain);
+    }
+    return Autos.nothingExists();
   }
 }
