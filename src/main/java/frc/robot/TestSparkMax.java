@@ -7,25 +7,25 @@ import edu.wpi.first.networktables.DoublePublisher;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.networktables.PubSubOption;
 
-public class TestSparkMax{
+public class TestSparkMax {
     private int motorID;
     private MotorType motorType;
     private CANSparkMax daSparcMacs;
     private DoubleTopic _bPositionTopic;
     private DoublePublisher _bPositionPublisher;
 
-    public TestSparkMax (int motorID, MotorType motorType, String daNameOfDaThing){
+    public TestSparkMax (int motorID, MotorType motorType, String daNameOfDaThing) {
         this.motorID = motorID;
         this.motorType = motorType;
-        if (motorID>=0){
+        if (motorID >= 0) {
             daSparcMacs = new CANSparkMax(motorID, motorType);
         } else {
-            _bPositionTopic = NetworkTableInstance.getDefault().getDoubleTopic(daNameOfDaThing+" speed ");
+            _bPositionTopic = NetworkTableInstance.getDefault().getDoubleTopic(daNameOfDaThing + " speed ");
             _bPositionPublisher = _bPositionTopic.publish(PubSubOption.periodic(0));
         }
     }
-    public void set(double speed){
-        if (motorID>=0){
+    public void set(double speed) {
+        if (motorID >= 0) {
             daSparcMacs.set(speed);
         } else {
             _bPositionPublisher.set(speed);
