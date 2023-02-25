@@ -56,4 +56,8 @@ public final class Autos {
     //if the robot isn't flat return true
     return (driveTrain.getNavX().getPitch() > 5 || driveTrain.getNavX().getPitch() < -5);
   }
+
+  public static CommandBase nothingExists(){
+    return Commands.sequence(null);
+  }
 }

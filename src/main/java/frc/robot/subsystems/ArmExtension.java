@@ -5,6 +5,8 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import frc.robot.TestSparkMax;
+
 //import com.ctre.phoenix.motorcontrol.can.*;
 import com.revrobotics.CANSparkMax;
 //import com.revrobotics.CANSparkMax.IdleMode;
@@ -12,12 +14,12 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 
 public class ArmExtension extends SubsystemBase {
-  private CANSparkMax extendMotor;
+  private TestSparkMax extendMotor;
   private static double currentTimeExtended = 0.0;
 
   // Creates a new ArmExtension.
   public ArmExtension() {
-    extendMotor = new CANSparkMax(Constants.ARM_EXTENDER_MOTOR,MotorType.kBrushed);
+    extendMotor = new TestSparkMax(Constants.ARM_EXTENDER_MOTOR,MotorType.kBrushed,"Arm extender");
   }
 
   @Override

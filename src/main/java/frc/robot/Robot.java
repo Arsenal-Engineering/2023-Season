@@ -22,8 +22,6 @@ public class Robot extends TimedRobot {
   private Command chargeStationRoute;
   private Command normalRoute;
   private Timer timer;
-//jkjkhkhk
-//kkjkj
   private RobotContainer robotContainer;
 
   /**
@@ -93,9 +91,9 @@ public class Robot extends TimedRobot {
       normalRoute.cancel();
     }
     robotContainer.getdriveJoystick().schedule();
-   // robotContainer.getArmMove().schedule();
 
    robotContainer.getRumble().schedule();
+    robotContainer.getDriveTrain().setBrakeMode(false);
   }
 
   /** This function is called periodically during operator control. */
