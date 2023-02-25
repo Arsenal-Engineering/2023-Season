@@ -28,7 +28,7 @@ public class LowerArm extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    arm.armMove(-.5);
+    arm.armWhenTheAutonomousIsSusAndGoDownToVent();
   }
 
   // Called once the command ends or is interrupted.

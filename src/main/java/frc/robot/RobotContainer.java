@@ -31,6 +31,8 @@ public class RobotContainer {
 
 
  private Joystick joystick;
+ private Trigger button1;
+ private Trigger button2;
  private Trigger button9;
  private Trigger button11;
 
@@ -47,8 +49,6 @@ public class RobotContainer {
   private ClawOpen cOpen;
 
   private ClawClose cClose;
-
-  private ClawStop cStop;
 
   private ClawUpDown clawWrist;
 
@@ -79,7 +79,6 @@ public class RobotContainer {
 
   private Rumble rumble;
 
-
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the trigger bindings
@@ -88,19 +87,20 @@ public class RobotContainer {
       armExtender = new ArmExtension();
       armBase = new ArmBase();
       joystick = new Joystick(Constants.ARM_CONTROLLER_PORT);
-      aMove = new ArmMove(armBase, joystick, Constants.FORWARD_LIMIT_SWITCH, Constants.BACKWARD_LIMIT_SWITCH);
+      aMove = new ArmMove(armBase, joystick);
       claw = new Claw(Constants.CLAW,MotorType.kBrushed);
       clawWrist = new ClawUpDown(Constants.CLAW_WRIST,MotorType.kBrushed);
       cOpen = new ClawOpen(claw);
       cClose = new ClawClose(claw);
-      cStop = new ClawStop(claw);
       wDown = new WristDown(clawWrist);
       wStop = new WristStop(clawWrist);
       wUp = new WristUp(clawWrist);
-      extendArm = new ExtendArm(armExtender, joystick, Constants.EXTEND_LIMIT_SWITCH);
-      retractArm = new RetractArm(armExtender, joystick, Constants.RETRACT_LIMIT_SWITCH);
+      extendArm = new ExtendArm(armExtender);
+      retractArm = new RetractArm(armExtender);
       twistyWrist = new ClawWrist();
       twistWrist = new TwistWrist(twistyWrist, joystick);
+      button1 = new Trigger(() -> joystick.getRawButton(1));
+      button2 = new Trigger(() -> joystick.getRawButton(2));
       button9 = new Trigger(() -> joystick.getRawButton(9));
       button11 = new Trigger(() -> joystick.getRawButton(11));
 
@@ -153,6 +153,8 @@ public class RobotContainer {
     // m_driverController.povRight().onTrue(rightConeAlign).onFalse(driveJoystick);
 
     if (Constants.DOES_ARM_EXIST) {
+      button1.whileTrue(cClose);
+      button2.whileTrue(cOpen);
       button9.whileTrue(extendArm);
       button11.whileTrue(retractArm);
     }
@@ -209,10 +211,6 @@ public class RobotContainer {
 
   public ClawOpen getClawOpen(){
     return cOpen;
-  }
-
-  public ClawStop getClawStop(){
-    return cStop;
   }
 
   public WristDown getWristDown(){

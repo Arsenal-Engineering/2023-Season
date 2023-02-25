@@ -91,6 +91,7 @@ public class Robot extends TimedRobot {
       normalRoute.cancel();
     }
     robotContainer.getdriveJoystick().schedule();
+    robotContainer.getArmMove().schedule();
 
    robotContainer.getRumble().schedule();
     robotContainer.getDriveTrain().setBrakeMode(false);
@@ -99,11 +100,7 @@ public class Robot extends TimedRobot {
   /** This function is called periodically during operator control. */
   @Override
   public void teleopPeriodic(){
-    if(Constants.DOES_ARM_EXIST){
-      //Axis 3 refers to the slider on the joystick 
-      //All the way up is -1
-      //All the way down is +1
-      
+    if(Constants.DOES_ARM_EXIST){      
       // if (robotContainer.getArmController().getRawAxis(3) < -.9) {
       //   robotContainer.getExtendArm().schedule();
       // }
@@ -118,24 +115,9 @@ public class Robot extends TimedRobot {
         robotContainer.getTwistWrist().schedule();
       }
 
-      //Axis 1 refers to Y-Axis (Move Joystick front and back)
-      //-1 is front
-      //+1 is back
-      if (Math.abs(robotContainer.getArmController().getRawAxis(1)) > .2){
-        robotContainer.getArmMove().schedule();
-      }
-
       //Buttons 5 & 6 are the buttons labeled 5 & 6
       //Returns True or False
-      if (robotContainer.getArmController().getRawButton(1)){
-        robotContainer.getClawClose().schedule();
-      }
-      else if(robotContainer.getArmController().getRawButton(2)) {
-        robotContainer.getClawOpen().schedule();
-      }
-      else{
-        robotContainer.getClawStop().schedule();
-      }
+
 
       //getPOV refers to the D-Pad on the joystick
       //returns the angle(degree) of the dpad with 0 = top

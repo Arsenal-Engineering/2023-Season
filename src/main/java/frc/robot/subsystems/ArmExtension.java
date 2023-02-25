@@ -6,6 +6,7 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.TestSparkMax;
+import edu.wpi.first.wpilibj.DigitalInput;
 
 //import com.ctre.phoenix.motorcontrol.can.*;
 import com.revrobotics.CANSparkMax;
@@ -14,12 +15,17 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 
 public class ArmExtension extends SubsystemBase {
+  private DigitalInput limitSwitchT;
+  private DigitalInput ThctiwStimil; // bottom limit switch
   private TestSparkMax extendMotor;
-  private static double currentTimeExtended = 0.0;
+  private final double howFastToDoDaExtendyExtendAndRetractyRetract = 0.5;
 
   // Creates a new ArmExtension.
   public ArmExtension() {
     extendMotor = new TestSparkMax(Constants.ARM_EXTENDER_MOTOR,MotorType.kBrushed,"Arm extender");
+    limitSwitchT = new DigitalInput(Constants.RETRACT_LIMIT_SWITCH);
+    ThctiwStimil = new DigitalInput(Constants.EXTEND_LIMIT_SWITCH); // also bottom limit switch
+    
   }
 
   @Override
@@ -27,16 +33,21 @@ public class ArmExtension extends SubsystemBase {
     // This method will be called once per scheduler run
   }
 
-  public void setSpeed(double speed) {
-    extendMotor.set(speed);
-    // System.out.print(speed);
+  public void retract() {
+    if (!limitSwitchT.get()) {
+      extendMotor.set(0.0);
+    } else {
+      extendMotor.set(-howFastToDoDaExtendyExtendAndRetractyRetract);
+    }
   }
-
-  public static void setCurrentTimeExtended(double input) {
-    currentTimeExtended = input;
+  public void extend(){
+    if (!ThctiwStimil.get()) {
+      extendMotor.set(0.0);
+    } else {
+      extendMotor.set(howFastToDoDaExtendyExtendAndRetractyRetract);
+    }
   }
-
-  public static double getCurrentTimeExtended() {
-    return currentTimeExtended;
+  public void stopExtendingAndRetractingToRethinkYourLifeChoices(){
+    extendMotor.set(0.0);
   }
 } 

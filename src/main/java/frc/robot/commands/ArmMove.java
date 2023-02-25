@@ -13,39 +13,40 @@ public class ArmMove extends CommandBase {
 
   private ArmBase armMove;
   private Joystick armcontrol;
-  private DigitalInput limitSwitchBottom;
-  private DigitalInput limitSwitchTop;
+
   // Creates a new ArmUp.
-  public ArmMove(ArmBase armMove, Joystick armcontroller, int limSwitchForID, int limSwitchBackID) {
+  public ArmMove(ArmBase armMove, Joystick armcontroller) {
     this.armMove = armMove;
     armcontrol = armcontroller;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(armMove);
-    limitSwitchBottom = new DigitalInput(limSwitchForID);
-    limitSwitchTop = new DigitalInput(limSwitchBackID);
+    
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
     // moves arm based on joystick front/back (Look at Robot.java for more info)
     double armmovement = armcontrol.getRawAxis(1);
-
-    //TODO: put limit switches on robot, fix ids, and uncomment this code
-    // if ((armmovement<0 && limitSwitchBottom.get()) || armmovement>0 && limitSwitchTop.get()){
-    //   armMove.armMove(0);
-    // } else {
-      armMove.armMove(armmovement < 0 ? armmovement/7 : armmovement/5);
-    // }
+    if (armmovement > .2) {
+      armMove.armUp(armmovement);
+    } else if (armmovement < -.2) {
+      armMove.armDown(armmovement);
+    } else {
+      armMove.armStop();
+    }
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    armMove.armStop();
+  }
 
   // Returns true when the command should end.
   @Override
