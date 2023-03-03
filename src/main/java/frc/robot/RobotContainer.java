@@ -91,19 +91,20 @@ public class RobotContainer {
       cOpen = new ClawOpen(claw);
       cClose = new ClawClose(claw);
     }
+
     if (Constants.DOES_DRIVETRAIN_EXIST) {
+      driveTrain = new DriveTrain();
+
       driveJoystick = new DriveJoystick(driveTrain, m_driverController.getHID());
       rumble = new Rumble(m_driverController, 0.5, 1);
-
-      driveTrain = new DriveTrain();
 
       lc = new LifeCam();
       lc.startVision();
 
-      limeLight = new LimelightCam();
-      cubeAlign = new AutoAlign(driveTrain, limeLight, 0);
-      leftConeAlign = new AutoAlign(driveTrain, limeLight, Constants.CONE_DEPOSIT_OFFSET);
-      rightConeAlign = new AutoAlign(driveTrain, limeLight, -Constants.CONE_DEPOSIT_OFFSET);
+      // limeLight = new LimelightCam();
+      // cubeAlign = new AutoAlign(driveTrain, limeLight, 0);
+      // leftConeAlign = new AutoAlign(driveTrain, limeLight, Constants.CONE_DEPOSIT_OFFSET);
+      // rightConeAlign = new AutoAlign(driveTrain, limeLight, -Constants.CONE_DEPOSIT_OFFSET);
     }
 
     configureBindings();
@@ -113,21 +114,18 @@ public class RobotContainer {
 
     // warning saying can't find button 1 on joystick....idk why....not working for
     // any of the buttons
-    // m_driverController.b().onTrue(new
-    // DriveTurnTowardsDirection(driveTrain)).onFalse(driveJoystick);
-    // m_driverController.a().onTrue(new
-    // AutoBalance(driveTrain)).onFalse(driveJoystick);
 
-    // m_driverController.start().onTrue(new SetDriveMode(driveTrain, true));
-    // m_driverController.start().onFalse(new DriveJoystick(driveTrain,
-    // m_driverController.getHID()));
-    // m_driverController.back().onTrue(new SetDriveMode(driveTrain, false));
-    // m_driverController.back().onFalse(new DriveJoystick(driveTrain,
-    // m_driverController.getHID()));
+    if (Constants.DOES_DRIVETRAIN_EXIST) {
+      m_driverController.b().onTrue(new DriveTurnTowardsDirection(driveTrain)).onFalse(driveJoystick);
+      m_driverController.a().onTrue(new AutoBalance(driveTrain)).onFalse(driveJoystick);
 
-    // m_driverController.povUp().onTrue(cubeAlign).onFalse(driveJoystick);
-    // m_driverController.povLeft().onTrue(leftConeAlign).onFalse(driveJoystick);
-    // m_driverController.povRight().onTrue(rightConeAlign).onFalse(driveJoystick);
+      m_driverController.start().onTrue(new SetDriveMode(driveTrain, true)).onFalse(driveJoystick);
+      m_driverController.back().onTrue(new SetDriveMode(driveTrain, false)).onFalse(driveJoystick);
+
+      // m_driverController.povUp().onTrue(cubeAlign).onFalse(driveJoystick);
+      // m_driverController.povLeft().onTrue(leftConeAlign).onFalse(driveJoystick);
+      // m_driverController.povRight().onTrue(rightConeAlign).onFalse(driveJoystick);
+    }
 
     if (Constants.DOES_ARM_EXIST) {
       button1.whileTrue(cClose);

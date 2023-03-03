@@ -89,11 +89,15 @@ public class Robot extends TimedRobot {
       normalRoute.cancel();
     }
 
-    robotContainer.getDriveTrain().setBrakeMode(false);
-    robotContainer.getDriveJoystick().schedule();
-    robotContainer.getRumble().schedule();
+    if (Constants.DOES_DRIVETRAIN_EXIST) {
+      robotContainer.getDriveTrain().setBrakeMode(false);
+      robotContainer.getDriveJoystick().schedule();
+      robotContainer.getRumble().schedule();
+    }
 
-    robotContainer.getArmMove().schedule();
+    if (Constants.DOES_ARM_EXIST) {
+      robotContainer.getArmMove().schedule();
+    }
   }
 
   /** This function is called periodically during operator control. */
@@ -109,6 +113,8 @@ public class Robot extends TimedRobot {
 
     timer.reset();
     timer.start();
+
+    // robotContainer.getController().a().whileTrue(new TestButtons());
   }
 
   /** This function is called periodically during test mode. */
@@ -119,6 +125,25 @@ public class Robot extends TimedRobot {
   /** This function is called once when the robot is first started up. */
   @Override
   public void simulationInit() {
+    // if (initialMoveAutonomous != null) {
+    //   initialMoveAutonomous.cancel();
+    // }
+    // if (chargeStationRoute != null) {
+    //   chargeStationRoute.cancel();
+    // }
+    // if (normalRoute != null) {
+    //   normalRoute.cancel();
+    // }
+
+    // if (Constants.DOES_DRIVETRAIN_EXIST) {
+    //   robotContainer.getDriveTrain().setBrakeMode(false);
+    //   robotContainer.getDriveJoystick().schedule();
+    //   robotContainer.getRumble().schedule();
+    // }
+
+    // if (Constants.DOES_ARM_EXIST) {
+    //   robotContainer.getArmMove().schedule();
+    // }
   }
 
   /** This function is called periodically whilst in simulation. */
