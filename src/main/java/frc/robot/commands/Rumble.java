@@ -4,19 +4,19 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 
 import edu.wpi.first.wpilibj.Timer;
 
-import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 
-import edu.wpi.first.wpilibj.GenericHID;
 
 public class Rumble extends CommandBase {
   private Timer timer = new Timer();
 
-  private final XboxController joystick;
+  private final CommandXboxController joystick;
   private final double intensity;
   private final double duration;
 
-  public Rumble(XboxController joystick, double duration, double intensity) {
+  public Rumble(CommandXboxController joystick, double duration, double intensity) {
     this.joystick = joystick;
     this.intensity = intensity;
     this.duration = duration;
@@ -24,7 +24,7 @@ public class Rumble extends CommandBase {
 
   @Override
   public void initialize() {
-    joystick.setRumble(RumbleType.kBothRumble, intensity);
+    //joystick.setRumble(RumbleType.kBothRumble, intensity);
     System.out.println("Rumble Start");
 
     timer.reset();
@@ -38,7 +38,7 @@ public class Rumble extends CommandBase {
 
   @Override
   public void end(boolean interrupted) {
-    joystick.setRumble(RumbleType.kBothRumble, 0);
+    //joystick.setRumble(RumbleType.kBothRumble, 0);
     System.out.println("Rumble stop");
 
     timer.stop();

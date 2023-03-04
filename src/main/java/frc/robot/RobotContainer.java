@@ -14,12 +14,10 @@ import edu.wpi.first.wpilibj2.command.Command;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
-import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 
 import edu.wpi.first.wpilibj.Joystick;
 
-import edu.wpi.first.wpilibj.GenericHID;
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -34,7 +32,6 @@ public class RobotContainer {
 
   // CONTROLLERS AND BUTTONS
   private CommandXboxController m_driverController;
-  private XboxController rumblePlaceholder;
 
   private Joystick joystick;
   private Trigger button1;
@@ -102,8 +99,7 @@ public class RobotContainer {
 
       //driveJoystick = new DriveJoystick(driveTrain, m_driverController.getHID());
 
-      rumblePlaceholder = new XboxController(OperatorConstants.kDriverControllerPort);
-      rumble = new Rumble(rumblePlaceholder, 1.0, 0.9);
+      rumble = new Rumble(m_driverController, 1.0, 0.9);
 
 
       // lc = new LifeCam();
@@ -148,13 +144,13 @@ public class RobotContainer {
     return m_driverController;
   }
 
-  // public DriveJoystick getDriveJoystick() {
-  //   return driveJoystick;
-  // }
+  public DriveJoystick getDriveJoystick() {
+    return driveJoystick;
+  }
 
-  // public DriveTrain getDriveTrain() {
-  //   return driveTrain;
-  // }
+  public DriveTrain getDriveTrain() {
+      return driveTrain;
+  }
 
   public Joystick getArmController() {
     return joystick;
