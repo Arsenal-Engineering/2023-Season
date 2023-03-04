@@ -102,10 +102,10 @@ public class RobotContainer {
       rumble = new Rumble(m_driverController, 1.0, 0.9);
 
 
-      lc = new LifeCam();
-      lc.startVision();
+      //lc = new LifeCam();
+      //lc.startVision();
 
-      limeLight = new LimelightCam();
+      //limeLight = new LimelightCam();
       cubeAlign = new AutoAlign(driveTrain, limeLight, 0);
       leftConeAlign = new AutoAlign(driveTrain, limeLight, Constants.CONE_DEPOSIT_OFFSET);
       rightConeAlign = new AutoAlign(driveTrain, limeLight, -Constants.CONE_DEPOSIT_OFFSET);
