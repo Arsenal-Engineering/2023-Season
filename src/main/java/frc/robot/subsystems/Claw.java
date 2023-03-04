@@ -5,17 +5,17 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import com.revrobotics.CANSparkMaxLowLevel.MotorType;
-import frc.robot.TestSparkMax;
+
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
 public class Claw extends SubsystemBase {
-  private TestSparkMax claw;
+  private WPI_TalonFX claw;
   private final double howFastToDoDaGrabbyGrabAndReleasyRelease = 0.8;
   private final double stopExistingAndNoMoreBreathing = 0.0;
 
   // Creates a new OpenCloseClaw.
-  public Claw(int clawID, MotorType motor) {
-    claw = new TestSparkMax(clawID, motor, "Claw");
+  public Claw(int clawID) {
+    claw = new WPI_TalonFX(clawID);
   }
 
   @Override

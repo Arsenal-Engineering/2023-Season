@@ -88,7 +88,7 @@ public class RobotContainer {
       extendArm = new ExtendArm(armExtender);
       retractArm = new RetractArm(armExtender);
 
-      claw = new Claw(Constants.CLAW, MotorType.kBrushed);
+      claw = new Claw(Constants.CLAW);
       cOpen = new ClawOpen(claw);
       cClose = new ClawClose(claw);
     }
