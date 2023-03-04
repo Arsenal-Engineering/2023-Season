@@ -97,18 +97,18 @@ public class RobotContainer {
       m_driverController =  new CommandXboxController(OperatorConstants.kDriverControllerPort);
       driveTrain = new DriveTrain();
 
-      //driveJoystick = new DriveJoystick(driveTrain, m_driverController.getHID());
+      driveJoystick = new DriveJoystick(driveTrain, m_driverController.getHID());
 
       rumble = new Rumble(m_driverController, 1.0, 0.9);
 
 
-      // lc = new LifeCam();
-      // lc.startVision();
+      lc = new LifeCam();
+      lc.startVision();
 
-      // limeLight = new LimelightCam();
-      // cubeAlign = new AutoAlign(driveTrain, limeLight, 0);
-      // leftConeAlign = new AutoAlign(driveTrain, limeLight, Constants.CONE_DEPOSIT_OFFSET);
-      // rightConeAlign = new AutoAlign(driveTrain, limeLight, -Constants.CONE_DEPOSIT_OFFSET);
+      limeLight = new LimelightCam();
+      cubeAlign = new AutoAlign(driveTrain, limeLight, 0);
+      leftConeAlign = new AutoAlign(driveTrain, limeLight, Constants.CONE_DEPOSIT_OFFSET);
+      rightConeAlign = new AutoAlign(driveTrain, limeLight, -Constants.CONE_DEPOSIT_OFFSET);
     }
 
     configureBindings();
@@ -156,9 +156,9 @@ public class RobotContainer {
     return joystick;
   }
 
-  // public CommandXboxController getController() {
-  //   return m_driverController;
-  // }
+  public CommandXboxController getController() {
+    return m_driverController;
+  }
 
   public LimelightCam getLimelightCam() {
     return limeLight;
