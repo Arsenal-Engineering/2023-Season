@@ -14,9 +14,12 @@ import edu.wpi.first.wpilibj2.command.Command;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 
 import edu.wpi.first.wpilibj.Joystick;
+
+import edu.wpi.first.wpilibj.GenericHID;
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -30,8 +33,8 @@ import edu.wpi.first.wpilibj.Joystick;
 public class RobotContainer {
 
   // CONTROLLERS AND BUTTONS
-  private final CommandXboxController m_driverController = new CommandXboxController(
-      OperatorConstants.kDriverControllerPort);
+  private CommandXboxController m_driverController;
+  private XboxController rumblePlaceholder;
 
   private Joystick joystick;
   private Trigger button1;
@@ -44,6 +47,7 @@ public class RobotContainer {
   // DRIVE TRAIN
   private DriveTrain driveTrain;
   private DriveJoystick driveJoystick;
+  
 
   // ARM BASE
   private ArmBase armBase;
@@ -93,13 +97,17 @@ public class RobotContainer {
     }
 
     if (Constants.DOES_DRIVETRAIN_EXIST) {
+      m_driverController =  new CommandXboxController(OperatorConstants.kDriverControllerPort);
       driveTrain = new DriveTrain();
 
-      driveJoystick = new DriveJoystick(driveTrain, m_driverController.getHID());
-      rumble = new Rumble(m_driverController, 0.5, 1);
+      //driveJoystick = new DriveJoystick(driveTrain, m_driverController.getHID());
 
-      lc = new LifeCam();
-      lc.startVision();
+      rumblePlaceholder = new XboxController(OperatorConstants.kDriverControllerPort);
+      rumble = new Rumble(rumblePlaceholder, 1.0, 0.9);
+
+
+      // lc = new LifeCam();
+      // lc.startVision();
 
       // limeLight = new LimelightCam();
       // cubeAlign = new AutoAlign(driveTrain, limeLight, 0);
@@ -116,11 +124,11 @@ public class RobotContainer {
     // any of the buttons
 
     if (Constants.DOES_DRIVETRAIN_EXIST) {
-      m_driverController.b().onTrue(new DriveTurnTowardsDirection(driveTrain)).onFalse(driveJoystick);
-      m_driverController.a().onTrue(new AutoBalance(driveTrain)).onFalse(driveJoystick);
+      //m_driverController.b().onTrue(new DriveTurnTowardsDirection(driveTrain)).onFalse(driveJoystick);
+      //m_driverController.a().onTrue(new AutoBalance(driveTrain)).onFalse(driveJoystick);
 
-      m_driverController.start().onTrue(new SetDriveMode(driveTrain, true)).onFalse(driveJoystick);
-      m_driverController.back().onTrue(new SetDriveMode(driveTrain, false)).onFalse(driveJoystick);
+      //m_driverController.start().onTrue(new SetDriveMode(driveTrain, true)).onFalse(driveJoystick);
+      //m_driverController.back().onTrue(new SetDriveMode(driveTrain, false)).onFalse(driveJoystick);
 
       // m_driverController.povUp().onTrue(cubeAlign).onFalse(driveJoystick);
       // m_driverController.povLeft().onTrue(leftConeAlign).onFalse(driveJoystick);
@@ -140,21 +148,21 @@ public class RobotContainer {
     return m_driverController;
   }
 
-  public DriveJoystick getDriveJoystick() {
-    return driveJoystick;
-  }
+  // public DriveJoystick getDriveJoystick() {
+  //   return driveJoystick;
+  // }
 
-  public DriveTrain getDriveTrain() {
-    return driveTrain;
-  }
+  // public DriveTrain getDriveTrain() {
+  //   return driveTrain;
+  // }
 
   public Joystick getArmController() {
     return joystick;
   }
 
-  public CommandXboxController getController() {
-    return m_driverController;
-  }
+  // public CommandXboxController getController() {
+  //   return m_driverController;
+  // }
 
   public LimelightCam getLimelightCam() {
     return limeLight;

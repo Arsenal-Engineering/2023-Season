@@ -9,6 +9,8 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj.Timer;
 
+
+
 /**
  * The VM is configured to automatically run this class, and to call the
  * functions corresponding to
@@ -90,8 +92,8 @@ public class Robot extends TimedRobot {
     }
 
     if (Constants.DOES_DRIVETRAIN_EXIST) {
-      robotContainer.getDriveTrain().setBrakeMode(false);
-      robotContainer.getDriveJoystick().schedule();
+      // robotContainer.getDriveTrain().setBrakeMode(false);
+      // robotContainer.getDriveJoystick().schedule();
       robotContainer.getRumble().schedule();
     }
 
