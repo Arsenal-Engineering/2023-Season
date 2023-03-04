@@ -24,8 +24,7 @@ public class Rumble extends CommandBase {
 
   @Override
   public void initialize() {
-    joystick.setRumble(RumbleType.kLeftRumble, intensity);
-    joystick.setRumble(RumbleType.kRightRumble, intensity);
+    joystick.setRumble(RumbleType.kBothRumble, intensity);
     System.out.println("Rumble Start");
 
     timer.reset();
@@ -39,8 +38,7 @@ public class Rumble extends CommandBase {
 
   @Override
   public void end(boolean interrupted) {
-    joystick.setRumble(RumbleType.kLeftRumble, 0);
-    joystick.setRumble(RumbleType.kRightRumble, 0);
+    joystick.setRumble(RumbleType.kBothRumble, 0);
     System.out.println("Rumble stop");
 
     timer.stop();
