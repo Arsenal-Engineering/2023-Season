@@ -5,17 +5,18 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.TestTalonFX;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
 public class Claw extends SubsystemBase {
-  private WPI_TalonFX claw;
+  private TestTalonFX claw;
   private final double howFastToDoDaGrabbyGrabAndReleasyRelease = 0.8;
   private final double stopExistingAndNoMoreBreathing = 0.0;
 
   // Creates a new OpenCloseClaw.
   public Claw(int clawID) {
-    claw = new WPI_TalonFX(clawID);
+    claw = new TestTalonFX(clawID, "Claw");
   }
 
   @Override
@@ -25,6 +26,7 @@ public class Claw extends SubsystemBase {
 
   public void clawClose() {
     claw.set(-howFastToDoDaGrabbyGrabAndReleasyRelease);
+    System.out.println(howFastToDoDaGrabbyGrabAndReleasyRelease);
   }
 
   public void clawOpen() {
