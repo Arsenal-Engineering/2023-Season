@@ -59,6 +59,7 @@ public class RobotContainer {
   private Claw claw;
   private ClawOpen cOpen;
   private ClawClose cClose;
+  private PulseClaw clawPulse;
 
   // VISION
   private LifeCam lc;
@@ -91,6 +92,7 @@ public class RobotContainer {
       claw = new Claw(Constants.CLAW);
       cOpen = new ClawOpen(claw);
       cClose = new ClawClose(claw);
+      clawPulse = new PulseClaw(claw);
     }
 
     if (Constants.DOES_DRIVETRAIN_EXIST) {
@@ -132,7 +134,7 @@ public class RobotContainer {
     }
 
     if (Constants.DOES_ARM_EXIST) {
-      button1.whileTrue(cClose);
+      button1.whileTrue(clawPulse);
       button2.whileTrue(cOpen);
       button9.whileTrue(extendArm);
       button11.whileTrue(retractArm);

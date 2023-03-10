@@ -10,8 +10,8 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
 public class Claw extends SubsystemBase {
   private WPI_TalonFX claw;
-  private final double howFastToDoDaGrabbyGrabAndReleasyRelease = 0.8;
-  private final double stopExistingAndNoMoreBreathing = 0.0;
+  private final double speed = 0.8;
+  private final double brake = 0.0;
 
   // Creates a new OpenCloseClaw.
   public Claw(int clawID) {
@@ -24,14 +24,14 @@ public class Claw extends SubsystemBase {
   }
 
   public void clawClose() {
-    claw.set(-howFastToDoDaGrabbyGrabAndReleasyRelease);
+    claw.set(-0.2);
   }
 
   public void clawOpen() {
-    claw.set(howFastToDoDaGrabbyGrabAndReleasyRelease);
+    claw.set(0.1);
   }
 
   public void clawStop() {
-    claw.set(stopExistingAndNoMoreBreathing);
+    claw.set(brake);
   }
 }

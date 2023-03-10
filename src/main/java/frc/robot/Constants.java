@@ -19,8 +19,8 @@ package frc.robot;
 public final class Constants {
 
   // Depends on whether the physical robot has the arm attached to it
-  public static final boolean DOES_ARM_EXIST = false;
-  public static final boolean DOES_DRIVETRAIN_EXIST = true;
+  public static final boolean DOES_ARM_EXIST = true;
+  public static final boolean DOES_DRIVETRAIN_EXIST = false;
 
   // TalonSRX/Falcon motor ID's
   public static final int RIGHT_FRONT_DRIVE = 1;
@@ -35,7 +35,7 @@ public final class Constants {
   public static final int BACKWARD_LIMIT_SWITCH = 3; // not using currently
 
   // Ports for arm
-  public static final int CLAW = -10;
+  public static final int CLAW = 12;
   public static final int CLAW_WRIST = -11;
   public static final int WRIST_TWIST = -12;
   public static final int ARM_EXTENDER_MOTOR = -13;
