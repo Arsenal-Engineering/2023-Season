@@ -107,11 +107,11 @@ public class RobotContainer {
       //lc = new LifeCam();
       //lc.startVision();
 
-      //limeLight = new LimelightCam();
+      limeLight = new LimelightCam();
       cubeAlign = new AutoAlign(driveTrain, limeLight, 0);
       leftConeAlign = new AutoAlign(driveTrain, limeLight, Constants.CONE_DEPOSIT_OFFSET);
       rightConeAlign = new AutoAlign(driveTrain, limeLight, -Constants.CONE_DEPOSIT_OFFSET);
-    }
+    } 
 
     configureBindings();
   }

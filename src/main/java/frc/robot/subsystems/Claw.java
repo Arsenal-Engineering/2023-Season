@@ -5,12 +5,13 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.TestTalonFX;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
 public class Claw extends SubsystemBase {
   private WPI_TalonFX claw;
-  private final double speed = 0.8;
+  private final double speed = 0.2;
   private final double brake = 0.0;
 
   // Creates a new OpenCloseClaw.
