@@ -2,36 +2,33 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands;
+package frc.robot.autonomous_commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.*;
-import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
-import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.Timer;
+import frc.robot.subsystems.ArmBase;
 
-public class TwistWrist extends CommandBase {
-  private TwistyWrist twist;
-  private Joystick controller;
-  /** Creates a new TwistWristL. */
-  public TwistWrist(TwistyWrist twist, Joystick controller) {
+public class LowerArm extends CommandBase {
+  private Timer timer;
+  private ArmBase arm;
+  /** Creates a new LowerArm. */
+  public LowerArm(ArmBase arm) {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(twist);
-    this.twist = twist;
-    this.controller = controller;
+    timer = new Timer();
+    this.arm = arm;
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    timer.reset();
+    timer.start();
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  //change the button triggers
   public void execute() {
-    if(controller.getTwist() > 0.2 || controller.getTwist() < -0.2){
-      twist.twist(controller.getTwist());
-    }
+    arm.armWhenTheAutonomousIsSusAndGoDownToVent();
   }
 
   // Called once the command ends or is interrupted.
@@ -41,6 +38,6 @@ public class TwistWrist extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return timer.get() > 2.0;
   }
 }

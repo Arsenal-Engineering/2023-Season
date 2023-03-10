@@ -4,37 +4,47 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.ArmBase;
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 public class ArmMove extends CommandBase {
 
   private ArmBase armMove;
   private Joystick armcontrol;
-  /** Creates a new ArmUp. */
+
+  // Creates a new ArmUp.
   public ArmMove(ArmBase armMove, Joystick armcontroller) {
     this.armMove = armMove;
     armcontrol = armcontroller;
-    // Use addRequirements() here to declare subsystem dependencies.
+
     addRequirements(armMove);
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    armMove.armMove(armcontrol.getX()/2);
+    double armmovement = armcontrol.getRawAxis(1);
+
+    if (armmovement > .2) {
+      armMove.armUp(armmovement);
+    } else if (armmovement < -.2) {
+      armMove.armDown(armmovement);
+    } else {
+      armMove.armStop();
+    }
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    armMove.armStop();
+  }
 
   // Returns true when the command should end.
   @Override

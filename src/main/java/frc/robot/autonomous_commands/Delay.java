@@ -2,30 +2,35 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands;
-
-import frc.robot.subsystems.Claw;
+package frc.robot.autonomous_commands;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-
-public class ClawStop extends CommandBase {
-  /** Creates a new ClawNoOpen. */
-  private Claw clawStop;
-  public ClawStop(Claw clawStop) {
-    this.clawStop = clawStop;
+import frc.robot.subsystems.DriveTrain;
+public class Delay extends CommandBase {
+    private Timer timer;
+    private DriveTrain driveTrain;
+    private double timeLimit;
+  /** Creates a new Move. */
+  public Delay(DriveTrain driveTrain, double timeLimit) {
     // Use addRequirements() here to declare subsystem dependencies.
-
-    addRequirements(clawStop);
-    // Use addRequirements() here to declare subsystem dependencies.
+    timer = new Timer();
+    addRequirements(driveTrain);
+    this.driveTrain = driveTrain;
+    this.timeLimit = timeLimit;
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    timer.reset();
+    timer.start();
+    driveTrain.setBrakeMode(false);
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    clawStop.clawGrip(0);
+    driveTrain.driveMecanum(0, 0, 0);
   }
 
   // Called once the command ends or is interrupted.
@@ -35,6 +40,6 @@ public class ClawStop extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return timer.get() > timeLimit;
   }
 }

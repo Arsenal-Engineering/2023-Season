@@ -5,17 +5,18 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants;
-//import com.ctre.phoenix.motorcontrol.can.*;
-import com.revrobotics.CANSparkMax;
-//import com.revrobotics.CANSparkMax.IdleMode;
-import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+import frc.robot.TestTalonFX;
+
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
 public class Claw extends SubsystemBase {
-  private CANSparkMax claw;
-  /** Creates a new OpenCloseClaw. */
-  public Claw(int clawID, MotorType motor) {
-    claw = new CANSparkMax(clawID, motor);
+  private WPI_TalonFX claw;
+  private final double speed = 0.2;
+  private final double brake = 0.0;
+
+  // Creates a new OpenCloseClaw.
+  public Claw(int clawID) {
+    claw = new WPI_TalonFX(clawID);
   }
 
   @Override
@@ -23,7 +24,15 @@ public class Claw extends SubsystemBase {
     // This method will be called once per scheduler run
   }
 
-  public void clawGrip(double clawSpeed){
-    claw.set(clawSpeed);
+  public void clawClose() {
+    claw.set(-0.2);
+  }
+
+  public void clawOpen() {
+    claw.set(0.1);
+  }
+
+  public void clawStop() {
+    claw.set(brake);
   }
 }

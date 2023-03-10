@@ -6,33 +6,33 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.*;
-import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 
 public class RetractArm extends CommandBase {
   private ArmExtension armRetractor;
-  private CommandXboxController controller;
+
   /** Creates a new RetractArm. */
-  public RetractArm(ArmExtension armRetractor, CommandXboxController controller) {
+  public RetractArm(ArmExtension armRetractor) {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(armRetractor);
     this.armRetractor = armRetractor;
-    this.controller = controller;
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (controller.getLeftTriggerAxis() > .2)
-      armRetractor.setSpeed(-controller.getLeftTriggerAxis() * 0.25);
+    armRetractor.retract();
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    armRetractor.stopExtendingAndRetractingToRethinkYourLifeChoices();
+  }
 
   // Returns true when the command should end.
   @Override

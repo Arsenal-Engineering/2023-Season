@@ -4,30 +4,44 @@
 
 package frc.robot.commands;
 
-import frc.robot.subsystems.ClawWrist;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.subsystems.Claw;
 
-public class WristDown extends CommandBase {
-  private ClawWrist wristDown;
-  /** Creates a new ClawDie. */
-  public WristDown(ClawWrist wristDown) {
-    this.wristDown = wristDown;
+public class PulseClaw extends CommandBase {
+  Claw claw;
+  Timer timer;
+  /** Creates a new PulseClaw. */
+  public PulseClaw(Claw claw) {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(wristDown);
+    addRequirements(claw);
+    this.claw = claw;
+    timer = new Timer();
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    timer.reset();
+    timer.start();
+  }
 
+  // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    wristDown.setWristSpeed(-.2);
+    if((int)(timer.get() * 16) % 2 == 0){
+      claw.clawClose();
+    }
+    else{
+      claw.clawStop();
+    }
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    claw.clawStop();
+  }
 
   // Returns true when the command should end.
   @Override
