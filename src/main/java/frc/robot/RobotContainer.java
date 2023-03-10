@@ -5,7 +5,6 @@
 package frc.robot;
 
 import frc.robot.Constants.OperatorConstants;
-import frc.robot.commands.Autos;
 import frc.robot.commands.*;
 import frc.robot.subsystems.*;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -72,7 +71,7 @@ public class RobotContainer {
   private AutoAlign leftConeAlign;
   private AutoAlign rightConeAlign;
  
-  private final DriveTurnTowardsDirection driveTurnTowardsDirection;
+  private DriveTurnTowardsDirection driveTurnTowardsDirection;
 
   private AutoBalance autoBalance;
 
@@ -134,15 +133,15 @@ public class RobotContainer {
     // any of the buttons
 
     if (Constants.DOES_DRIVETRAIN_EXIST) {
-      //m_driverController.b().onTrue(new DriveTurnTowardsDirection(driveTrain)).onFalse(driveJoystick);
-      //m_driverController.a().onTrue(new AutoBalance(driveTrain)).onFalse(driveJoystick);
+      m_driverController.b().onTrue(new DriveTurnTowardsDirection(driveTrain)).onFalse(driveJoystick);
+      m_driverController.a().onTrue(new AutoBalance(driveTrain)).onFalse(driveJoystick);
 
-      //m_driverController.start().onTrue(new SetDriveMode(driveTrain, true)).onFalse(driveJoystick);
-      //m_driverController.back().onTrue(new SetDriveMode(driveTrain, false)).onFalse(driveJoystick);
+      m_driverController.start().onTrue(new SetDriveMode(driveTrain, true)).onFalse(driveJoystick);
+      m_driverController.back().onTrue(new SetDriveMode(driveTrain, false)).onFalse(driveJoystick);
 
-      // m_driverController.povUp().onTrue(cubeAlign).onFalse(driveJoystick);
-      // m_driverController.povLeft().onTrue(leftConeAlign).onFalse(driveJoystick);
-      // m_driverController.povRight().onTrue(rightConeAlign).onFalse(driveJoystick);
+      m_driverController.povUp().onTrue(cubeAlign).onFalse(driveJoystick);
+      m_driverController.povLeft().onTrue(leftConeAlign).onFalse(driveJoystick);
+      m_driverController.povRight().onTrue(rightConeAlign).onFalse(driveJoystick);
     }
 
     if (Constants.DOES_ARM_EXIST) {

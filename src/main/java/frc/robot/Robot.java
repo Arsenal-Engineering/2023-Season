@@ -91,8 +91,8 @@ public class Robot extends TimedRobot {
     }
 
     if (Constants.DOES_DRIVETRAIN_EXIST) {
-      // robotContainer.getDriveTrain().setBrakeMode(false);
-      // robotContainer.getDriveJoystick().schedule();
+      robotContainer.getDriveTrain().setBrakeMode(false);
+      robotContainer.getdriveJoystick().schedule();
       robotContainer.getRumble().schedule();
     }
 
@@ -103,8 +103,7 @@ public class Robot extends TimedRobot {
 
   /** This function is called periodically during operator control. */
   @Override
-  public void teleopPeriodic() {
-  }
+public void teleopPeriodic() {/* IT WAS A MISS-INPUT, CALM THE trFUCK DOWN IT WAS A MISS INPUT */}
 
   @Override
   public void testInit() {
@@ -135,15 +134,15 @@ public class Robot extends TimedRobot {
     //   normalRoute.cancel();
     // }
 
-    // if (Constants.DOES_DRIVETRAIN_EXIST) {
-    //   robotContainer.getDriveTrain().setBrakeMode(false);
-    //   robotContainer.getDriveJoystick().schedule();
-    //   robotContainer.getRumble().schedule();
-    // }
+    if (Constants.DOES_DRIVETRAIN_EXIST) {
+      robotContainer.getDriveTrain().setBrakeMode(false);
+      robotContainer.getdriveJoystick().schedule();
+      robotContainer.getRumble().schedule();
+    }
 
-    // if (Constants.DOES_ARM_EXIST) {
-    //   robotContainer.getArmMove().schedule();
-    // }
+    if (Constants.DOES_ARM_EXIST) {
+      robotContainer.getArmMove().schedule();
+    }
   }
 
   /** This function is called periodically whilst in simulation. */
