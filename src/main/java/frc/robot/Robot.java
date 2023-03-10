@@ -9,8 +9,6 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj.Timer;
 
-
-
 /**
  * The VM is configured to automatically run this class, and to call the
  * functions corresponding to
@@ -19,12 +17,13 @@ import edu.wpi.first.wpilibj.Timer;
  * the package after creating this project, you must also update the
  * build.gradle file in the
  * project.
- */
+*/ 
 public class Robot extends TimedRobot {
   private Command initialMoveAutonomous;
   private Command chargeStationRoute;
   private Command normalRoute;
   private Timer timer;
+
   private RobotContainer robotContainer;
 
   /**
@@ -105,7 +104,6 @@ public class Robot extends TimedRobot {
   /** This function is called periodically during operator control. */
   @Override
   public void teleopPeriodic() {
-
   }
 
   @Override

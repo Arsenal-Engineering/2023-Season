@@ -16,10 +16,12 @@ public class AutoBalance extends CommandBase {
 
   /** Creates a new AutoBalance. */
   public AutoBalance(DriveTrain driveTrain) {
+    //System.out.println("testprint");
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(driveTrain);
     this.driveTrain = driveTrain;
     navX = driveTrain.getNavX();
+
   }
 
   // Called when the command is initially scheduled.

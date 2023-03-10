@@ -5,16 +5,20 @@
 package frc.robot;
 
 import frc.robot.Constants.OperatorConstants;
-import frc.robot.autonomous_commands.AutoBalance;
-import frc.robot.autonomous_commands.Autos;
+import frc.robot.commands.Autos;
 import frc.robot.commands.*;
 import frc.robot.subsystems.*;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj2.command.button.Trigger;
+
+import frc.robot.autonomous_commands.AutoBalance;
+import frc.robot.autonomous_commands.Autos;
+
 
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
-import edu.wpi.first.wpilibj2.command.button.Trigger;
 
 import edu.wpi.first.wpilibj.Joystick;
 
@@ -29,7 +33,6 @@ import edu.wpi.first.wpilibj.Joystick;
  * subsystems, commands, and trigger mappings) should be declared here.
  */
 public class RobotContainer {
-
   // CONTROLLERS AND BUTTONS
   private CommandXboxController m_driverController;
 
@@ -68,6 +71,12 @@ public class RobotContainer {
   private AutoAlign cubeAlign;
   private AutoAlign leftConeAlign;
   private AutoAlign rightConeAlign;
+ 
+  private final DriveTurnTowardsDirection driveTurnTowardsDirection;
+
+  private AutoBalance autoBalance;
+
+ 
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -100,6 +109,9 @@ public class RobotContainer {
       driveTrain = new DriveTrain();
 
       driveJoystick = new DriveJoystick(driveTrain, m_driverController.getHID());
+      driveTurnTowardsDirection = new DriveTurnTowardsDirection(driveTrain);
+      autoBalance = new AutoBalance(driveTrain);
+
 
       rumble = new Rumble(m_driverController, 1.0, 0.9);
 
@@ -146,10 +158,6 @@ public class RobotContainer {
     return m_driverController;
   }
 
-  public DriveJoystick getDriveJoystick() {
-    return driveJoystick;
-  }
-
   public DriveTrain getDriveTrain() {
       return driveTrain;
   }
@@ -157,9 +165,17 @@ public class RobotContainer {
   public Joystick getArmController() {
     return joystick;
   }
+  
+  public DriveJoystick getdriveJoystick() {
+    return driveJoystick;
+  }
 
-  public CommandXboxController getController() {
-    return m_driverController;
+  public DriveTurnTowardsDirection getDriveTurnTowardsDirection() {
+    return driveTurnTowardsDirection;
+  }
+  
+  public AutoBalance getaAutoBalance() {
+    return autoBalance;
   }
 
   public LimelightCam getLimelightCam() {
