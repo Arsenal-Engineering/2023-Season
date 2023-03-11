@@ -165,7 +165,7 @@ public class RobotContainer {
     return joystick;
   }
   
-  public DriveJoystick getdriveJoystick() {
+  public DriveJoystick getDriveJoystick() {
     return driveJoystick;
   }
 

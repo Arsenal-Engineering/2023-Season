@@ -92,7 +92,7 @@ public class Robot extends TimedRobot {
 
     if (Constants.DOES_DRIVETRAIN_EXIST) {
       robotContainer.getDriveTrain().setBrakeMode(false);
-      robotContainer.getdriveJoystick().schedule();
+      robotContainer.getDriveJoystick().schedule();
       robotContainer.getRumble().schedule();
     }
 
@@ -136,7 +136,7 @@ public void teleopPeriodic() {/* IT WAS A MISS-INPUT, CALM THE trFUCK DOWN IT WA
 
     if (Constants.DOES_DRIVETRAIN_EXIST) {
       robotContainer.getDriveTrain().setBrakeMode(false);
-      robotContainer.getdriveJoystick().schedule();
+      robotContainer.getDriveJoystick().schedule();
       robotContainer.getRumble().schedule();
     }
 
