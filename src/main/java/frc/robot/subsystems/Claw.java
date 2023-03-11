@@ -30,7 +30,7 @@ public class Claw extends SubsystemBase {
   }
 
   public void clawOpen() {
-    claw.set(0.1);
+    claw.set(speed / 2);
   }
 
   //We want to avoid opening the claw past where it's supposed to and causing the motor to scream

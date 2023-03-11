@@ -9,8 +9,6 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj.Timer;
 
-
-
 /**
  * The VM is configured to automatically run this class, and to call the
  * functions corresponding to
@@ -19,12 +17,13 @@ import edu.wpi.first.wpilibj.Timer;
  * the package after creating this project, you must also update the
  * build.gradle file in the
  * project.
- */
+*/ 
 public class Robot extends TimedRobot {
   private Command initialMoveAutonomous;
   private Command chargeStationRoute;
   private Command normalRoute;
   private Timer timer;
+
   private RobotContainer robotContainer;
 
   /**
@@ -93,7 +92,7 @@ public class Robot extends TimedRobot {
 
     if (Constants.DOES_DRIVETRAIN_EXIST) {
       robotContainer.getDriveTrain().setBrakeMode(false);
-      robotContainer.getDriveJoystick().schedule();
+      robotContainer.getdriveJoystick().schedule();
       robotContainer.getRumble().schedule();
     }
 
@@ -104,9 +103,7 @@ public class Robot extends TimedRobot {
 
   /** This function is called periodically during operator control. */
   @Override
-  public void teleopPeriodic() {
-
-  }
+public void teleopPeriodic() {/* IT WAS A MISS-INPUT, CALM THE trFUCK DOWN IT WAS A MISS INPUT */}
 
   @Override
   public void testInit() {
@@ -137,15 +134,15 @@ public class Robot extends TimedRobot {
     //   normalRoute.cancel();
     // }
 
-    // if (Constants.DOES_DRIVETRAIN_EXIST) {
-    //   robotContainer.getDriveTrain().setBrakeMode(false);
-    //   robotContainer.getDriveJoystick().schedule();
-    //   robotContainer.getRumble().schedule();
-    // }
+    if (Constants.DOES_DRIVETRAIN_EXIST) {
+      robotContainer.getDriveTrain().setBrakeMode(false);
+      robotContainer.getdriveJoystick().schedule();
+      robotContainer.getRumble().schedule();
+    }
 
-    // if (Constants.DOES_ARM_EXIST) {
-    //   robotContainer.getArmMove().schedule();
-    // }
+    if (Constants.DOES_ARM_EXIST) {
+      robotContainer.getArmMove().schedule();
+    }
   }
 
   /** This function is called periodically whilst in simulation. */
