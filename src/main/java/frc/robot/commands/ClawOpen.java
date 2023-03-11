@@ -6,13 +6,16 @@ package frc.robot.commands;
 
 import frc.robot.subsystems.Claw;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj.Timer;
 
 public class ClawOpen extends CommandBase {
   private Claw claw;
+  private Timer timer;
 
   /** Creates a new ClawOpen. */
   public ClawOpen(Claw clawOpen) {
     claw = clawOpen;
+    timer = new Timer();
     // Use addRequirements() her\e to declare subsystem dependencies.
 
     addRequirements(claw);
@@ -22,12 +25,17 @@ public class ClawOpen extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    timer.reset();
+    timer.start();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    claw.clawOpen();
+    if (timer.get() < 1.3)
+      claw.clawOpen();
+    else
+      claw.holdOpenPosition();
   }
 
   // Called once the command ends or is interrupted.

@@ -12,6 +12,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 public class Claw extends SubsystemBase {
   private WPI_TalonFX claw;
   private final double speed = 0.2;
+  private final double holdOpenPosition = 0.06;
   private final double brake = 0.0;
 
   // Creates a new OpenCloseClaw.
@@ -25,11 +26,17 @@ public class Claw extends SubsystemBase {
   }
 
   public void clawClose() {
-    claw.set(-0.2);
+    claw.set(-speed);
   }
 
   public void clawOpen() {
     claw.set(0.1);
+  }
+
+  //We want to avoid opening the claw past where it's supposed to and causing the motor to scream
+  //So once, the claw has opened, we must set it at a slight speed so it doesn't close while driver is picking up object
+  public void holdOpenPosition() {
+    claw.set(holdOpenPosition);
   }
 
   public void clawStop() {
