@@ -6,26 +6,34 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.*;
+import edu.wpi.first.wpilibj.Timer;
 
 public class ExtendArm extends CommandBase {
   private ArmExtension armExtender;
+  private Timer timer;
 
   /** Creates a new ExtendArm. */
   public ExtendArm(ArmExtension armExtender) {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(armExtender);
     this.armExtender = armExtender;
+    this.timer = new Timer();
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    timer.reset();
+    timer.start();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    armExtender.extend();
+    if (timer.get() < 0.5)
+      armExtender.extendSlow();
+    else
+      armExtender.extend();
   }
 
   // Called once the command ends or is interrupted.

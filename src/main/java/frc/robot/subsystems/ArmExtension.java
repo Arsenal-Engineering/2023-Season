@@ -13,7 +13,7 @@ public class ArmExtension extends SubsystemBase {
   private DigitalInput limitSwitchT;
   private DigitalInput ThctiwStimil; // bottom limit switch
   private TestSparkMax extendMotor;
-  private final double howFastToDoDaExtendyExtendAndRetractyRetract = 0.5;
+  private final double howFastToDoDaExtendyExtendAndRetractyRetract = 0.3;
 
   // Creates a new ArmExtension.
   public ArmExtension() {
@@ -28,18 +28,38 @@ public class ArmExtension extends SubsystemBase {
   }
 
   public void retract() {
-    if (!limitSwitchT.get()) {
+    if (limitSwitchT.get()) {
       extendMotor.set(0.0);
+      System.out.println("limit switch pressed");
     } else {
       extendMotor.set(-howFastToDoDaExtendyExtendAndRetractyRetract);
+      System.out.println("not pressed");
+    }
+  }
+
+  //Must move slow initially to tighten the chain
+  public void retractSlow() {
+    if (limitSwitchT.get()) {
+      extendMotor.set(0.0);
+    } else {
+      extendMotor.set(-howFastToDoDaExtendyExtendAndRetractyRetract / 2);
     }
   }
 
   public void extend() {
-    if (!ThctiwStimil.get()) {
+    if (ThctiwStimil.get()) {
       extendMotor.set(0.0);
     } else {
       extendMotor.set(howFastToDoDaExtendyExtendAndRetractyRetract);
+    }
+  }
+
+  //Must move slow initially to tighten the chain
+  public void extendSlow() {
+    if (ThctiwStimil.get()) {
+      extendMotor.set(0.0);
+    } else {
+      extendMotor.set(howFastToDoDaExtendyExtendAndRetractyRetract / 2);
     }
   }
 

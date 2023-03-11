@@ -35,9 +35,9 @@ public final class Constants {
   public static final int BACKWARD_LIMIT_SWITCH = 3; // not using currently
 
   // Ports for arm
-  public static final int CLAW = -10;
-  public static final int ARM_EXTENDER_MOTOR = -13;
-  public static final int ARM_BASE = -14;
+  public static final int ARM_BASE = 10;
+  public static final int CLAW = 11;
+  public static final int ARM_EXTENDER_MOTOR = 13;
 
   // Controller ports
   public static final int ARM_CONTROLLER_PORT = 1;

@@ -6,26 +6,34 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.*;
+import edu.wpi.first.wpilibj.Timer;
 
 public class RetractArm extends CommandBase {
   private ArmExtension armRetractor;
+  private Timer timer;
 
   /** Creates a new RetractArm. */
   public RetractArm(ArmExtension armRetractor) {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(armRetractor);
     this.armRetractor = armRetractor;
+    this.timer = new Timer();
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    timer.reset();
+    timer.start();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    armRetractor.retract();
+    if (timer.get() < 0.2)
+      armRetractor.retractSlow();
+    else
+      armRetractor.retract();
   }
 
   // Called once the command ends or is interrupted.
