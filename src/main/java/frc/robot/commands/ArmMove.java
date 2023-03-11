@@ -8,12 +8,13 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.ArmBase;
 import edu.wpi.first.wpilibj.Joystick;
 
+
 public class ArmMove extends CommandBase {
 
   private ArmBase armMove;
   private Joystick armcontrol;
 
-  // Creates a new ArmUp.
+  
   public ArmMove(ArmBase armMove, Joystick armcontroller) {
     this.armMove = armMove;
     armcontrol = armcontroller;

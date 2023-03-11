@@ -9,10 +9,11 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.TestSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class ArmBase extends SubsystemBase {
-  private final double upReducer = 0.5;
-  private final double downReducer = 0.1;
+  private final double upReducer = 0.6;
+  private final double downReducer = 0.4;
   private TestSparkMax arm_base;
   private DigitalInput limitSwitchBottom;
   private DigitalInput limitSwitchTop;
@@ -35,6 +36,7 @@ public class ArmBase extends SubsystemBase {
     } else {
       arm_base.set(happyStickSpeed * upReducer);
     }
+    SmartDashboard.putNumber("Arm Position: ", arm_base.getPosition());
   }
 
   public void armDown(double happyStickSpeed) {
@@ -43,6 +45,7 @@ public class ArmBase extends SubsystemBase {
     } else {
       arm_base.set(happyStickSpeed * downReducer);
     }
+    SmartDashboard.putNumber("Arm Position: ", arm_base.getPosition());
   }
 
   public void armStop() {
