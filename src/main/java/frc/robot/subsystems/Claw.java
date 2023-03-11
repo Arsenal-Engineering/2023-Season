@@ -25,11 +25,11 @@ public class Claw extends SubsystemBase {
   }
 
   public void clawClose() {
-    claw.set(-0.2);
+    claw.set(-speed);
   }
 
   public void clawOpen() {
-    claw.set(0.1);
+    claw.set(speed / 2);
   }
 
   public void clawStop() {
