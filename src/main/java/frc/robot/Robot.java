@@ -92,8 +92,8 @@ public class Robot extends TimedRobot {
     }
 
     if (Constants.DOES_DRIVETRAIN_EXIST) {
-      // robotContainer.getDriveTrain().setBrakeMode(false);
-      // robotContainer.getDriveJoystick().schedule();
+      robotContainer.getDriveTrain().setBrakeMode(false);
+      robotContainer.getDriveJoystick().schedule();
       robotContainer.getRumble().schedule();
     }
 
