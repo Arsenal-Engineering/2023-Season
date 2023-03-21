@@ -4,19 +4,20 @@
 
 package frc.robot.autonomous_commands;
 
-import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj.Timer;
-import frc.robot.subsystems.ArmBase;
+import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.subsystems.ArmExtension;
 
-public class LowerArm extends CommandBase {
+public class AutoRetractArm extends CommandBase {
+  private ArmExtension armExtension;
   private Timer timer;
-  private ArmBase arm;
   private double timeLimit;
-  /** Creates a new LowerArm. */
-  public LowerArm(ArmBase arm, double timeLimit) {
+  /** Creates a new AutoRetractArm. */
+  public AutoRetractArm(ArmExtension armExtension, double timeLimit) {
     // Use addRequirements() here to declare subsystem dependencies.
+    addRequirements(armExtension);
+    this.armExtension = armExtension;
     timer = new Timer();
-    this.arm = arm;
     this.timeLimit = timeLimit;
   }
 
@@ -30,18 +31,21 @@ public class LowerArm extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    arm.autonomousArmDown();
+    if (timer.get() < 0.5)
+      armExtension.retractSlow();
+    else
+      armExtension.retract();
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    arm.armStop();
+    armExtension.stopExtension();
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return timer.get() > timeLimit;
+    return timer.get() > timeLimit || armExtension.getTopLimSwitch();
   }
 }

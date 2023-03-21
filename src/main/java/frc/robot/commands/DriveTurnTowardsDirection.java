@@ -34,9 +34,9 @@ public class DriveTurnTowardsDirection extends CommandBase {
     // Align Yaw to 180
     if (driveTrain.getBrakeMode()) {
       if (navX.getYaw() < 0) {
-        driveTrain.driveTest(0, 0, Math.sin((navX.getYaw() + 180) * (Math.PI / 180.0)) * -1);
+        driveTrain.driveTest(0, 0, Math.sin((navX.getYaw() /*+ 180*/) * (Math.PI / 180.0)) * -1);
       } else {
-        driveTrain.driveTest(0, 0, Math.sin((navX.getYaw() - 180) * (Math.PI / 180.0)) * -1);
+        driveTrain.driveTest(0, 0, Math.sin((navX.getYaw() /*- 180*/) * (Math.PI / 180.0)) * -1);
       }
     }
   }

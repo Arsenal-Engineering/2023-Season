@@ -11,12 +11,12 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.Constants;
 
-public class AutoBalance extends CommandBase {
+public class AutonomousBalance extends CommandBase {
   private DriveTrain driveTrain;
   private AHRS navX;
   private Timer timer = new Timer();
   /** Creates a new AutoBalance. */
-  public AutoBalance(DriveTrain driveTrain){
+  public AutonomousBalance(DriveTrain driveTrain){
     addRequirements(driveTrain);
     this.driveTrain = driveTrain;
     navX = driveTrain.getNavX();
@@ -28,6 +28,7 @@ public class AutoBalance extends CommandBase {
   @Override
   public void initialize() {
     driveTrain.setBrakeMode(true);
+    driveTrain.setDriveMode(true);
     timer.reset();
     timer.start();
   }
@@ -35,13 +36,20 @@ public class AutoBalance extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (navX.getPitch() < -Constants.AUTO_ANGLE_TARGET/2){
-      driveTrain.driveMecanumField(Math.sin(-navX.getPitch() * 0.9 * (Math.PI / 180.0) + 0.1) * (2 / (2 + (timer.get() / 3))), 0, 0);
-    } else if (navX.getPitch() > Constants.AUTO_ANGLE_TARGET/2) { 
-      driveTrain.driveMecanumField(Math.sin(-navX.getPitch() - Constants.NAVX_PITCH_OFFSET * 0.9 * (Math.PI / 180.0) - 0.1) * (2 / (2 + (timer.get() / 3))), 0, 0);
-    }//Stop when Balanced
+    double switchDir = 1;
+
+    if (navX.getYaw() > -90 && navX.getYaw() < 90)
+      switchDir = -1;
+
+    if (navX.getPitch() - Constants.NAVX_PITCH_OFFSET > 4) {
+      driveTrain.driveTest(
+          Math.sin((navX.getPitch() - Constants.NAVX_PITCH_OFFSET) * 0.9 * (Math.PI / 180.0) + 0.1) * -(2 / (2 + (timer.get() / 2))) * switchDir, 0, 0);
+    } else if (navX.getPitch() - Constants.NAVX_PITCH_OFFSET < -4) {
+      driveTrain.driveTest(
+          Math.sin((navX.getPitch() - Constants.NAVX_PITCH_OFFSET) * 0.9 * (Math.PI / 180.0) - 0.1) * -(2 / (2 + (timer.get() / 2))) * switchDir, 0, 0);
+    } // Stop when Balanced
     else {
-      driveTrain.driveMecanumField(0,0,0);
+      driveTrain.driveTest(0, 0, 0);
     }
   }
 

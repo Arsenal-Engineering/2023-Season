@@ -19,8 +19,10 @@ package frc.robot;
 public final class Constants {
 
   // Depends on whether the physical robot has the arm attached to it
-  public static final boolean DOES_ARM_EXIST = true;
+  public static final boolean DOES_ARM_EXIST = false;
+  public static final boolean DOES_ARM_EXTENSION_EXIST = false;
   public static final boolean DOES_DRIVETRAIN_EXIST = true;
+
 
   // TalonSRX/Falcon motor ID's
   public static final int RIGHT_FRONT_DRIVE = 1;
@@ -43,7 +45,7 @@ public final class Constants {
   public static final int ARM_CONTROLLER_PORT = 1;
 
   public static class OperatorConstants {
-    public static final int kDriverControllerPort = 0;
+    public static final int kDriverControllerPort = 2;
   }
 
   // Constants for auto-aligning
@@ -52,7 +54,7 @@ public final class Constants {
   public static final double CONE_DEPOSIT_OFFSET = 0.5;
 
   // angle offset
-  public static final double NAVX_PITCH_OFFSET = 0;
+  public static final double NAVX_PITCH_OFFSET = 2;
 
   //autonomous constants
   public static final double AUTO_SPEED = 0.65;

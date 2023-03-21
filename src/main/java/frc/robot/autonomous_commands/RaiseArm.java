@@ -8,12 +8,12 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj.Timer;
 import frc.robot.subsystems.ArmBase;
 
-public class LowerArm extends CommandBase {
+public class RaiseArm extends CommandBase {
   private Timer timer;
   private ArmBase arm;
   private double timeLimit;
   /** Creates a new LowerArm. */
-  public LowerArm(ArmBase arm, double timeLimit) {
+  public RaiseArm(ArmBase arm, double timeLimit) {
     // Use addRequirements() here to declare subsystem dependencies.
     timer = new Timer();
     this.arm = arm;
@@ -30,7 +30,7 @@ public class LowerArm extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    arm.autonomousArmDown();
+    arm.autonomousArmUp();
   }
 
   // Called once the command ends or is interrupted.

@@ -103,7 +103,11 @@ public class Robot extends TimedRobot {
 
   /** This function is called periodically during operator control. */
   @Override
-public void teleopPeriodic() {/* IT WAS A MISS-INPUT, CALM THE trFUCK DOWN IT WAS A MISS INPUT */}
+  public void teleopPeriodic() {
+    //System.out.println(Math.sin((robotContainer.getDriveTrain().getNavX().getPitch() - Constants.NAVX_PITCH_OFFSET) * 0.9 * (Math.PI / 180.0) - 0.1) * -0.5);
+    //System.out.println(robotContainer.getDriveTrain().getNavX().getPitch()-Constants.NAVX_PITCH_OFFSET);
+    //System.out.println(robotContainer.getaAutoBalance().getStatus());
+  }
 
   @Override
   public void testInit() {

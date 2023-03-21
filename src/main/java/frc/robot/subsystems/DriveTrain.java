@@ -50,11 +50,11 @@ public class DriveTrain extends SubsystemBase {
       // With XBox controller, need negative X, Z, and NavXangle
       mecanumDrive.driveCartesian(-controller.getLeftY() * driveFactor,
           controller.getLeftX() * driveFactor,
-          controller.getRightX() / 2.0,
+          controller.getRightX()  * driveFactor / 2,
           new Rotation2d(Math.toRadians(navX.getAngle())));
       } else {
         mecanumDrive.driveCartesian(controller.getLeftY() * driveFactor, 
-          -controller.getLeftX() * driveFactor, controller.getRightX()/2.0);
+          -controller.getLeftX() * driveFactor, controller.getRightX() * driveFactor / 2);
       }
       
       L1.feed();
@@ -91,8 +91,8 @@ public class DriveTrain extends SubsystemBase {
       updateBrakeMode();
     }
 
-    public void setDriveMode(boolean theFunny){
-      isFieldOriented=theFunny;
+    public void setDriveMode(boolean fieldOriented){
+      isFieldOriented=fieldOriented;
     }
 
   // allows for driving through set values rather than a controller
@@ -106,7 +106,28 @@ public class DriveTrain extends SubsystemBase {
   }
 
   public void driveTest(double x, double y, double z) {
-    mecanumDrive.driveCartesian(-x, y, z);
+    double driveFactor = 1;
+    if (brakeMode)
+      driveFactor = 1;
+
+    if (isFieldOriented) {
+      // With XBox controller, need negative X, Z, and NavXangle
+      mecanumDrive.driveCartesian(-x * driveFactor,
+          y * driveFactor,
+          z  * driveFactor / 2,
+          new Rotation2d(Math.toRadians(navX.getAngle())));
+      } else {
+        mecanumDrive.driveCartesian(x * driveFactor, 
+          -y * driveFactor, z * driveFactor / 2);
+      }
+
+      
+      L1.feed();
+      L2.feed();
+      R1.feed();
+      R2.feed();
+    
+    // mecanumDrive.driveCartesian(-x, y, z);
   }
 
   public AHRS getNavX() {

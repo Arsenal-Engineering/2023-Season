@@ -11,15 +11,15 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 public class ArmExtension extends SubsystemBase {
   private DigitalInput limitSwitchT;
-  private DigitalInput ThctiwStimil; // bottom limit switch
+  private DigitalInput limitSwitchB; // bottom limit switch
   private TestSparkMax extendMotor;
-  private final double howFastToDoDaExtendyExtendAndRetractyRetract = 0.3;
+  private final double speed = 0.5;
 
   // Creates a new ArmExtension.
   public ArmExtension() {
     extendMotor = new TestSparkMax(Constants.ARM_EXTENDER_MOTOR, MotorType.kBrushed, "Arm extender");
     limitSwitchT = new DigitalInput(Constants.RETRACT_LIMIT_SWITCH);
-    ThctiwStimil = new DigitalInput(Constants.EXTEND_LIMIT_SWITCH); // also bottom limit switch
+    limitSwitchB = new DigitalInput(Constants.EXTEND_LIMIT_SWITCH); // also bottom limit switch
   }
 
   @Override
@@ -32,7 +32,7 @@ public class ArmExtension extends SubsystemBase {
       extendMotor.set(0.0);
       System.out.println("limit switch pressed");
     } else {
-      extendMotor.set(-howFastToDoDaExtendyExtendAndRetractyRetract);
+      extendMotor.set(-speed);
       System.out.println("not pressed");
     }
   }
@@ -42,28 +42,36 @@ public class ArmExtension extends SubsystemBase {
     if (limitSwitchT.get()) {
       extendMotor.set(0.0);
     } else {
-      extendMotor.set(-howFastToDoDaExtendyExtendAndRetractyRetract / 2);
+      extendMotor.set(-speed / 2);
     }
   }
 
   public void extend() {
-    if (ThctiwStimil.get()) {
+    if (limitSwitchB.get()) {
       extendMotor.set(0.0);
     } else {
-      extendMotor.set(howFastToDoDaExtendyExtendAndRetractyRetract);
+      extendMotor.set(speed);
     }
   }
 
   //Must move slow initially to tighten the chain
   public void extendSlow() {
-    if (ThctiwStimil.get()) {
+    if (limitSwitchB.get()) {
       extendMotor.set(0.0);
     } else {
-      extendMotor.set(howFastToDoDaExtendyExtendAndRetractyRetract / 2);
+      extendMotor.set(speed / 2);
     }
   }
 
-  public void stopExtendingAndRetractingToRethinkYourLifeChoices() {
+  public void stopExtension() {
     extendMotor.set(0.0);
+  }
+
+  public boolean getTopLimSwitch(){
+    return limitSwitchT.get();
+  }
+
+  public boolean getBotLimSwitch(){
+    return limitSwitchB.get();
   }
 }

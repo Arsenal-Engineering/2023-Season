@@ -8,14 +8,10 @@ import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.*;
 import frc.robot.subsystems.*;
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 
-import frc.robot.autonomous_commands.AutoBalance;
+import frc.robot.autonomous_commands.AutonomousBalance;
 import frc.robot.autonomous_commands.Autos;
-
-
-import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 
@@ -73,7 +69,7 @@ public class RobotContainer {
  
   private DriveTurnTowardsDirection driveTurnTowardsDirection;
 
-  private AutoBalance autoBalance;
+  private AutonomousBalance autoBalance;
 
  
 
@@ -93,9 +89,11 @@ public class RobotContainer {
       armBase = new ArmBase();
       aMove = new ArmMove(armBase, joystick);
 
-      armExtender = new ArmExtension();
-      extendArm = new ExtendArm(armExtender);
-      retractArm = new RetractArm(armExtender);
+      if(Constants.DOES_ARM_EXTENSION_EXIST){
+        armExtender = new ArmExtension();
+        extendArm = new ExtendArm(armExtender);
+        retractArm = new RetractArm(armExtender);
+      }
 
       claw = new Claw(Constants.CLAW);
       cOpen = new ClawOpen(claw);
@@ -109,19 +107,19 @@ public class RobotContainer {
 
       driveJoystick = new DriveJoystick(driveTrain, m_driverController.getHID());
       driveTurnTowardsDirection = new DriveTurnTowardsDirection(driveTrain);
-      autoBalance = new AutoBalance(driveTrain);
+      autoBalance = new AutonomousBalance(driveTrain);
 
 
       rumble = new Rumble(m_driverController, 1.0, 0.9);
 
 
-      //lc = new LifeCam();
-      //lc.startVision();
+      lc = new LifeCam();
+      lc.startVision();
 
-      limeLight = new LimelightCam();
-      cubeAlign = new AutoAlign(driveTrain, limeLight, 0);
-      leftConeAlign = new AutoAlign(driveTrain, limeLight, Constants.CONE_DEPOSIT_OFFSET);
-      rightConeAlign = new AutoAlign(driveTrain, limeLight, -Constants.CONE_DEPOSIT_OFFSET);
+      // limeLight = new LimelightCam();
+      // cubeAlign = new AutoAlign(driveTrain, limeLight, 0);
+      // leftConeAlign = new AutoAlign(driveTrain, limeLight, Constants.CONE_DEPOSIT_OFFSET);
+      // rightConeAlign = new AutoAlign(driveTrain, limeLight, -Constants.CONE_DEPOSIT_OFFSET);
     } 
 
     configureBindings();
@@ -139,16 +137,19 @@ public class RobotContainer {
       m_driverController.start().onTrue(new SetDriveMode(driveTrain, true)).onFalse(driveJoystick);
       m_driverController.back().onTrue(new SetDriveMode(driveTrain, false)).onFalse(driveJoystick);
 
-      m_driverController.povUp().onTrue(cubeAlign).onFalse(driveJoystick);
-      m_driverController.povLeft().onTrue(leftConeAlign).onFalse(driveJoystick);
-      m_driverController.povRight().onTrue(rightConeAlign).onFalse(driveJoystick);
+      // m_driverController.povUp().onTrue(cubeAlign).onFalse(driveJoystick);
+      // m_driverController.povLeft().onTrue(leftConeAlign).onFalse(driveJoystick);
+      // m_driverController.povRight().onTrue(rightConeAlign).onFalse(driveJoystick);
     }
 
     if (Constants.DOES_ARM_EXIST) {
       button1.whileTrue(clawPulse);
       button2.whileTrue(cOpen);
-      button9.whileTrue(extendArm);
-      button11.whileTrue(retractArm);
+      if(Constants.DOES_ARM_EXTENSION_EXIST){
+        button9.whileTrue(extendArm);
+        button11.whileTrue(retractArm);
+
+      }
     }
 
   }
@@ -173,9 +174,11 @@ public class RobotContainer {
     return driveTurnTowardsDirection;
   }
   
-  public AutoBalance getaAutoBalance() {
+  public AutonomousBalance getaAutoBalance() {
     return autoBalance;
   }
+
+  
 
   public LimelightCam getLimelightCam() {
     return limeLight;
@@ -192,11 +195,18 @@ public class RobotContainer {
   // Autonomous Commands
   public Command getInitialMoveAutonomous() {
     if (Constants.DOES_ARM_EXIST && Constants.DOES_DRIVETRAIN_EXIST) {
-      return Autos.initialMove(armBase, claw, driveTrain);
+      if(Constants.DOES_ARM_EXTENSION_EXIST){
+        return Autos.initialMove(armBase, claw, driveTrain);
+      }
+      return Autos.initialMove(armBase, armExtender, claw, driveTrain);
     }
     if (Constants.DOES_DRIVETRAIN_EXIST) {
       return Autos.initialMove(driveTrain);
     }
     return Autos.nothingExists();
+  }
+
+  public void printPitch(){
+    System.out.println(driveTrain.getNavX().getPitch());
   }
 }

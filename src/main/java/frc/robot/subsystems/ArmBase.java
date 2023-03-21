@@ -12,8 +12,8 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class ArmBase extends SubsystemBase {
-  private final double upReducer = 0.6;
-  private final double downReducer = 0.4;
+  private final double upReducer = 0.8;
+  private final double downReducer = 0.6;
   private TestSparkMax arm_base;
   private DigitalInput limitSwitchBottom;
   private DigitalInput limitSwitchTop;
@@ -30,20 +30,20 @@ public class ArmBase extends SubsystemBase {
     // This method will be called once per scheduler run
   }
 
-  public void armUp(double happyStickSpeed) {
+  public void armUp(double speed) {
     if (!limitSwitchTop.get()) {
       arm_base.set(0.0);
     } else {
-      arm_base.set(happyStickSpeed * upReducer);
+      arm_base.set(speed * upReducer);
     }
     SmartDashboard.putNumber("Arm Position: ", arm_base.getPosition());
   }
 
-  public void armDown(double happyStickSpeed) {
+  public void armDown(double speed) {
     if (!limitSwitchBottom.get()) {
       arm_base.set(0.0);
     } else {
-      arm_base.set(happyStickSpeed * downReducer);
+      arm_base.set(speed * downReducer);
     }
     SmartDashboard.putNumber("Arm Position: ", arm_base.getPosition());
   }
@@ -52,7 +52,11 @@ public class ArmBase extends SubsystemBase {
     arm_base.set(0.0);
   }
 
-  public void armWhenTheAutonomousIsSusAndGoDownToVent() {
-    arm_base.set(downReducer);
+  public void autonomousArmDown() {
+    arm_base.set(-downReducer);
+  }
+
+  public void autonomousArmUp(){
+    arm_base.set(upReducer);
   }
 }
