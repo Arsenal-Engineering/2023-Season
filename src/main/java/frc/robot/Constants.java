@@ -19,8 +19,8 @@ package frc.robot;
 public final class Constants {
 
   // Depends on whether the physical robot has the arm attached to it
-  public static final boolean DOES_ARM_EXIST = false;
-  public static final boolean DOES_ARM_EXTENSION_EXIST = false;
+  public static final boolean DOES_ARM_EXIST = true;
+  public static final boolean DOES_ARM_EXTENSION_EXIST = true;
   public static final boolean DOES_DRIVETRAIN_EXIST = true;
 
 
