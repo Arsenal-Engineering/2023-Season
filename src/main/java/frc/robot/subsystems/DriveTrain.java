@@ -57,6 +57,7 @@ public class DriveTrain extends SubsystemBase {
           -controller.getLeftX() * driveFactor, controller.getRightX() * driveFactor / 2);
       }
       
+      System.out.println("feed");
       L1.feed();
       L2.feed();
       R1.feed();
