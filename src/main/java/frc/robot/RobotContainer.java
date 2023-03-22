@@ -196,9 +196,9 @@ public class RobotContainer {
   public Command getInitialMoveAutonomous() {
     if (Constants.DOES_ARM_EXIST && Constants.DOES_DRIVETRAIN_EXIST) {
       if(Constants.DOES_ARM_EXTENSION_EXIST){
-        return Autos.initialMove(armBase, claw, driveTrain);
+        return Autos.initialMove(armBase, armExtender, claw, driveTrain);
       }
-      return Autos.initialMove(armBase, armExtender, claw, driveTrain);
+      return Autos.initialMove(armBase, claw, driveTrain);
     }
     if (Constants.DOES_DRIVETRAIN_EXIST) {
       return Autos.initialMove(driveTrain);
