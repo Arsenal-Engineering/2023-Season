@@ -57,7 +57,6 @@ public class DriveTrain extends SubsystemBase {
           -controller.getLeftX() * driveFactor, controller.getRightX() * driveFactor / 2);
       }
       
-      System.out.println("feed");
       L1.feed();
       L2.feed();
       R1.feed();
@@ -69,7 +68,6 @@ public class DriveTrain extends SubsystemBase {
     }
     
     private void updateBrakeMode() {
-      System.out.println("brakeMode is "+brakeMode);
       if (brakeMode){
         L1.setNeutralMode(NeutralMode.Brake);
         L2.setNeutralMode(NeutralMode.Brake);
