@@ -27,6 +27,7 @@ public class Move extends CommandBase {
   public void initialize() {
     timer.reset();
     timer.start();
+    driveTrain.setDriveMode(true);
     driveTrain.setBrakeMode(true);
   }
 

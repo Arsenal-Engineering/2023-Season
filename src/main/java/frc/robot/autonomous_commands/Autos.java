@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.ConditionalCommand;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.subsystems.*;
 
 public final class Autos {
@@ -38,8 +39,9 @@ public final class Autos {
                                                       new LowerArm(armBase, lowerArmTime)), 
                              new Drop(claw),
                              new ParallelCommandGroup(new AutoRetractArm(armExtension, 3),
-                                                      new RaiseArm(armBase, raiseArmTime)),
-                             new Move(driveTrain, moveForwardTime, -Constants.AUTO_SPEED),
+                                                      new RaiseArm(armBase, raiseArmTime), 
+                                                      new SequentialCommandGroup(new Delay(driveTrain, 0.5), 
+                                                                                 new Move(driveTrain, 1, -Constants.AUTO_SPEED))),
                              //runs chargeStationRoute if the robot encounters a hill, otherwise leaves community
                              new ConditionalCommand(new AutonomousBalance(driveTrain), 
                                                     new Delay(driveTrain, 0),
@@ -72,5 +74,4 @@ public final class Autos {
   public static CommandBase nothingExists(){
     return Commands.sequence(null);
   }
-  //test
 }
