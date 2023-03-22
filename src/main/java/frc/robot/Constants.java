@@ -31,8 +31,8 @@ public final class Constants {
   public static final int RIGHT_BACK_DRIVE = 4;
 
   // Limit switch ids
-  public static final int RETRACT_LIMIT_SWITCH = 0; // bottom
-  public static final int EXTEND_LIMIT_SWITCH = 1; // top
+  public static final int RETRACT_LIMIT_SWITCH = 0; // top
+  public static final int EXTEND_LIMIT_SWITCH = 1; // bottom
   public static final int FORWARD_LIMIT_SWITCH = 2; // not using currently
   public static final int BACKWARD_LIMIT_SWITCH = 3; // not using currently
 

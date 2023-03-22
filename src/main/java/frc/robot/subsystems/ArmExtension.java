@@ -30,10 +30,8 @@ public class ArmExtension extends SubsystemBase {
   public void retract() {
     if (limitSwitchT.get()) {
       extendMotor.set(0.0);
-      System.out.println("limit switch pressed");
     } else {
       extendMotor.set(-speed);
-      System.out.println("not pressed");
     }
   }
 

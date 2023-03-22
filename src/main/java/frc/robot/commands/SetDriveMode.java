@@ -16,7 +16,6 @@ public class SetDriveMode extends InstantCommand {
 
   public SetDriveMode(DriveTrain driveTrain, boolean isFieldOriented) {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(driveTrain);
     this.driveTrain = driveTrain;
     this.isFieldOriented = isFieldOriented;
   }
