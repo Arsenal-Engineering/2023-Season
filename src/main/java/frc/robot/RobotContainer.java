@@ -60,8 +60,8 @@ public class RobotContainer {
   private PulseClaw clawPulse;
 
   // VISION
-  private LifeCam lc;
-  private LimelightCam limeLight;
+  // private LifeCam lc;
+  // private LimelightCam limeLight;
 
   private AutoAlign cubeAlign;
   private AutoAlign leftConeAlign;
@@ -113,8 +113,8 @@ public class RobotContainer {
       rumble = new Rumble(m_driverController, 1.0, 0.9);
 
 
-      lc = new LifeCam();
-      lc.startVision();
+      // lc = new LifeCam();
+      // lc.startVision();
 
       // limeLight = new LimelightCam();
       // cubeAlign = new AutoAlign(driveTrain, limeLight, 0);
@@ -180,9 +180,9 @@ public class RobotContainer {
 
   
 
-  public LimelightCam getLimelightCam() {
-    return limeLight;
-  }
+  // public LimelightCam getLimelightCam() {
+  //   return limeLight;
+  // }
 
   public ArmMove getArmMove() {
     return aMove;

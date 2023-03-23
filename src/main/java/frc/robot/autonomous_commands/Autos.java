@@ -65,10 +65,10 @@ public final class Autos {
   private Autos(){
     throw new UnsupportedOperationException("This is a utility class!");
   }
-
+ 
   public static boolean isHill(DriveTrain driveTrain){
     //if the robot isn't flat return true
-    return (driveTrain.getNavX().getPitch() > 5 || driveTrain.getNavX().getPitch() < -5);
+    return (driveTrain.getNavX().getPitch() - Constants.NAVX_PITCH_OFFSET > 4 || driveTrain.getNavX().getPitch() - Constants.NAVX_PITCH_OFFSET < -4);
   }
 
   public static CommandBase nothingExists(){

@@ -14,6 +14,7 @@ public class ArmExtension extends SubsystemBase {
   private DigitalInput limitSwitchB; // bottom limit switch
   private TestSparkMax extendMotor;
   private final double speed = 0.5;
+  private final double autoSpeed = 0.75;
 
   // Creates a new ArmExtension.
   public ArmExtension() {
@@ -48,7 +49,7 @@ public class ArmExtension extends SubsystemBase {
     if (limitSwitchT.get()) {
       extendMotor.set(0.0);
     } else {
-      extendMotor.set(-speed * 1.5);
+      extendMotor.set(-autoSpeed);
     }
   }
 
@@ -73,7 +74,7 @@ public class ArmExtension extends SubsystemBase {
     if (limitSwitchB.get()) {
       extendMotor.set(0.0);
     } else {
-      extendMotor.set(speed * 1.5);
+      extendMotor.set(autoSpeed);
     }
   }
 

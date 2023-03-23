@@ -31,6 +31,7 @@ public class AutonomousBalance extends CommandBase {
     driveTrain.setDriveMode(true);
     timer.reset();
     timer.start();
+    System.out.println("AutoBalancing in Auto");
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -41,12 +42,12 @@ public class AutonomousBalance extends CommandBase {
     if (navX.getYaw() > -90 && navX.getYaw() < 90)
       switchDir = -1;
 
-    if (navX.getPitch() - Constants.NAVX_PITCH_OFFSET > 4) {
+    if (navX.getPitch() - Constants.NAVX_PITCH_OFFSET > 2) {
       driveTrain.driveTest(
-          Math.sin((navX.getPitch() - Constants.NAVX_PITCH_OFFSET) * 0.9 * (Math.PI / 180.0) + 0.1) * -(2 / (2 + (timer.get() / 2))) * switchDir, 0, 0);
-    } else if (navX.getPitch() - Constants.NAVX_PITCH_OFFSET < -4) {
+          Math.sin((navX.getPitch() - Constants.NAVX_PITCH_OFFSET) * 0.9 * (Math.PI / 180.0) + 0.1) * -(1.5 / (2 + (timer.get() / 2))) * switchDir, 0, 0);
+    } else if (navX.getPitch() - Constants.NAVX_PITCH_OFFSET < -2) {
       driveTrain.driveTest(
-          Math.sin((navX.getPitch() - Constants.NAVX_PITCH_OFFSET) * 0.9 * (Math.PI / 180.0) - 0.1) * -(2 / (2 + (timer.get() / 2))) * switchDir, 0, 0);
+          Math.sin((navX.getPitch() - Constants.NAVX_PITCH_OFFSET) * 0.9 * (Math.PI / 180.0) - 0.1) * -(1.5 / (2 + (timer.get() / 2))) * switchDir, 0, 0);
     } // Stop when Balanced
     else {
       driveTrain.driveTest(0, 0, 0);
