@@ -44,6 +44,14 @@ public class ArmExtension extends SubsystemBase {
     }
   }
 
+  public void retractAutonomous() {
+    if (limitSwitchT.get()) {
+      extendMotor.set(0.0);
+    } else {
+      extendMotor.set(-speed * 1.5);
+    }
+  }
+
   public void extend() {
     if (limitSwitchB.get()) {
       extendMotor.set(0.0);
@@ -58,6 +66,14 @@ public class ArmExtension extends SubsystemBase {
       extendMotor.set(0.0);
     } else {
       extendMotor.set(speed / 2);
+    }
+  }
+
+  public void extendAutonomous(){
+    if (limitSwitchB.get()) {
+      extendMotor.set(0.0);
+    } else {
+      extendMotor.set(speed * 1.5);
     }
   }
 

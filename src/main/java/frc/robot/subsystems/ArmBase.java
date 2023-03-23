@@ -53,10 +53,10 @@ public class ArmBase extends SubsystemBase {
   }
 
   public void autonomousArmDown() {
-    arm_base.set(-downReducer);
+    arm_base.set(-downReducer * 1.5);
   }
 
   public void autonomousArmUp(){
-    arm_base.set(upReducer);
+    arm_base.set(upReducer * 1.5);
   }
 }

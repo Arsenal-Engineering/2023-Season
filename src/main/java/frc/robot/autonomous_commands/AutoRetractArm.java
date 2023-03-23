@@ -31,10 +31,10 @@ public class AutoRetractArm extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (timer.get() < 0.5)
+    if (timer.get() < 0.3)
       armExtension.retractSlow();
     else
-      armExtension.retract();
+      armExtension.retractAutonomous();
   }
 
   // Called once the command ends or is interrupted.

@@ -13,9 +13,9 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.subsystems.*;
 
 public final class Autos {
-  private static final double moveForwardTime = 1.75;
+  private static final double moveForwardTime = 2.0;
   private static final double raiseArmTime = 1.15;
-  private static final double lowerArmTime = 1.4;
+  private static final double lowerArmTime = 1.5;
   /** Example static factory for an autonomous command. */
 
   public static CommandBase initialMove(DriveTrain driveTrain){
@@ -35,16 +35,16 @@ public final class Autos {
     //command sequence
     return Commands.sequence(/*new LowerArm(armBase),
                              new Drop(claw),*/
-                             new ParallelCommandGroup(new AutoExtendArm(armExtension, 4),
+                             new ParallelCommandGroup(new AutoExtendArm(armExtension, 2.0),
                                                       new LowerArm(armBase, lowerArmTime)), 
                              new Drop(claw),
-                             new ParallelCommandGroup(new AutoRetractArm(armExtension, 3),
+                             new ParallelCommandGroup(new AutoRetractArm(armExtension, 2.0),
                                                       new RaiseArm(armBase, raiseArmTime), 
                                                       new SequentialCommandGroup(new Delay(driveTrain, 0.5), 
                                                                                  new Move(driveTrain, 1, -Constants.AUTO_SPEED))),
                              //runs chargeStationRoute if the robot encounters a hill, otherwise leaves community
                              new ConditionalCommand(new AutonomousBalance(driveTrain), 
-                                                    new Delay(driveTrain, 0),
+                                                    new Move(driveTrain, 1.5, -Constants.AUTO_SPEED),
                                                     () -> isHill(driveTrain)));
   }  
   public static CommandBase initialMove(ArmBase armBase, Claw claw, DriveTrain driveTrain){

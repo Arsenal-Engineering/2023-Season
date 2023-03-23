@@ -31,10 +31,10 @@ public class AutoExtendArm extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (timer.get() < 0.5)
+    if (timer.get() < 0.3)
       armExtension.extendSlow();
     else
-      armExtension.extend();
+      armExtension.extendAutonomous();
   }
 
   // Called once the command ends or is interrupted.
