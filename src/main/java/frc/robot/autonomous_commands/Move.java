@@ -34,8 +34,8 @@ public class Move extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(timer.get() < 1)
-      driveTrain.driveMecanumField(speed / (2 - timer.get()), 0, 0);
+    if(timer.get() < 0.75)
+      driveTrain.driveMecanumField(speed / (1.75 - timer.get()), 0, 0);
     else
       driveTrain.driveMecanumField(speed, 0, 0);
   }

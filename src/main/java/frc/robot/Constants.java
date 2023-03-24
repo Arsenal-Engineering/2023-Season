@@ -57,6 +57,6 @@ public final class Constants {
   public static final double NAVX_PITCH_OFFSET = 2;
 
   //autonomous constants
-  public static final double AUTO_SPEED = 0.65;
+  public static final double AUTO_SPEED = 0.75;
   public static final double AUTO_ANGLE_TARGET = 10.0;
 }

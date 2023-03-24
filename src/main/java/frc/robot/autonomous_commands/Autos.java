@@ -14,7 +14,7 @@ import frc.robot.subsystems.*;
 
 public final class Autos {
   private static final double moveForwardTime = 2.0;
-  private static final double raiseArmTime = 1.15;
+  private static final double raiseArmTime = 1.2;
   private static final double lowerArmTime = 1.5;
   /** Example static factory for an autonomous command. */
 
@@ -40,8 +40,8 @@ public final class Autos {
                              new Drop(claw),
                              new ParallelCommandGroup(new AutoRetractArm(armExtension, 2.0),
                                                       new RaiseArm(armBase, raiseArmTime), 
-                                                      new SequentialCommandGroup(new Delay(driveTrain, 0.5), 
-                                                                                 new Move(driveTrain, 1, -Constants.AUTO_SPEED))),
+                                                      new SequentialCommandGroup(new Delay(driveTrain, 1.0), 
+                                                                                 new Move(driveTrain, 1.4, -Constants.AUTO_SPEED))),
                              //runs chargeStationRoute if the robot encounters a hill, otherwise leaves community
                              new ConditionalCommand(new AutonomousBalance(driveTrain), 
                                                     new Move(driveTrain, 1.5, -Constants.AUTO_SPEED),
@@ -68,6 +68,9 @@ public final class Autos {
  
   public static boolean isHill(DriveTrain driveTrain){
     //if the robot isn't flat return true
+    System.out.println("Checking if it's level...");
+    System.out.println("Pitch is currently: " + driveTrain.getNavX().getPitch());
+    System.out.println("Will start balancing: " + (driveTrain.getNavX().getPitch() - Constants.NAVX_PITCH_OFFSET > 4 || driveTrain.getNavX().getPitch() - Constants.NAVX_PITCH_OFFSET < -4));
     return (driveTrain.getNavX().getPitch() - Constants.NAVX_PITCH_OFFSET > 4 || driveTrain.getNavX().getPitch() - Constants.NAVX_PITCH_OFFSET < -4);
   }
 

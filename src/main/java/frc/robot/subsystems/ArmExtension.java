@@ -13,8 +13,8 @@ public class ArmExtension extends SubsystemBase {
   private DigitalInput limitSwitchT;
   private DigitalInput limitSwitchB; // bottom limit switch
   private TestSparkMax extendMotor;
-  private final double speed = 0.5;
-  private final double autoSpeed = 0.75;
+  private final double speed = 0.85;
+  private final double autoSpeed = 0.85;
 
   // Creates a new ArmExtension.
   public ArmExtension() {

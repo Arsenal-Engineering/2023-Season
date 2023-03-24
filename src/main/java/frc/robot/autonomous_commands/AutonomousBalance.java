@@ -44,10 +44,10 @@ public class AutonomousBalance extends CommandBase {
 
     if (navX.getPitch() - Constants.NAVX_PITCH_OFFSET > 2) {
       driveTrain.driveTest(
-          Math.sin((navX.getPitch() - Constants.NAVX_PITCH_OFFSET) * 0.9 * (Math.PI / 180.0) + 0.1) * -(1.5 / (2 + (timer.get() / 2))) * switchDir, 0, 0);
+          Math.sin((navX.getPitch() - Constants.NAVX_PITCH_OFFSET) * 0.9 * (Math.PI / 180.0) + 0.1) * -(1.5 / (2 + (timer.get() / 2))) * 1.25 *switchDir, 0, 0);
     } else if (navX.getPitch() - Constants.NAVX_PITCH_OFFSET < -2) {
       driveTrain.driveTest(
-          Math.sin((navX.getPitch() - Constants.NAVX_PITCH_OFFSET) * 0.9 * (Math.PI / 180.0) - 0.1) * -(1.5 / (2 + (timer.get() / 2))) * switchDir, 0, 0);
+          Math.sin((navX.getPitch() - Constants.NAVX_PITCH_OFFSET) * 0.9 * (Math.PI / 180.0) - 0.1) * -(1.5 / (2 + (timer.get() / 2))) * 1.25 * switchDir, 0, 0);
     } // Stop when Balanced
     else {
       driveTrain.driveTest(0, 0, 0);

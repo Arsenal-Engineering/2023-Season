@@ -12,8 +12,8 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class ArmBase extends SubsystemBase {
-  private final double upReducer = 0.8;
-  private final double downReducer = 0.6;
+  private final double upReducer = 1;
+  private final double downReducer = 0.8;
   private TestSparkMax arm_base;
   private DigitalInput limitSwitchBottom;
   private DigitalInput limitSwitchTop;
