@@ -34,6 +34,7 @@ public class RobotContainer {
   private Joystick joystick;
   private Trigger button1;
   private Trigger button2;
+  private Trigger button8;
   private Trigger button9;
   private Trigger button11;
 
@@ -85,6 +86,8 @@ public class RobotContainer {
       button2 = new Trigger(() -> joystick.getRawButton(2));
       button9 = new Trigger(() -> joystick.getRawButton(9));
       button11 = new Trigger(() -> joystick.getRawButton(11));
+
+      button8 = new Trigger(() -> joystick.getRawButton(8));
 
       armBase = new ArmBase();
       aMove = new ArmMove(armBase, joystick);
@@ -151,7 +154,7 @@ public class RobotContainer {
       if(Constants.DOES_ARM_EXTENSION_EXIST){
         button9.whileTrue(extendArm);
         button11.whileTrue(retractArm);
-
+        button8.whileTrue(PlaceCube.place(armBase, armExtender, claw, driveTrain));
       }
     }
 
