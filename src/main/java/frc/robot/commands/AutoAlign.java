@@ -5,6 +5,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.geometry.Translation2d;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.LimelightCam;
@@ -60,8 +61,11 @@ public class AutoAlign extends CommandBase {
     // if the translation is valid, sets the speeds using PID controllers (scary
     // calculus the computer does for us)
     if (translation != null) {
-      forwardSpeed = ControllerX.calculate(translation.getX(), 0.45);
-      sideSpeed = -ControllerY.calculate(translation.getY(), sideOffset);
+      forwardSpeed = ControllerX.calculate(translation.getX(), 0.21) * -4;
+      sideSpeed = -ControllerY.calculate(translation.getY(), sideOffset) * -2;
+      SmartDashboard.putNumber("X translation: ", translation.getX());
+      SmartDashboard.putNumber("Forward Speed: ", forwardSpeed);
+      SmartDashboard.putNumber("Side Speed: ", sideSpeed);
     }
     // drives using speed values
     driveTrain.driveMecanum(forwardSpeed, sideSpeed, 0);

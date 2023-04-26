@@ -62,7 +62,7 @@ public class RobotContainer {
 
   // VISION
   // private LifeCam lc;
-  // private LimelightCam limeLight;
+  private LimelightCam limeLight;
 
   private AutoAlign cubeAlign;
   private AutoAlign leftConeAlign;
@@ -119,10 +119,10 @@ public class RobotContainer {
       // lc = new LifeCam();
       // lc.startVision();
 
-      // limeLight = new LimelightCam();
-      // cubeAlign = new AutoAlign(driveTrain, limeLight, 0);
-      // leftConeAlign = new AutoAlign(driveTrain, limeLight, Constants.CONE_DEPOSIT_OFFSET);
-      // rightConeAlign = new AutoAlign(driveTrain, limeLight, -Constants.CONE_DEPOSIT_OFFSET);
+      limeLight = new LimelightCam();
+      cubeAlign = new AutoAlign(driveTrain, limeLight, 0);
+      leftConeAlign = new AutoAlign(driveTrain, limeLight, Constants.CONE_DEPOSIT_OFFSET);
+      rightConeAlign = new AutoAlign(driveTrain, limeLight, -Constants.CONE_DEPOSIT_OFFSET);
     } 
 
     configureBindings();
@@ -143,9 +143,9 @@ public class RobotContainer {
       m_driverController.start().onTrue(new SetDriveMode(driveTrain, true)).onFalse(driveJoystick);
       m_driverController.back().onTrue(new SetDriveMode(driveTrain, false)).onFalse(driveJoystick);
 
-      // m_driverController.povUp().onTrue(cubeAlign).onFalse(driveJoystick);
-      // m_driverController.povLeft().onTrue(leftConeAlign).onFalse(driveJoystick);
-      // m_driverController.povRight().onTrue(rightConeAlign).onFalse(driveJoystick);
+      m_driverController.povUp().onTrue(cubeAlign).onFalse(driveJoystick);
+      m_driverController.povLeft().onTrue(leftConeAlign).onFalse(driveJoystick);
+      m_driverController.povRight().onTrue(rightConeAlign).onFalse(driveJoystick);
     }
 
     if (Constants.DOES_ARM_EXIST) {

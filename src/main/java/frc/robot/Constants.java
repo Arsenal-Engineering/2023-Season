@@ -50,7 +50,7 @@ public final class Constants {
 
   // Constants for auto-aligning
   public static final double DEPOSIT_TAG_HEIGHT = 0.36;
-  public static final double LIMELIGHT_HEIGHT = 0.16;
+  public static final double LIMELIGHT_HEIGHT = 0.32;
   public static final double CONE_DEPOSIT_OFFSET = 0.5;
 
   // angle offset
