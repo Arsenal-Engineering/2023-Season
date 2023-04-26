@@ -5,24 +5,25 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.InstantCommand;
-import frc.robot.subsystems.*;
+import frc.robot.subsystems.DriveTrain;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class SetDriveMode extends InstantCommand {
-  private boolean isFieldOriented;
+public class SetBrakeMode extends InstantCommand {
   private DriveTrain driveTrain;
+  private boolean isBrakeMode;
 
-  public SetDriveMode(DriveTrain driveTrain, boolean isFieldOriented) {
+  public SetBrakeMode(DriveTrain driveTrain, boolean isBrakeMode) {
     // Use addRequirements() here to declare subsystem dependencies.
+
     this.driveTrain = driveTrain;
-    this.isFieldOriented = isFieldOriented;
+    this.isBrakeMode = isBrakeMode;
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    driveTrain.setDriveMode(isFieldOriented);
+    driveTrain.setBrakeMode(isBrakeMode);
   }
 }

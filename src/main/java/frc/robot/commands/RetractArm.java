@@ -4,46 +4,42 @@
 
 package frc.robot.commands;
 
-import com.kauailabs.navx.frc.AHRS;
-
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.*;
+import edu.wpi.first.wpilibj.Timer;
 
-public class DriveTurnTowardsDirection extends CommandBase {
-  private DriveTrain driveTrain;
-  private AHRS navX;
+public class RetractArm extends CommandBase {
+  private ArmExtension armRetractor;
+  private Timer timer;
 
-  /** Creates a new AutoAlign. */
-  public DriveTurnTowardsDirection(DriveTrain driveTrain) {
+  /** Creates a new RetractArm. */
+  public RetractArm(ArmExtension armRetractor) {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(driveTrain);
-    this.driveTrain = driveTrain;
-    navX = driveTrain.getNavX();
+    addRequirements(armRetractor);
+    this.armRetractor = armRetractor;
+    this.timer = new Timer();
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    // Turn on E-breake
-    driveTrain.setBrakeMode(true);
+    timer.reset();
+    timer.start();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    // Align Yaw to 180
-    if (driveTrain.getBrakeMode()) {
-      if (navX.getYaw() < 0) {
-        driveTrain.driveTest(0, 0, Math.sin((navX.getYaw() /*+ 180*/) * (Math.PI / 180.0)) * -1);
-      } else {
-        driveTrain.driveTest(0, 0, Math.sin((navX.getYaw() /*- 180*/) * (Math.PI / 180.0)) * -1);
-      }
-    }
+    if (timer.get() < 0.2)
+      armRetractor.retractSlow();
+    else
+      armRetractor.retract();
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    armRetractor.stopExtension();
   }
 
   // Returns true when the command should end.
